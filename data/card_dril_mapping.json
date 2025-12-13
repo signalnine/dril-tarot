@@ -1,0 +1,1884 @@
+{
+  "metadata": {
+    "generated_at": "2025-12-13T00:58:19.979032Z",
+    "interpretation_system": "modern_intuitive",
+    "min_retweets": 1000,
+    "popularity_weight": 0.2,
+    "total_cards": 78,
+    "total_matches": 156
+  },
+  "cards": {
+    "The Fool": {
+      "upright": {
+        "tweet_id": "1141735072455778305",
+        "tweet_content": "age 0 (baby): I want my Dada . age 25 (Millennial): I want my Data Do you see how fucked this is?",
+        "tweet_url": "https://twitter.com/dril/status/1141735072455778305",
+        "tweet_date": "2019-06-20 17:50:28",
+        "retweets": 23994,
+        "favorites": 144361,
+        "similarity_score": 0.17969752964793523,
+        "adjusted_score": 0.3370584428009592,
+        "card_interpretation": "Trust your instincts and take that leap. New adventures await. Stay open to possibilities. Embrace your unique path with courage."
+      },
+      "reversed": {
+        "tweet_id": "879453684987572226",
+        "tweet_content": "DUMBASS: SHut the fuck up THE WISE MAN: No you shut the fuck up",
+        "tweet_url": "https://twitter.com/dril/status/879453684987572226",
+        "tweet_date": "2017-06-26 23:37:52",
+        "retweets": 17158,
+        "favorites": 65171,
+        "similarity_score": 0.3153399891124332,
+        "adjusted_score": 0.34679980574542624,
+        "card_interpretation": "Pause before jumping. Consider consequences. Ground yourself before moving forward. Avoid impulsive decisions."
+      }
+    },
+    "The Magician": {
+      "upright": {
+        "tweet_id": "384408932061417472",
+        "tweet_content": "Food $200 Data $150 Rent $800 Candles $3,600 Utility $150 someone who is good at the economy please help me budget this. my family is dying",
+        "tweet_url": "https://twitter.com/dril/status/384408932061417472",
+        "tweet_date": "2013-09-29 22:06:46",
+        "retweets": 60912,
+        "favorites": 111333,
+        "similarity_score": 0.14008572537232888,
+        "adjusted_score": 0.30983538665873345,
+        "card_interpretation": "You have everything you need to succeed. Channel your skills and energy toward your goals. Make things happen. Your time to shine."
+      },
+      "reversed": {
+        "tweet_id": "1077438194990235653",
+        "tweet_content": "JACKING OFF and committing FRAUD",
+        "tweet_url": "https://twitter.com/dril/status/1077438194990235653",
+        "tweet_date": "2018-12-25 06:37:38",
+        "retweets": 11896,
+        "favorites": 49387,
+        "similarity_score": 0.25726203601717457,
+        "adjusted_score": 0.2761730251051456,
+        "card_interpretation": "Self-doubt blocking your magic. Imposter syndrome. Reconnect with your innate abilities. Stop overthinking, start doing."
+      }
+    },
+    "The High Priestess": {
+      "upright": {
+        "tweet_id": "722586067275247618",
+        "tweet_content": "PRIEST: in the name of the father... ME: Yes. Good PRIEST: ...the son.. ME: Great. Go on. keep em comin PRIEST: ..and the Holy Spirit ME: No",
+        "tweet_url": "https://twitter.com/dril/status/722586067275247618",
+        "tweet_date": "2016-04-20 02:41:58",
+        "retweets": 3392,
+        "favorites": 9591,
+        "similarity_score": 0.3037393095776797,
+        "adjusted_score": 0.2578981587247765,
+        "card_interpretation": "Listen to your gut feelings. Trust what you know without knowing how. Divine timing is at work. What's hidden will be revealed when ready."
+      },
+      "reversed": {
+        "tweet_id": "791892596779921408",
+        "tweet_content": "if you turn the patterns on their shirts 90 degrees... the trusted REFEREE becomes the despicable PRISONER.... truly life is a fragile Bitch",
+        "tweet_url": "https://twitter.com/dril/status/791892596779921408",
+        "tweet_date": "2016-10-28 08:41:22",
+        "retweets": 7846,
+        "favorites": 22851,
+        "similarity_score": 0.30594769533393035,
+        "adjusted_score": 0.2800035779331412,
+        "card_interpretation": "Ignoring red flags. Forcing answers before they're ready. Need to reconnect with your intuition. Create sacred space for inner listening."
+      }
+    },
+    "The Empress": {
+      "upright": {
+        "tweet_id": "945649210455707648",
+        "tweet_content": "my friend the only crypto currency you wanna get your hands on is this: bird seed. There is a lot of birds and they all gotta eat",
+        "tweet_url": "https://twitter.com/dril/status/945649210455707648",
+        "tweet_date": "2017-12-26 14:35:15",
+        "retweets": 24602,
+        "favorites": 86103,
+        "similarity_score": 0.17246492103022606,
+        "adjusted_score": 0.2650802668086806,
+        "card_interpretation": "Abundance flows to you naturally. Nurture your creative projects. Mother yourself and others. Connect with nature. You're in a fertile period."
+      },
+      "reversed": {
+        "tweet_id": "922321981",
+        "tweet_content": "no",
+        "tweet_url": "https://twitter.com/dril/status/922321981",
+        "tweet_date": "2008-09-15 19:25:20",
+        "retweets": 59552,
+        "favorites": 114638,
+        "similarity_score": 0.08129719754552654,
+        "adjusted_score": 0.26503775803642127,
+        "card_interpretation": "Burnout from over-giving. Reclaim your energy. Set boundaries. Self-care isn't selfish. Tend to your own garden first."
+      }
+    },
+    "The Emperor": {
+      "upright": {
+        "tweet_id": "1108527296623730688",
+        "tweet_content": "mastering Life calmness in the face of being called a dip shit",
+        "tweet_url": "https://twitter.com/dril/status/1108527296623730688",
+        "tweet_date": "2019-03-21 01:34:37",
+        "retweets": 2496,
+        "favorites": 12394,
+        "similarity_score": 0.3382295107276396,
+        "adjusted_score": 0.28767988276547474,
+        "card_interpretation": "Take charge of your situation. Create structure and systems. Be the leader you need. Protect what matters. Build solid foundations."
+      },
+      "reversed": {
+        "tweet_id": "965363860529131520",
+        "tweet_content": "hard at work in the Study, pen in hand, orchestrating my next public melt down",
+        "tweet_url": "https://twitter.com/dril/status/965363860529131520",
+        "tweet_date": "2018-02-19 00:14:14",
+        "retweets": 5982,
+        "favorites": 20237,
+        "similarity_score": 0.28040116707517976,
+        "adjusted_score": 0.25442484318422676,
+        "card_interpretation": "Control issues surfacing. Rigidity blocking flow. Challenge authority that doesn't serve. Find balance between order and flexibility."
+      }
+    },
+    "The Hierophant": {
+      "upright": {
+        "tweet_id": "1106106139375095808",
+        "tweet_content": "yes i am a \"HO\" Honorable online",
+        "tweet_url": "https://twitter.com/dril/status/1106106139375095808",
+        "tweet_date": "2019-03-14 09:13:48",
+        "retweets": 8932,
+        "favorites": 41140,
+        "similarity_score": 0.258804545798943,
+        "adjusted_score": 0.2645348818311861,
+        "card_interpretation": "Seek wisdom from those who've walked this path. Honor traditions that serve you. Find your spiritual community. Learn from established systems."
+      },
+      "reversed": {
+        "tweet_id": "473265809079693312",
+        "tweet_content": "the wise man bowed his head solemnly and spoke: \"theres actually zero difference between good & bad things. you imbecile. you fucking moron\"",
+        "tweet_url": "https://twitter.com/dril/status/473265809079693312",
+        "tweet_date": "2014-06-02 02:52:16",
+        "retweets": 16806,
+        "favorites": 40873,
+        "similarity_score": 0.2687738046629399,
+        "adjusted_score": 0.28124442980303116,
+        "card_interpretation": "Question outdated beliefs. Find your own spiritual path. Don't let tradition limit you. Be the teacher you needed."
+      }
+    },
+    "The Lovers": {
+      "upright": {
+        "tweet_id": "670963270317154304",
+        "tweet_content": "its fucked up how there are like 1000 christmas songs but only 1 song aboutr the boys being back in town",
+        "tweet_url": "https://twitter.com/dril/status/670963270317154304",
+        "tweet_date": "2015-11-29 14:51:24",
+        "retweets": 64257,
+        "favorites": 106961,
+        "similarity_score": 0.0747453865900323,
+        "adjusted_score": 0.2563839434645742,
+        "card_interpretation": "Choose love. Align with your values. Important relationship milestone. Trust your heart. Union and harmony available now."
+      },
+      "reversed": {
+        "tweet_id": "331223511962107904",
+        "tweet_content": "The wine imparts a foreign bitterness. How could he betray me? We were brothers. I fall to the ground. Execute a partial curl. One last rep.",
+        "tweet_url": "https://twitter.com/dril/status/331223511962107904",
+        "tweet_date": "2013-05-06 03:46:53",
+        "retweets": 2071,
+        "favorites": 5580,
+        "similarity_score": 0.28746290096779464,
+        "adjusted_score": 0.2387549812025037,
+        "card_interpretation": "Misaligned values causing friction. Choose yourself first. Codependency or separation anxiety. Heal the relationship with yourself."
+      }
+    },
+    "The Chariot": {
+      "upright": {
+        "tweet_id": "1027088072066789377",
+        "tweet_content": "the road is a battle field, all the other cars are your enemies, and not using turn signals gives you an Advantage against then",
+        "tweet_url": "https://twitter.com/dril/status/1027088072066789377",
+        "tweet_date": "2018-08-08 09:04:13",
+        "retweets": 4144,
+        "favorites": 21226,
+        "similarity_score": 0.28141421416063217,
+        "adjusted_score": 0.254260483217822,
+        "card_interpretation": "You've got this! Stay focused on your goal. Balance competing priorities. Victory is within reach. Take the reins and go."
+      },
+      "reversed": {
+        "tweet_id": "490366979749216256",
+        "tweet_content": "awfully bold of you to fly the Good Year blimp on a year that has been extremely bad thus far",
+        "tweet_url": "https://twitter.com/dril/status/490366979749216256",
+        "tweet_date": "2014-07-19 07:26:13",
+        "retweets": 24285,
+        "favorites": 35544,
+        "similarity_score": 0.2516196018910286,
+        "adjusted_score": 0.2699896363896815,
+        "card_interpretation": "Spinning your wheels. Lack of clear direction. Slow down and reassess. Let go of need to control everything."
+      }
+    },
+    "Strength": {
+      "upright": {
+        "tweet_id": "935415976526524416",
+        "tweet_content": "\" nothing is stronger than power. \" - qdoba_NoScope",
+        "tweet_url": "https://twitter.com/dril/status/935415976526524416",
+        "tweet_date": "2017-11-28 08:52:02",
+        "retweets": 1134,
+        "favorites": 7454,
+        "similarity_score": 0.3250919638285515,
+        "adjusted_score": 0.26993406822111665,
+        "card_interpretation": "Lead with compassion. Your gentle strength is your superpower. Face fears with courage. Inner resilience sees you through."
+      },
+      "reversed": {
+        "tweet_id": "955933835329462273",
+        "tweet_content": "love when i lose aobut 100 followers immediately after making a beautiful post. the weak shriveling up into dust. Thats called darwin",
+        "tweet_url": "https://twitter.com/dril/status/955933835329462273",
+        "tweet_date": "2018-01-23 23:42:41",
+        "retweets": 8643,
+        "favorites": 45077,
+        "similarity_score": 0.2339114415655715,
+        "adjusted_score": 0.248808928210836,
+        "card_interpretation": "Self-doubt undermining you. Reclaim your power. Don't let others dim your light. Heal the relationship with your strength."
+      }
+    },
+    "The Hermit": {
+      "upright": {
+        "tweet_id": "943195293151059968",
+        "tweet_content": "as wander my study, Quill Pen in one hand, Whisky in the other, i muse, one might perhaps take me for a Famous Author, from the days of old,",
+        "tweet_url": "https://twitter.com/dril/status/943195293151059968",
+        "tweet_date": "2017-12-19 20:04:16",
+        "retweets": 1218,
+        "favorites": 7466,
+        "similarity_score": 0.3303504276556936,
+        "adjusted_score": 0.27425106375036584,
+        "card_interpretation": "Time for solo reflection. Trust your inner guidance. Answers come in solitude. Seek your own truth. Sacred alone time needed."
+      },
+      "reversed": {
+        "tweet_id": "1112184923597627392",
+        "tweet_content": "Introvert = In vitro pervert. theyre sick",
+        "tweet_url": "https://twitter.com/dril/status/1112184923597627392",
+        "tweet_date": "2019-03-31 04:48:43",
+        "retweets": 3118,
+        "favorites": 24317,
+        "similarity_score": 0.3211884119626128,
+        "adjusted_score": 0.2884508156829555,
+        "card_interpretation": "Loneliness vs. chosen solitude. Come back to the world. Isolation isn't serving you. Reach out for connection."
+      }
+    },
+    "Wheel of Fortune": {
+      "upright": {
+        "tweet_id": "1046773212741128193",
+        "tweet_content": "feel i have much to reflect upon in my life, on news of receiving \"The Golden Douchebag\" award. Many improvements to make, moving forward.",
+        "tweet_url": "https://twitter.com/dril/status/1046773212741128193",
+        "tweet_date": "2018-10-01 16:45:56",
+        "retweets": 1136,
+        "favorites": 8631,
+        "similarity_score": 0.32133043317718496,
+        "adjusted_score": 0.2682785379419432,
+        "card_interpretation": "Lucky break coming. Karma is real - what you've planted is growing. Trust divine timing. Life is changing for the better."
+      },
+      "reversed": {
+        "tweet_id": "1083099660586106880",
+        "tweet_content": "getting brain damage from pissing my self off",
+        "tweet_url": "https://twitter.com/dril/status/1083099660586106880",
+        "tweet_date": "2019-01-09 21:34:16",
+        "retweets": 27989,
+        "favorites": 78892,
+        "similarity_score": 0.16737094254296966,
+        "adjusted_score": 0.2566144760620467,
+        "card_interpretation": "Temporary setback. Break the cycle. Don't repeat old patterns. Create your own luck. Learn the lesson and move on."
+      }
+    },
+    "Justice": {
+      "upright": {
+        "tweet_id": "1082811047898099712",
+        "tweet_content": "posting Ethically, within reason",
+        "tweet_url": "https://twitter.com/dril/status/1082811047898099712",
+        "tweet_date": "2019-01-09 02:27:26",
+        "retweets": 3102,
+        "favorites": 18092,
+        "similarity_score": 0.30529421530391765,
+        "adjusted_score": 0.2685697197946583,
+        "card_interpretation": "Truth prevails. Fair outcomes ahead. Take responsibility. Legal matters resolve favorably. Stand in your integrity."
+      },
+      "reversed": {
+        "tweet_id": "1169719626185359360",
+        "tweet_content": "Seems to me that politics is something of a \"Double Edge Sword\" , that can be used for Good, or, in some cases, Evil.",
+        "tweet_url": "https://twitter.com/dril/status/1169719626185359360",
+        "tweet_date": "2019-09-05 23:11:05",
+        "retweets": 3375,
+        "favorites": 24390,
+        "similarity_score": 0.30340124133099705,
+        "adjusted_score": 0.27459997578481604,
+        "card_interpretation": "Injustice present. Don't let others escape accountability. Inner work needed before outer justice. Forgive but don't forget."
+      }
+    },
+    "The Hanged Man": {
+      "upright": {
+        "tweet_id": "959389367470084096",
+        "tweet_content": "due to budget constraints the ground hog this year has been replaced by a caged man in a loincloth who also fears shadows",
+        "tweet_url": "https://twitter.com/dril/status/959389367470084096",
+        "tweet_date": "2018-02-02 12:33:44",
+        "retweets": 7379,
+        "favorites": 32150,
+        "similarity_score": 0.2616667694582391,
+        "adjusted_score": 0.25471948824584956,
+        "card_interpretation": "Pause and gain perspective. Surrender control. Trust the waiting period. See things from a new angle. Let go to receive."
+      },
+      "reversed": {
+        "tweet_id": "1155166798708219904",
+        "tweet_content": "Its impossible for me to respect someone who is wearing an arm cast. UYou look like a mummy from egypt. Remove it",
+        "tweet_url": "https://twitter.com/dril/status/1155166798708219904",
+        "tweet_date": "2019-07-27 19:23:21",
+        "retweets": 8647,
+        "favorites": 64959,
+        "similarity_score": 0.24122866079535177,
+        "adjusted_score": 0.2774952427760139,
+        "card_interpretation": "Stuck in indecision. Stop martyring yourself. Take action instead of waiting. Release victim mentality."
+      }
+    },
+    "Death": {
+      "upright": {
+        "tweet_id": "361282749086175234",
+        "tweet_content": "if your grave doesnt say \"rest in peace\" on it you are automatically drafted into the skeleton war",
+        "tweet_url": "https://twitter.com/dril/status/361282749086175234",
+        "tweet_date": "2013-07-28 02:31:34",
+        "retweets": 35861,
+        "favorites": 61968,
+        "similarity_score": 0.2629745114341075,
+        "adjusted_score": 0.3227040824235935,
+        "card_interpretation": "Major transformation underway. Release what no longer serves. Grieve the ending. Trust the rebirth coming. You're evolving."
+      },
+      "reversed": {
+        "tweet_id": "673939741654523904",
+        "tweet_content": "the worst thing you can do in death is make the R.I.P. on your grave actually stand for Racism Is Power",
+        "tweet_url": "https://twitter.com/dril/status/673939741654523904",
+        "tweet_date": "2015-12-07 19:58:50",
+        "retweets": 1921,
+        "favorites": 4874,
+        "similarity_score": 0.34113527520148396,
+        "adjusted_score": 0.2807100457539307,
+        "card_interpretation": "Fighting inevitable change. Complete the closure. Fear of transformation keeping you stuck. Embrace the metamorphosis."
+      }
+    },
+    "Temperance": {
+      "upright": {
+        "tweet_id": "880906490495807488",
+        "tweet_content": "people who jack off in the bedroom: spiritual, harmonious, Attuned people who jack off in the bathroom: intellectual, mechanical, productive",
+        "tweet_url": "https://twitter.com/dril/status/880906490495807488",
+        "tweet_date": "2017-06-30 23:50:48",
+        "retweets": 6074,
+        "favorites": 20364,
+        "similarity_score": 0.2795646927359219,
+        "adjusted_score": 0.25400711327938563,
+        "card_interpretation": "Find your balance. Patience brings healing. Blend different aspects of your life. Divine timing at work. Middle path is best."
+      },
+      "reversed": {
+        "tweet_id": "847177688485937152",
+        "tweet_content": "i have squandered the last of my fathers good will by christening our new boat with the name of \"S.S. Mind Of Mencia\"",
+        "tweet_url": "https://twitter.com/dril/status/847177688485937152",
+        "tweet_date": "2017-03-29 22:04:35",
+        "retweets": 1336,
+        "favorites": 6439,
+        "similarity_score": 0.2861512083895952,
+        "adjusted_score": 0.23784800041051077,
+        "card_interpretation": "Out of balance. Extremes causing problems. Slow down. Realign with your purpose. Moderation needed now."
+      }
+    },
+    "The Devil": {
+      "upright": {
+        "tweet_id": "1068397876332515328",
+        "tweet_content": "the words \"yugioh angel\" reverse burned into my flesh after attempting to pose shirtless on the hood of my modified car during a heat wave",
+        "tweet_url": "https://twitter.com/dril/status/1068397876332515328",
+        "tweet_date": "2018-11-30 07:54:38",
+        "retweets": 1981,
+        "favorites": 10919,
+        "similarity_score": 0.3515218695888227,
+        "adjusted_score": 0.2960289084961343,
+        "card_interpretation": "Name your shadows. See your patterns. You're more powerful than what binds you. Addiction or attachment surfacing. Face your fears."
+      },
+      "reversed": {
+        "tweet_id": "259412511214931968",
+        "tweet_content": "\"FEAR IS USED 2 ENSLAVE THE MASSES,\" I SAID AS I RIPPED THE FUCKIN DECORATIVE CARDBOARD SKELETON OFF OF THE COMMUNITY CENTERS BULLETIN BOARD",
+        "tweet_url": "https://twitter.com/dril/status/259412511214931968",
+        "tweet_date": "2012-10-19 23:55:36",
+        "retweets": 3873,
+        "favorites": 6697,
+        "similarity_score": 0.3381808972667996,
+        "adjusted_score": 0.28268089095770743,
+        "card_interpretation": "Breaking free! Release limiting beliefs. Detox from toxicity. Reclaim your power. The chains were always unlocked."
+      }
+    },
+    "The Tower": {
+      "upright": {
+        "tweet_id": "954526675328536576",
+        "tweet_content": "falling down a stair case completely unscathed after executing a perfect series of Block techniques",
+        "tweet_url": "https://twitter.com/dril/status/954526675328536576",
+        "tweet_date": "2018-01-20 02:31:08",
+        "retweets": 2197,
+        "favorites": 10197,
+        "similarity_score": 0.31347807394208094,
+        "adjusted_score": 0.26501289718110604,
+        "card_interpretation": "Everything happens for you. Sudden change brings liberation. False foundations crumbling. Truth bomb incoming. Breakthrough ahead."
+      },
+      "reversed": {
+        "tweet_id": "905515975906398209",
+        "tweet_content": "only TRUTH can bring the the Message Troll , the common dumb ass ,to his knees, so that we may bring the blade down upon Him , As is writtenpic.twitter.com/45FFi2Potg",
+        "tweet_url": "https://twitter.com/dril/status/905515975906398209",
+        "tweet_date": "2017-09-06 21:40:06",
+        "retweets": 1515,
+        "favorites": 6205,
+        "similarity_score": 0.31479959009992764,
+        "adjusted_score": 0.2607035563442512,
+        "card_interpretation": "Resisting necessary change. Fear of the fall. Internal transformation. Learn the lesson now to avoid external disaster."
+      }
+    },
+    "The Star": {
+      "upright": {
+        "tweet_id": "1160112041832529920",
+        "tweet_content": "Cause I got high high Hopes for the living !!!! Cause I got High High Hopes !!!!",
+        "tweet_url": "https://twitter.com/dril/status/1160112041832529920",
+        "tweet_date": "2019-08-10 10:53:59",
+        "retweets": 1351,
+        "favorites": 9667,
+        "similarity_score": 0.30027424310426926,
+        "adjusted_score": 0.25286994847618194,
+        "card_interpretation": "Your prayers are heard. Hope restored. Healing flows to you. Follow your North Star. Divine inspiration and renewal."
+      },
+      "reversed": {
+        "tweet_id": "588795664823386114",
+        "tweet_content": "floks... whether you're young or old: Star wors. Does it every time",
+        "tweet_url": "https://twitter.com/dril/status/588795664823386114",
+        "tweet_date": "2015-04-16 22:06:40",
+        "retweets": 1114,
+        "favorites": 1793,
+        "similarity_score": 0.3328370439003657,
+        "adjusted_score": 0.26960736977785044,
+        "card_interpretation": "Faith wavering. Reconnect with source. Your light hasn't gone out. Trust is returning. Look up."
+      }
+    },
+    "The Moon": {
+      "upright": {
+        "tweet_id": "782425203963990017",
+        "tweet_content": "mind of a lion.. heart of a Pregnant woman",
+        "tweet_url": "https://twitter.com/dril/status/782425203963990017",
+        "tweet_date": "2016-10-02 05:41:20",
+        "retweets": 1602,
+        "favorites": 4510,
+        "similarity_score": 0.30130792725134586,
+        "adjusted_score": 0.24806396623416702,
+        "card_interpretation": "Trust your intuition over logic. Not everything is as it seems. Face your fears. Let your dreams guide you. The path will illuminate."
+      },
+      "reversed": {
+        "tweet_id": "1108543516227985408",
+        "tweet_content": "just found out about Object Permanence... why didnt any one tell me about this shit",
+        "tweet_url": "https://twitter.com/dril/status/1108543516227985408",
+        "tweet_date": "2019-03-21 02:39:04",
+        "retweets": 12595,
+        "favorites": 71463,
+        "similarity_score": 0.1961928722261881,
+        "adjusted_score": 0.2534673008236051,
+        "card_interpretation": "Clarity emerging from confusion. Illusions dissolving. Anxiety releasing. Trust yourself. The monsters aren't real."
+      }
+    },
+    "The Sun": {
+      "upright": {
+        "tweet_id": "875550728684744704",
+        "tweet_content": "revealing the gender of my baby by eating a whole bunch of food dye and taking a huge pink shit in front of my relatives. ah!! its a girl !!",
+        "tweet_url": "https://twitter.com/dril/status/875550728684744704",
+        "tweet_date": "2017-06-16 05:08:55",
+        "retweets": 15604,
+        "favorites": 86376,
+        "similarity_score": 0.16180898703985214,
+        "adjusted_score": 0.24653772295756055,
+        "card_interpretation": "Everything is working out! Bask in success. Share your light. Pure joy available. Your time to shine. Celebrate!"
+      },
+      "reversed": {
+        "tweet_id": "1167921495659577346",
+        "tweet_content": "to the pyramid on the $1 bill calling itself the \"all seeing eye\" Fuck you. the only thing you can see from my wallet is the jeans of my ass",
+        "tweet_url": "https://twitter.com/dril/status/1167921495659577346",
+        "tweet_date": "2019-09-01 00:05:58",
+        "retweets": 6749,
+        "favorites": 43892,
+        "similarity_score": 0.24085580579326338,
+        "adjusted_score": 0.2508291994310973,
+        "card_interpretation": "Inner child needs healing. Don't fake happiness. Real joy coming after inner work. Reclaim your authentic radiance."
+      }
+    },
+    "Judgement": {
+      "upright": {
+        "tweet_id": "991760735884791808",
+        "tweet_content": "imagining a judge sentencing a beautiful lady criminal to be my wife , and saying \"Oh thats good\"",
+        "tweet_url": "https://twitter.com/dril/status/991760735884791808",
+        "tweet_date": "2018-05-02 21:26:00",
+        "retweets": 1230,
+        "favorites": 10596,
+        "similarity_score": 0.3056850082222247,
+        "adjusted_score": 0.258126283172303,
+        "card_interpretation": "Your calling is clear. Forgive and rise. Major awakening happening. Past releasing. Answer the call. You're ready for rebirth."
+      },
+      "reversed": {
+        "tweet_id": "518421095255662592",
+        "tweet_content": "judges are bullshit, your honor",
+        "tweet_url": "https://twitter.com/dril/status/518421095255662592",
+        "tweet_date": "2014-10-04 17:23:15",
+        "retweets": 2742,
+        "favorites": 5909,
+        "similarity_score": 0.31437548008830657,
+        "adjusted_score": 0.2614332160357409,
+        "card_interpretation": "Self-judgment blocking progress. Silence the inner critic. Forgive yourself. You're worthy of the calling. Trust the process."
+      }
+    },
+    "The World": {
+      "upright": {
+        "tweet_id": "1172713851688603649",
+        "tweet_content": "Just gotten word that ive been approved for the verified mark. It'll appear within 5-7 days. Wow! What a nice surprise! Thank you every body",
+        "tweet_url": "https://twitter.com/dril/status/1172713851688603649",
+        "tweet_date": "2019-09-14 05:29:04",
+        "retweets": 1307,
+        "favorites": 30906,
+        "similarity_score": 0.28718620946611684,
+        "adjusted_score": 0.266735017288721,
+        "card_interpretation": "You did it! Celebrate completion. The world is yours. Full circle moment. Integration and wholeness achieved. Dance with joy!"
+      },
+      "reversed": {
+        "tweet_id": "764864532720279552",
+        "tweet_content": "1st grade: Mastered. 2nd Grade: MAstered. 3rd Grade: Mastered. 4th Grade: Heres when they start trying to trick you 5th Grade:This ones hard",
+        "tweet_url": "https://twitter.com/dril/status/764864532720279552",
+        "tweet_date": "2016-08-14 18:41:29",
+        "retweets": 8450,
+        "favorites": 22823,
+        "similarity_score": 0.30297148918509853,
+        "adjusted_score": 0.27828395981928844,
+        "card_interpretation": "Almost there - finish strong. Loose ends need tying. Don't fear the ending. Complete the cycle. You're ready for the next chapter."
+      }
+    },
+    "Ace of Wands": {
+      "upright": {
+        "tweet_id": "1103726128026525697",
+        "tweet_content": "feel as though i could break through most walls with my bare hands , given an unlimited amount of time and resources",
+        "tweet_url": "https://twitter.com/dril/status/1103726128026525697",
+        "tweet_date": "2019-03-07 19:36:29",
+        "retweets": 4902,
+        "favorites": 29540,
+        "similarity_score": 0.26654471998844864,
+        "adjusted_score": 0.2527811000621752,
+        "card_interpretation": "Your breakthrough moment is here! Seize the opportunity. Creative fire ignited. Trust the inspiration and take the first step boldly."
+      },
+      "reversed": {
+        "tweet_id": "757914951868485632",
+        "tweet_content": "so long suckers! i rev up my motorcylce and create a huge cloud of smoke. when the cloud dissipates im lying completely dead on the pavement",
+        "tweet_url": "https://twitter.com/dril/status/757914951868485632",
+        "tweet_date": "2016-07-26 14:26:20",
+        "retweets": 33730,
+        "favorites": 59150,
+        "similarity_score": 0.20176823815952832,
+        "adjusted_score": 0.2680567628681704,
+        "card_interpretation": "Timing isn't quite right yet. Refine your idea. Don't force it. Your spark will reignite when you reconnect with your passion."
+      }
+    },
+    "Two of Wands": {
+      "upright": {
+        "tweet_id": "1150865267141910528",
+        "tweet_content": "i got a big ass and i know how to fuck it. Mastercard",
+        "tweet_url": "https://twitter.com/dril/status/1150865267141910528",
+        "tweet_date": "2019-07-15 22:30:36",
+        "retweets": 4533,
+        "favorites": 29204,
+        "similarity_score": 0.3121726786359863,
+        "adjusted_score": 0.28847400604674184,
+        "card_interpretation": "The world is yours for the taking. Make bold plans. Think bigger. Your vision is ready to expand beyond current boundaries."
+      },
+      "reversed": {
+        "tweet_id": "584049040637218816",
+        "tweet_content": "some times it takes a little bit of Free thinking to be able to look at the bull shit of the world to step back and say \"Damn What the hell\"",
+        "tweet_url": "https://twitter.com/dril/status/584049040637218816",
+        "tweet_date": "2015-04-03 19:45:17",
+        "retweets": 1017,
+        "favorites": 1990,
+        "similarity_score": 0.3053461699351632,
+        "adjusted_score": 0.2477294877593712,
+        "card_interpretation": "Analysis paralysis. Stop overthinking. Small steps are still steps. Trust yourself to choose and adjust along the way."
+      }
+    },
+    "Three of Wands": {
+      "upright": {
+        "tweet_id": "568056615355740160",
+        "tweet_content": "Politic's is back baby. It's good again. Awoouu (wolf Howl)",
+        "tweet_url": "https://twitter.com/dril/status/568056615355740160",
+        "tweet_date": "2015-02-18 15:37:05",
+        "retweets": 11055,
+        "favorites": 20516,
+        "similarity_score": 0.2305377537893943,
+        "adjusted_score": 0.2206791266206997,
+        "card_interpretation": "Your ships are coming in! Expansion happening. Trust your vision. Leadership opportunities emerging. The wait is almost over."
+      },
+      "reversed": {
+        "tweet_id": "959401405055422464",
+        "tweet_content": "Time and time Again. People on here Fuck me over and ruin my life. simply for starting the Dialouge",
+        "tweet_url": "https://twitter.com/dril/status/959401405055422464",
+        "tweet_date": "2018-02-02 13:21:34",
+        "retweets": 2036,
+        "favorites": 12113,
+        "similarity_score": 0.27658959441943776,
+        "adjusted_score": 0.23751715461012396,
+        "card_interpretation": "Delays in manifestation. Don't give up now. Adjust your expectations but keep the vision. Your time will come."
+      }
+    },
+    "Four of Wands": {
+      "upright": {
+        "tweet_id": "396296773964017665",
+        "tweet_content": "its the weekend baby. youknow what that means. its time to drink precisely one beer and call 911",
+        "tweet_url": "https://twitter.com/dril/status/396296773964017665",
+        "tweet_date": "2013-11-01 16:24:48",
+        "retweets": 23781,
+        "favorites": 38937,
+        "similarity_score": 0.2155438746648255,
+        "adjusted_score": 0.24444612217861394,
+        "card_interpretation": "Time to celebrate! You've earned this victory. Gather your people. Home and happiness align. Enjoy the fruits of your labor."
+      },
+      "reversed": {
+        "tweet_id": "883150175149150208",
+        "tweet_content": "(in \"not knowing what chickens coming home to roost means\" voice) looks like the chickens have come home to roost,",
+        "tweet_url": "https://twitter.com/dril/status/883150175149150208",
+        "tweet_date": "2017-07-07 04:26:24",
+        "retweets": 2331,
+        "favorites": 9364,
+        "similarity_score": 0.2810438777192545,
+        "adjusted_score": 0.23826296829860238,
+        "card_interpretation": "Delays in celebration. Home feels unsettled. Create your own sense of belonging. Small wins still count."
+      }
+    },
+    "Five of Wands": {
+      "upright": {
+        "tweet_id": "941162189456642048",
+        "tweet_content": "Stand My Ground Mother Fucker",
+        "tweet_url": "https://twitter.com/dril/status/941162189456642048",
+        "tweet_date": "2017-12-14 05:25:26",
+        "retweets": 1175,
+        "favorites": 6361,
+        "similarity_score": 0.3054797138828625,
+        "adjusted_score": 0.25303639180782284,
+        "card_interpretation": "Healthy competition pushes you to grow. Different perspectives create friction. Stay in the arena. This challenge is making you stronger."
+      },
+      "reversed": {
+        "tweet_id": "976572751652753408",
+        "tweet_content": "if you have trouble discerning the \"Family Room\" from the \"Living Room\" your house should be taken away from you",
+        "tweet_url": "https://twitter.com/dril/status/976572751652753408",
+        "tweet_date": "2018-03-21 22:34:22",
+        "retweets": 1582,
+        "favorites": 10834,
+        "similarity_score": 0.28535686628600193,
+        "adjusted_score": 0.24254119083005304,
+        "card_interpretation": "Pick your battles wisely. Not every fight is worth it. Inner conflict needs resolution. Step back and reassess."
+      }
+    },
+    "Six of Wands": {
+      "upright": {
+        "tweet_id": "1030261589918642176",
+        "tweet_content": "pleased to report that an angel has lifted the curse against me after doing my \"Good Deed\" of the year, by tipping a waiter 15%",
+        "tweet_url": "https://twitter.com/dril/status/1030261589918642176",
+        "tweet_date": "2018-08-17 03:14:39",
+        "retweets": 1213,
+        "favorites": 11113,
+        "similarity_score": 0.2985656379675952,
+        "adjusted_score": 0.2530048727370132,
+        "card_interpretation": "Your moment to shine! Recognition coming. Accept the praise graciously. You've earned this victory. Lead with confidence."
+      },
+      "reversed": {
+        "tweet_id": "990041494332559360",
+        "tweet_content": "discreetly getting my ass kicked",
+        "tweet_url": "https://twitter.com/dril/status/990041494332559360",
+        "tweet_date": "2018-04-28 03:34:20",
+        "retweets": 4059,
+        "favorites": 18047,
+        "similarity_score": 0.2992836872826924,
+        "adjusted_score": 0.2648084298192649,
+        "card_interpretation": "Success doesn't need an audience. Private victories matter too. Don't let ego sabotage. Humility serves you now."
+      }
+    },
+    "Seven of Wands": {
+      "upright": {
+        "tweet_id": "1004383924284526594",
+        "tweet_content": "i challenge any man who thinks that my 7 handsome border collies are too loud through-out the day to a round of Chess, the game of kings",
+        "tweet_url": "https://twitter.com/dril/status/1004383924284526594",
+        "tweet_date": "2018-06-06 17:26:02",
+        "retweets": 2058,
+        "favorites": 12995,
+        "similarity_score": 0.28667079471085205,
+        "adjusted_score": 0.24662006191254754,
+        "card_interpretation": "Stand your ground! Your position is strong. Don't let opposition shake you. Fight for what you've built. You've got the advantage."
+      },
+      "reversed": {
+        "tweet_id": "1019229449810685952",
+        "tweet_content": "sending my most powerful kisses to all pregnant women fire fighers",
+        "tweet_url": "https://twitter.com/dril/status/1019229449810685952",
+        "tweet_date": "2018-07-17 16:36:51",
+        "retweets": 2937,
+        "favorites": 21444,
+        "similarity_score": 0.316869777166394,
+        "adjusted_score": 0.28148939197250894,
+        "card_interpretation": "Burnout from constant defense. Choose your battles. Sometimes strategic retreat is wisdom. Conserve your energy."
+      }
+    },
+    "Eight of Wands": {
+      "upright": {
+        "tweet_id": "1063700551311908864",
+        "tweet_content": "a tisket? Fine a tasket? Fuck yes a green and yellow basket? Too much",
+        "tweet_url": "https://twitter.com/dril/status/1063700551311908864",
+        "tweet_date": "2018-11-17 08:49:08",
+        "retweets": 5045,
+        "favorites": 32963,
+        "similarity_score": 0.26163727078402743,
+        "adjusted_score": 0.25294952039896546,
+        "card_interpretation": "Everything is happening fast! Ride the momentum. Messages and opportunities flying in. Strike while the iron is hot. Go with the flow."
+      },
+      "reversed": {
+        "tweet_id": "1216390911526965248",
+        "tweet_content": "wife is no longer permitting me to jack off in the car during her book club meetings. where am i supposed to jack off then? fucking EGYPT???",
+        "tweet_url": "https://twitter.com/dril/status/1216390911526965248",
+        "tweet_date": "2020-01-12 17:06:07",
+        "retweets": 7192,
+        "favorites": 70717,
+        "similarity_score": 0.17478184455950818,
+        "adjusted_score": 0.2292783719103082,
+        "card_interpretation": "Slow down! Delays are divine protection. Timing is off. Patience needed. Things will move when they're meant to."
+      }
+    },
+    "Nine of Wands": {
+      "upright": {
+        "tweet_id": "512937315363078144",
+        "tweet_content": "what donest kill me makes me stronger ((gains infinite strength from being not killed by infinite things))",
+        "tweet_url": "https://twitter.com/dril/status/512937315363078144",
+        "tweet_date": "2014-09-19 14:12:40",
+        "retweets": 1369,
+        "favorites": 2362,
+        "similarity_score": 0.3005868255825387,
+        "adjusted_score": 0.24475328846993474,
+        "card_interpretation": "You're stronger than you know. One more push. Don't give up now. Your resilience is remarkable. Victory is just ahead."
+      },
+      "reversed": {
+        "tweet_id": "913109321147437056",
+        "tweet_content": "top ten things you do NOT want to hear in the Nursing profession: 10. Shut the fuck up 9. Fuck you idiot 8. Your pay check is in the trash",
+        "tweet_url": "https://twitter.com/dril/status/913109321147437056",
+        "tweet_date": "2017-09-27 20:33:21",
+        "retweets": 3706,
+        "favorites": 20878,
+        "similarity_score": 0.266307730127457,
+        "adjusted_score": 0.2412728331633354,
+        "card_interpretation": "Rest is not giving up. Burnout is real. Lower those walls. Heal the wounds. You don't have to do this alone."
+      }
+    },
+    "Ten of Wands": {
+      "upright": {
+        "tweet_id": "504134967946141697",
+        "tweet_content": "i am selling six beautfiul, extremely ill, white horses. they no longer recognize me as their father, and are the Burden of my life",
+        "tweet_url": "https://twitter.com/dril/status/504134967946141697",
+        "tweet_date": "2014-08-26 07:15:17",
+        "retweets": 10036,
+        "favorites": 23375,
+        "similarity_score": 0.25642263921279707,
+        "adjusted_score": 0.24349967058718466,
+        "card_interpretation": "You're carrying too much. Ask for help. Delegate. Success shouldn't feel this heavy. Almost there - but at what cost?"
+      },
+      "reversed": {
+        "tweet_id": "1038230623922450432",
+        "tweet_content": "using mindfulness. to waste my enemies",
+        "tweet_url": "https://twitter.com/dril/status/1038230623922450432",
+        "tweet_date": "2018-09-08 03:00:44",
+        "retweets": 5217,
+        "favorites": 22359,
+        "similarity_score": 0.29322244148883775,
+        "adjusted_score": 0.2662399314906282,
+        "card_interpretation": "Put down what's not yours to carry. Burnout is knocking. Release perfectionism. Your worth isn't measured by how much you endure."
+      }
+    },
+    "Page of Wands": {
+      "upright": {
+        "tweet_id": "910716499756818433",
+        "tweet_content": "\"be the james you want to see in the world \" - James Bond",
+        "tweet_url": "https://twitter.com/dril/status/910716499756818433",
+        "tweet_date": "2017-09-21 06:05:08",
+        "retweets": 2728,
+        "favorites": 12070,
+        "similarity_score": 0.2584259131219658,
+        "adjusted_score": 0.22373137289954748,
+        "card_interpretation": "Exciting news coming! Follow your curiosity. Take inspired action. Your enthusiasm is contagious. Adventure awaits - say yes!"
+      },
+      "reversed": {
+        "tweet_id": "965998285319270402",
+        "tweet_content": "seems to me, life is aoubt \"STICKS\" Age: 1-20 : Selfie Stick Age 21-90: Walking stick",
+        "tweet_url": "https://twitter.com/dril/status/965998285319270402",
+        "tweet_date": "2018-02-20 18:15:13",
+        "retweets": 7875,
+        "favorites": 41799,
+        "similarity_score": 0.21932389975043193,
+        "adjusted_score": 0.23249339272071987,
+        "card_interpretation": "Scattered energy going nowhere. Ground your ideas in reality. Follow through matters. Channel enthusiasm into focused action."
+      }
+    },
+    "Knight of Wands": {
+      "upright": {
+        "tweet_id": "883352279558049794",
+        "tweet_content": "thinking aobut turning into a wolf and kicking hurricane sandys ass",
+        "tweet_url": "https://twitter.com/dril/status/883352279558049794",
+        "tweet_date": "2017-07-07 17:49:29",
+        "retweets": 2227,
+        "favorites": 9227,
+        "similarity_score": 0.2632124115603893,
+        "adjusted_score": 0.22372108603113483,
+        "card_interpretation": "Go for it with everything you've got! Bold moves win. Follow your passion fearlessly. Adventure and excitement ahead. Take the leap!"
+      },
+      "reversed": {
+        "tweet_id": "1010765087521505281",
+        "tweet_content": "TODAY: - pissed some body off - got my ass kicked - Pissed myself - got piss kicked into my ass - ANd its only 2:01 AM.",
+        "tweet_url": "https://twitter.com/dril/status/1010765087521505281",
+        "tweet_date": "2018-06-24 08:02:30",
+        "retweets": 6624,
+        "favorites": 38839,
+        "similarity_score": 0.256633427213113,
+        "adjusted_score": 0.2575060643492837,
+        "card_interpretation": "Slow down before you crash. Recklessness isn't courage. Finish what you start. Channel that fire into sustainable action."
+      }
+    },
+    "Queen of Wands": {
+      "upright": {
+        "tweet_id": "1211678745439821830",
+        "tweet_content": "Goddess George W Bush is the Light of my Being, The Master of my BLOOD. I am a Piggy who must be sent to Iraq @ TheBushCenter",
+        "tweet_url": "https://twitter.com/dril/status/1211678745439821830",
+        "tweet_date": "2019-12-30 17:01:39",
+        "retweets": 1719,
+        "favorites": 14988,
+        "similarity_score": 0.2715438545622133,
+        "adjusted_score": 0.2364175855155494,
+        "card_interpretation": "Own your power! Your confidence is magnetic. Lead with warmth and strength. Creative fire aligned with purpose. You're unstoppable."
+      },
+      "reversed": {
+        "tweet_id": "516183352106577920",
+        "tweet_content": "THERAPIST: your problem is, that youre perfect, and everyone is jealous of your good posts, and that makes you rightfully upset. ME: I agree",
+        "tweet_url": "https://twitter.com/dril/status/516183352106577920",
+        "tweet_date": "2014-09-28 13:11:16",
+        "retweets": 18809,
+        "favorites": 33254,
+        "similarity_score": 0.2858519643133897,
+        "adjusted_score": 0.28845882617256724,
+        "card_interpretation": "Insecurity making you pushy. Calm the jealousy. Real confidence doesn't need validation. Channel intensity constructively."
+      }
+    },
+    "King of Wands": {
+      "upright": {
+        "tweet_id": "1160484506979065856",
+        "tweet_content": "The Proven Mental Health Benefits Of Calling Your Boss \"Father\"",
+        "tweet_url": "https://twitter.com/dril/status/1160484506979065856",
+        "tweet_date": "2019-08-11 11:34:01",
+        "retweets": 2611,
+        "favorites": 23585,
+        "similarity_score": 0.2577024414215633,
+        "adjusted_score": 0.2362394547159865,
+        "card_interpretation": "Step into leadership! Your vision inspires others. Lead with integrity and passion. Manifest your bold dreams. You were born for this."
+      },
+      "reversed": {
+        "tweet_id": "943197098769633280",
+        "tweet_content": "\" And the beast which I saw was like unto a leopard, and his feet were as the feet of a bear, and his mouth as the mouth of a lion: and the dragon gave him his power, and his seat, and great authority. \"pic.twitter.com/CUq8FtiQ3s",
+        "tweet_url": "https://twitter.com/dril/status/943197098769633280",
+        "tweet_date": "2017-12-19 20:11:26",
+        "retweets": 5194,
+        "favorites": 15819,
+        "similarity_score": 0.29523061906441056,
+        "adjusted_score": 0.26031102375488685,
+        "card_interpretation": "Control isn't leadership. Check your ego. Inspire, don't intimidate. True power serves rather than dominates."
+      }
+    },
+    "Ace of Cups": {
+      "upright": {
+        "tweet_id": "914549381940092928",
+        "tweet_content": "fdreaming of that special moment when i can look into my wifes eyes and say \"Thank you. Thank you for marrying me\"",
+        "tweet_url": "https://twitter.com/dril/status/914549381940092928",
+        "tweet_date": "2017-10-01 19:55:38",
+        "retweets": 1727,
+        "favorites": 7435,
+        "similarity_score": 0.28754217172151225,
+        "adjusted_score": 0.2405532849976243,
+        "card_interpretation": "Your heart is opening. New love or deep emotional connection beginning. Creative inspiration flowing. Say yes to love. Divine grace pouring into your life."
+      },
+      "reversed": {
+        "tweet_id": "1046125588430217216",
+        "tweet_content": "a respectful nod to all my friends whohave been removed from group chats after having some sort of melt down. \"The Fallen Angels\"",
+        "tweet_url": "https://twitter.com/dril/status/1046125588430217216",
+        "tweet_date": "2018-09-29 21:52:31",
+        "retweets": 3213,
+        "favorites": 18684,
+        "similarity_score": 0.30495612868988603,
+        "adjusted_score": 0.2691064150938228,
+        "card_interpretation": "Emotional walls up. Give yourself permission to feel. Unblock your heart. Healing needed before you can receive love fully."
+      }
+    },
+    "Two of Cups": {
+      "upright": {
+        "tweet_id": "1205799004086292480",
+        "tweet_content": "\"The one thing i love about Beer: The one thing I love about beer is that its always time for another sip.\" -The one thing i love about Beer",
+        "tweet_url": "https://twitter.com/dril/status/1205799004086292480",
+        "tweet_date": "2019-12-14 11:37:39",
+        "retweets": 3243,
+        "favorites": 29945,
+        "similarity_score": 0.23162941143825472,
+        "adjusted_score": 0.22340904611483825,
+        "card_interpretation": "Soul connection activated. This relationship has sacred purpose. Mutual attraction and respect. Love flows both ways. Partnership blessed."
+      },
+      "reversed": {
+        "tweet_id": "644965836965441536",
+        "tweet_content": "FOOL: Love to get a bee in my bonnet ME: theres no possible way you could love that. take this down immediately FOOL: Ah, foiled again",
+        "tweet_url": "https://twitter.com/dril/status/644965836965441536",
+        "tweet_date": "2015-09-18 22:06:53",
+        "retweets": 1029,
+        "favorites": 2618,
+        "similarity_score": 0.3460776883561555,
+        "adjusted_score": 0.28104953227973467,
+        "card_interpretation": "One-sided feelings. Codependency patterns surfacing. Love yourself first. Mismatched energies. Heal before committing."
+      }
+    },
+    "Three of Cups": {
+      "upright": {
+        "tweet_id": "979141180318453762",
+        "tweet_content": "i just need to say, to anyone reading this.. You are Important, You are loved, and You belong in this world, if you have over 5000 followers",
+        "tweet_url": "https://twitter.com/dril/status/979141180318453762",
+        "tweet_date": "2018-03-29 01:40:23",
+        "retweets": 10391,
+        "favorites": 54249,
+        "similarity_score": 0.22451546264413158,
+        "adjusted_score": 0.2538301782558415,
+        "card_interpretation": "Celebrate with your people! Friendship circle expanding. Creative collaboration blessed. Joy multiplied when shared. Your tribe has your back."
+      },
+      "reversed": {
+        "tweet_id": "378130907804098560",
+        "tweet_content": "mean while, while you were \"Gaming \", i tasted 100 different wines in a cave behind a waterfall and cried into a shaman's arms",
+        "tweet_url": "https://twitter.com/dril/status/378130907804098560",
+        "tweet_date": "2013-09-12 14:20:08",
+        "retweets": 11122,
+        "favorites": 18932,
+        "similarity_score": 0.28958197875624747,
+        "adjusted_score": 0.26617273037281475,
+        "card_interpretation": "FOMO or feeling left out. Toxic friend group. Quality over quantity in friendships. Set boundaries with social obligations. Find your real tribe."
+      }
+    },
+    "Four of Cups": {
+      "upright": {
+        "tweet_id": "1119775428191723521",
+        "tweet_content": "alone and my thoughts...",
+        "tweet_url": "https://twitter.com/dril/status/1119775428191723521",
+        "tweet_date": "2019-04-21 03:30:41",
+        "retweets": 1897,
+        "favorites": 9925,
+        "similarity_score": 0.29597534999014996,
+        "adjusted_score": 0.2503539639004959,
+        "card_interpretation": "Check your gratitude. Opportunity knocking but you're distracted. Time for inner reflection. What are you missing while looking elsewhere? Meditation needed."
+      },
+      "reversed": {
+        "tweet_id": "1023255635608006656",
+        "tweet_content": "had that dream again. a Top Female Influencer grasped my hand and took me to my Forever Home..where i never have to demean myself by posting",
+        "tweet_url": "https://twitter.com/dril/status/1023255635608006656",
+        "tweet_date": "2018-07-28 19:15:29",
+        "retweets": 3023,
+        "favorites": 22130,
+        "similarity_score": 0.2922029955020851,
+        "adjusted_score": 0.2626423550674928,
+        "card_interpretation": "Waking up to what's been offered. Snap out of it. Depression clearing. Say yes to the new opportunity. Renewed appreciation coming."
+      }
+    },
+    "Five of Cups": {
+      "upright": {
+        "tweet_id": "1165046443431747585",
+        "tweet_content": "david kock death hitting especially hard because of baby bird brain derangement that makes me think every rich person i see on tv is my Mom",
+        "tweet_url": "https://twitter.com/dril/status/1165046443431747585",
+        "tweet_date": "2019-08-24 01:41:32",
+        "retweets": 6179,
+        "favorites": 37831,
+        "similarity_score": 0.24532374295630885,
+        "adjusted_score": 0.24679002370082986,
+        "card_interpretation": "Feel your feelings fully. Grief is necessary. But don't miss what remains while mourning what's gone. Loss teaching important lessons. This too shall pass."
+      },
+      "reversed": {
+        "tweet_id": "991081596550860801",
+        "tweet_content": "another blissfful day ignoring the fact that 75% of my peers on this site have been rejected from offline society for pretty good reasons",
+        "tweet_url": "https://twitter.com/dril/status/991081596550860801",
+        "tweet_date": "2018-05-01 00:27:20",
+        "retweets": 7725,
+        "favorites": 35641,
+        "similarity_score": 0.23780094907244298,
+        "adjusted_score": 0.24003236612402018,
+        "card_interpretation": "Healing after heartbreak. Forgiveness flowing. Choosing to move forward. Gratitude for what remains. Wisdom gained from pain."
+      }
+    },
+    "Six of Cups": {
+      "upright": {
+        "tweet_id": "976614559409680385",
+        "tweet_content": "thinking about shit that i Recognize and smiling",
+        "tweet_url": "https://twitter.com/dril/status/976614559409680385",
+        "tweet_date": "2018-03-22 01:20:30",
+        "retweets": 1781,
+        "favorites": 9263,
+        "similarity_score": 0.2997523659673907,
+        "adjusted_score": 0.2524822992266366,
+        "card_interpretation": "Beautiful memories surfacing. Old friends reconnecting. Honor your inner child. Simple joys are the deepest. Innocence and sweetness blessed."
+      },
+      "reversed": {
+        "tweet_id": "976804375631941632",
+        "tweet_content": "8 Words We Must Never Say In Front Of Father (Number 6 Will Make You Shit)",
+        "tweet_url": "https://twitter.com/dril/status/976804375631941632",
+        "tweet_date": "2018-03-22 13:54:45",
+        "retweets": 1891,
+        "favorites": 11709,
+        "similarity_score": 0.27598907598188677,
+        "adjusted_score": 0.23640639368636482,
+        "card_interpretation": "Stop living in the past. Those days are gone - be here now. Heal childhood wounds. Create new memories. Release the old story."
+      }
+    },
+    "Seven of Cups": {
+      "upright": {
+        "tweet_id": "771209562611257345",
+        "tweet_content": "boy oh boy do i love purchasing large amounnts of Fool's Gold. wait a minute... fools gold fucking sucks. this stuff is no good..!! Fuck !!!",
+        "tweet_url": "https://twitter.com/dril/status/771209562611257345",
+        "tweet_date": "2016-09-01 06:54:22",
+        "retweets": 2754,
+        "favorites": 9804,
+        "similarity_score": 0.29577983410979275,
+        "adjusted_score": 0.25104260544731527,
+        "card_interpretation": "Too many options overwhelming you. Not all that glitters is gold. Ground your dreams in reality. One choice at a time. Beware illusions and false promises."
+      },
+      "reversed": {
+        "tweet_id": "1199346053876609025",
+        "tweet_content": "if you \"clap back\" someone with a PhD on here, you should be allowed to have their PhD. Its just common sense people. Oh that's tea",
+        "tweet_url": "https://twitter.com/dril/status/1199346053876609025",
+        "tweet_date": "2019-11-26 16:15:56",
+        "retweets": 11326,
+        "favorites": 77427,
+        "similarity_score": 0.14501091263247706,
+        "adjusted_score": 0.21791239851404182,
+        "card_interpretation": "Clarity cutting through confusion. You know what you really want. Stop fantasizing, start doing. The right path is revealing itself."
+      }
+    },
+    "Eight of Cups": {
+      "upright": {
+        "tweet_id": "817542968764747776",
+        "tweet_content": "(carrrying a huge polkadotted bindle, looking like a dumb ass , shoes completely untied) Mother.. Father... Im leaving home to join the cops",
+        "tweet_url": "https://twitter.com/dril/status/817542968764747776",
+        "tweet_date": "2017-01-07 02:26:47",
+        "retweets": 2023,
+        "favorites": 8164,
+        "similarity_score": 0.2875115811825391,
+        "adjusted_score": 0.2417056883916941,
+        "card_interpretation": "Trust your knowing that it's time to leave. Walking away from what's no longer aligned. Spiritual quest calling. Courage to seek more. You've outgrown this."
+      },
+      "reversed": {
+        "tweet_id": "158042815128023040",
+        "tweet_content": "see this watch? i got it by Crying. my car? crying. my beautiful wife? Crying. My perfect teeth? Crying. now get the fuck out of my office",
+        "tweet_url": "https://twitter.com/dril/status/158042815128023040",
+        "tweet_date": "2012-01-14 05:28:38",
+        "retweets": 9597,
+        "favorites": 18379,
+        "similarity_score": 0.26459427738416696,
+        "adjusted_score": 0.24379666882162257,
+        "card_interpretation": "Fear holding you in the wrong place. Complete the departure. Stop looking back. Commitment issues. Make the break clean."
+      }
+    },
+    "Nine of Cups": {
+      "upright": {
+        "tweet_id": "1078406742420086784",
+        "tweet_content": "\"Hwhoo!! That's a lot of zeroes\" - me after seeing the amount of money of $12.00",
+        "tweet_url": "https://twitter.com/dril/status/1078406742420086784",
+        "tweet_date": "2018-12-27 22:46:17",
+        "retweets": 5628,
+        "favorites": 31506,
+        "similarity_score": 0.2123781790660126,
+        "adjusted_score": 0.21253874510136628,
+        "card_interpretation": "Your wishes are coming true! Emotional fulfillment achieved. Count your blessings. You deserve this happiness. Celebrate your contentment. Life is good."
+      },
+      "reversed": {
+        "tweet_id": "1079998669263228928",
+        "tweet_content": "im not wishning you freaks a happy new year. you will all fuck up my 2019, like you have with all the other years. youre dopes",
+        "tweet_url": "https://twitter.com/dril/status/1079998669263228928",
+        "tweet_date": "2019-01-01 08:12:02",
+        "retweets": 9414,
+        "favorites": 41262,
+        "similarity_score": 0.22739358041602228,
+        "adjusted_score": 0.2400996051330934,
+        "card_interpretation": "Happiness is internal, not external. Check your smugness. Gratitude practice needed. Don't let success make you selfish. Share your abundance."
+      }
+    },
+    "Ten of Cups": {
+      "upright": {
+        "tweet_id": "836155612425773056",
+        "tweet_content": "i lvoe and cherish all of the girls of this site, and other websites. you all become my wife more and more with each passing day. Thank you",
+        "tweet_url": "https://twitter.com/dril/status/836155612425773056",
+        "tweet_date": "2017-02-27 11:06:47",
+        "retweets": 9453,
+        "favorites": 20636,
+        "similarity_score": 0.2624936527574764,
+        "adjusted_score": 0.24454225557758685,
+        "card_interpretation": "Your dream relationship/family manifesting. Lasting emotional fulfillment. All the love you've given returns multiplied. This is what you've been working toward. Heaven on earth."
+      },
+      "reversed": {
+        "tweet_id": "876295901555412992",
+        "tweet_content": "I lvoe giving thousands of dollars to my real friends while kicking my fake friends asses",
+        "tweet_url": "https://twitter.com/dril/status/876295901555412992",
+        "tweet_date": "2017-06-18 06:29:58",
+        "retweets": 1570,
+        "favorites": 6480,
+        "similarity_score": 0.29107419225603337,
+        "adjusted_score": 0.24210213467628888,
+        "card_interpretation": "Release the fantasy of perfect family. Real love has conflict too. Individual needs matter in relationships. Don't sacrifice yourself for false harmony."
+      }
+    },
+    "Page of Cups": {
+      "upright": {
+        "tweet_id": "1148091806581530625",
+        "tweet_content": "theres a popular nursery rhyme in which the singer claims to be a teapot. this, for many children, is their first experience with \"Trolling\"",
+        "tweet_url": "https://twitter.com/dril/status/1148091806581530625",
+        "tweet_date": "2019-07-08 06:49:51",
+        "retweets": 7383,
+        "favorites": 49902,
+        "similarity_score": 0.19719308612885836,
+        "adjusted_score": 0.2235274753902559,
+        "card_interpretation": "Trust your feelings and hunches. Creative inspiration arriving. Message from your intuition or from someone emotional. Stay open and curious. Playfulness blessed."
+      },
+      "reversed": {
+        "tweet_id": "1057007104349761536",
+        "tweet_content": "(11yr old Jack Droseys head pulled out of toilet)it bears repeating that 'Likes' are not conducive to my vision, and th(gets dunked again)",
+        "tweet_url": "https://twitter.com/dril/status/1057007104349761536",
+        "tweet_date": "2018-10-29 21:31:46",
+        "retweets": 4301,
+        "favorites": 21232,
+        "similarity_score": 0.24875598887188854,
+        "adjusted_score": 0.22832105494733002,
+        "card_interpretation": "Emotional immaturity showing. Don't take things so personally. Grow up emotionally. Stop escaping into fantasy. Creative project needs maturity."
+      }
+    },
+    "Knight of Cups": {
+      "upright": {
+        "tweet_id": "551464123293523968",
+        "tweet_content": "do not be afraid to talk to that lonely boy on the train ... with the rosy red cheeks, sun glasses & big cigar... he just mmight be... angel",
+        "tweet_url": "https://twitter.com/dril/status/551464123293523968",
+        "tweet_date": "2015-01-03 20:44:27",
+        "retweets": 2453,
+        "favorites": 7124,
+        "similarity_score": 0.31442336581551117,
+        "adjusted_score": 0.2625347314606069,
+        "card_interpretation": "Follow your heart fearlessly. Romantic offer or proposal coming. Creative project worth pursuing. Lead with love. Your dreams are valid - chase them."
+      },
+      "reversed": {
+        "tweet_id": "1087855327427518464",
+        "tweet_content": "there is too much of Lies...",
+        "tweet_url": "https://twitter.com/dril/status/1087855327427518464",
+        "tweet_date": "2019-01-23 00:31:36",
+        "retweets": 2336,
+        "favorites": 13423,
+        "similarity_score": 0.28172604802494766,
+        "adjusted_score": 0.24347487366882434,
+        "card_interpretation": "Too much fantasy, not enough reality. Emotional manipulation. Empty promises. Know the difference between romance and genuine love. Ground your dreams."
+      }
+    },
+    "Queen of Cups": {
+      "upright": {
+        "tweet_id": "1035879982625566723",
+        "tweet_content": "jack: i will protect you from all rogue group dms. you are not a \"Honkey\" . Your an angel me: Im an angel. Im intelligent. Im not a honkey",
+        "tweet_url": "https://twitter.com/dril/status/1035879982625566723",
+        "tweet_date": "2018-09-01 15:20:08",
+        "retweets": 1511,
+        "favorites": 13104,
+        "similarity_score": 0.3144179333633748,
+        "adjusted_score": 0.26831487370143525,
+        "card_interpretation": "Your emotional intelligence is your superpower. Trust your intuition completely. Nurture others from overflow. Compassion and wisdom combined. You're the safe harbor."
+      },
+      "reversed": {
+        "tweet_id": "685244467213897728",
+        "tweet_content": "DOCTOR: you cant keep doing this to yourself. being The Last True Good Boy online will destroy you. you must stop posting with honor ME: No,",
+        "tweet_url": "https://twitter.com/dril/status/685244467213897728",
+        "tweet_date": "2016-01-08 00:39:46",
+        "retweets": 4790,
+        "favorites": 10932,
+        "similarity_score": 0.29290558064119465,
+        "adjusted_score": 0.2523760174149593,
+        "card_interpretation": "You're drowning in others' emotions. Set boundaries. Stop over-giving. Your feelings matter too. Protect your energy. Heal the martyr within."
+      }
+    },
+    "King of Cups": {
+      "upright": {
+        "tweet_id": "1204994263710220290",
+        "tweet_content": "harvey weinsein in court w/ oversized diaper & fake arrow through his head: oohhh me so sorry ohhh JUDGE: I will always protect you sir ,",
+        "tweet_url": "https://twitter.com/dril/status/1204994263710220290",
+        "tweet_date": "2019-12-12 06:19:54",
+        "retweets": 3854,
+        "favorites": 36935,
+        "similarity_score": 0.2292410581778808,
+        "adjusted_score": 0.2302256153579657,
+        "card_interpretation": "Lead with emotional intelligence. You can hold space for all feelings without being overwhelmed. Calm authority. Balance head and heart. Wise counsel flows through you."
+      },
+      "reversed": {
+        "tweet_id": "1193955593414795264",
+        "tweet_content": "Going Very fucking hard on donald duck today. Saying i would never want to be him, or be any part of his life.",
+        "tweet_url": "https://twitter.com/dril/status/1193955593414795264",
+        "tweet_date": "2019-11-11 19:16:10",
+        "retweets": 3936,
+        "favorites": 36133,
+        "similarity_score": 0.24382099635968607,
+        "adjusted_score": 0.24106288239689405,
+        "card_interpretation": "Emotional control issues. Either repressing feelings or using them to manipulate. Find balance. Don't weaponize your emotions. True strength includes vulnerability."
+      }
+    },
+    "Ace of Swords": {
+      "upright": {
+        "tweet_id": "599772152213151744",
+        "tweet_content": "Sword's. The only blade known to man",
+        "tweet_url": "https://twitter.com/dril/status/599772152213151744",
+        "tweet_date": "2015-05-17 05:03:18",
+        "retweets": 3929,
+        "favorites": 6974,
+        "similarity_score": 0.295009130665333,
+        "adjusted_score": 0.24852581879829777,
+        "card_interpretation": "A powerful 'aha' moment is coming. Cut through the noise and see the truth. Your mental clarity is your superpower right now. Speak your truth boldly."
+      },
+      "reversed": {
+        "tweet_id": "978625282222559233",
+        "tweet_content": "i regret to inform you, that by resorting to Swear language, you have forfeit this debate. Farewell my bitch",
+        "tweet_url": "https://twitter.com/dril/status/978625282222559233",
+        "tweet_date": "2018-03-27 15:30:23",
+        "retweets": 13591,
+        "favorites": 54371,
+        "similarity_score": 0.19624983897547396,
+        "adjusted_score": 0.23503190516625666,
+        "card_interpretation": "Mental fog obscuring the path. Take time to clear your head before deciding. Avoid arguments where no one wins. Seek clarity before acting."
+      }
+    },
+    "Two of Swords": {
+      "upright": {
+        "tweet_id": "524202247350415360",
+        "tweet_content": "maybe sometimes both sides... are good and bad at the same time??? im sorry if im doing this wrong. it is difficult to write",
+        "tweet_url": "https://twitter.com/dril/status/524202247350415360",
+        "tweet_date": "2014-10-20 16:15:29",
+        "retweets": 1232,
+        "favorites": 2792,
+        "similarity_score": 0.3003217582599178,
+        "adjusted_score": 0.24487764887212854,
+        "card_interpretation": "You're avoiding a choice you need to make. Remove the blindfold and look at the situation honestly. Temporary peace is not resolution."
+      },
+      "reversed": {
+        "tweet_id": "977858805538152448",
+        "tweet_content": "Hm lets see. Do I \"Shut the fuck uop\", or continue exposing the truths of life to the chagrin of the 99% of people on earth who are villains",
+        "tweet_url": "https://twitter.com/dril/status/977858805538152448",
+        "tweet_date": "2018-03-25 12:44:41",
+        "retweets": 3120,
+        "favorites": 14480,
+        "similarity_score": 0.2610663615670085,
+        "adjusted_score": 0.22906090830177261,
+        "card_interpretation": "Ready to face what you've been avoiding. The truth becomes clear. Choose your path and move forward with conviction."
+      }
+    },
+    "Three of Swords": {
+      "upright": {
+        "tweet_id": "1008465966831931393",
+        "tweet_content": "pain man",
+        "tweet_url": "https://twitter.com/dril/status/1008465966831931393",
+        "tweet_date": "2018-06-17 23:46:37",
+        "retweets": 2109,
+        "favorites": 8319,
+        "similarity_score": 0.3009727622800748,
+        "adjusted_score": 0.2527513426100981,
+        "card_interpretation": "Your heart is breaking but healing begins with feeling. Let yourself grieve fully. Painful truths are still truths that set you free."
+      },
+      "reversed": {
+        "tweet_id": "991941835256934400",
+        "tweet_content": "three sayings to any fool who would claim that i am the bitch of this website: 1.your god damn right 2. i dont give a fuck 3. you Lose",
+        "tweet_url": "https://twitter.com/dril/status/991941835256934400",
+        "tweet_date": "2018-05-03 09:25:37",
+        "retweets": 4160,
+        "favorites": 21479,
+        "similarity_score": 0.24925481214644415,
+        "adjusted_score": 0.22884181974987822,
+        "card_interpretation": "Beginning to heal from old wounds. Ready to forgive yourself or others. Don't rush the grieving process or suppress your pain."
+      }
+    },
+    "Four of Swords": {
+      "upright": {
+        "tweet_id": "768409611896496128",
+        "tweet_content": "shutting computer down until the shitty moods & attitudes can fuck off., if you need me ill be on my other computer, sititng 60\u00b0 to my right",
+        "tweet_url": "https://twitter.com/dril/status/768409611896496128",
+        "tweet_date": "2016-08-24 13:28:22",
+        "retweets": 1973,
+        "favorites": 4991,
+        "similarity_score": 0.31432548988411413,
+        "adjusted_score": 0.25945625848975873,
+        "card_interpretation": "You need a mental health day. Rest is productive. Step back from the chaos and recharge. Meditation and quiet time are essential now."
+      },
+      "reversed": {
+        "tweet_id": "1208776137171587072",
+        "tweet_content": "repeating to my self in the mirror \"Star wars is for adults\" before seeing the final one & having a violent reaction like ingesting a poison",
+        "tweet_url": "https://twitter.com/dril/status/1208776137171587072",
+        "tweet_date": "2019-12-22 16:47:43",
+        "retweets": 6411,
+        "favorites": 41494,
+        "similarity_score": 0.2111942487724345,
+        "adjusted_score": 0.2239585564896739,
+        "card_interpretation": "Restlessness won't let you settle. Either you're avoiding necessary rest or you're ready to return to action. Listen to your body."
+      }
+    },
+    "Five of Swords": {
+      "upright": {
+        "tweet_id": "1025773792486801409",
+        "tweet_content": "first they ignore you then they laugh at u then you jack off & read posts for 30 years then you die of pulmonary heart disease then you Win",
+        "tweet_url": "https://twitter.com/dril/status/1025773792486801409",
+        "tweet_date": "2018-08-04 18:01:44",
+        "retweets": 5021,
+        "favorites": 31435,
+        "similarity_score": 0.23589500797480795,
+        "adjusted_score": 0.23057374792643343,
+        "card_interpretation": "Walking away is sometimes winning. Not every battle is worth fighting. Choose your peace over being right. Recognize when you've been defeated."
+      },
+      "reversed": {
+        "tweet_id": "1035887170832089093",
+        "tweet_content": "thinking about taking some of the excess respect I have for our Fallen Heroes and converting it in to Cold Hard Cash",
+        "tweet_url": "https://twitter.com/dril/status/1035887170832089093",
+        "tweet_date": "2018-09-01 15:48:42",
+        "retweets": 2511,
+        "favorites": 18080,
+        "similarity_score": 0.2780991600000152,
+        "adjusted_score": 0.24612132811482934,
+        "card_interpretation": "Making peace after conflict. Letting go of grudges. Or still fighting battles that are already lost. Release the need for revenge."
+      }
+    },
+    "Six of Swords": {
+      "upright": {
+        "tweet_id": "876294495276609536",
+        "tweet_content": "the secret -- to becoming a content genius -- is that you have to be able to name every font face on the planet while being water boarded",
+        "tweet_url": "https://twitter.com/dril/status/876294495276609536",
+        "tweet_date": "2017-06-18 06:24:23",
+        "retweets": 2105,
+        "favorites": 9966,
+        "similarity_score": 0.26226989851502375,
+        "adjusted_score": 0.22367549743306497,
+        "card_interpretation": "You're moving toward better mental spaces. Leave the drama behind and sail toward peace. The journey may be slow but you're heading in the right direction."
+      },
+      "reversed": {
+        "tweet_id": "473706394009759744",
+        "tweet_content": "blocked. blocked. blocked. youre all blocked. none of you are free of sin",
+        "tweet_url": "https://twitter.com/dril/status/473706394009759744",
+        "tweet_date": "2014-06-03 08:03:00",
+        "retweets": 30869,
+        "favorites": 34268,
+        "similarity_score": 0.20588151028773138,
+        "adjusted_score": 0.23949365762452463,
+        "card_interpretation": "Stuck in the past or afraid to move forward. You're carrying too much mental baggage. Allow yourself to transition at your own pace."
+      }
+    },
+    "Seven of Swords": {
+      "upright": {
+        "tweet_id": "1061091401251745792",
+        "tweet_content": "in a world where big data threatens to commodify our lives,. telling online surveys that i \"Dont know\" what pringles are constitutes Heroism",
+        "tweet_url": "https://twitter.com/dril/status/1061091401251745792",
+        "tweet_date": "2018-11-10 04:01:18",
+        "retweets": 14024,
+        "favorites": 53812,
+        "similarity_score": 0.1870568906559775,
+        "adjusted_score": 0.22753287689701923,
+        "card_interpretation": "Strategic thinking required. Work smarter not harder. But check your motives - are you being deceptive or clever? Someone may be withholding truth."
+      },
+      "reversed": {
+        "tweet_id": "972534838057230336",
+        "tweet_content": "go ahead. keep screaming \"Shut The Fuck Up \" at me. it only makes my opinions Worse",
+        "tweet_url": "https://twitter.com/dril/status/972534838057230336",
+        "tweet_date": "2018-03-10 19:09:08",
+        "retweets": 23587,
+        "favorites": 70801,
+        "similarity_score": 0.17796214296001575,
+        "adjusted_score": 0.2507433293860963,
+        "card_interpretation": "Time to come clean or face the truth. Your tactics aren't working. Stop hiding and confront situations directly. Honesty is the better strategy."
+      }
+    },
+    "Eight of Swords": {
+      "upright": {
+        "tweet_id": "955106867784626177",
+        "tweet_content": "thinking of wrapping my entire body in barbed wire and becoming Sovereign",
+        "tweet_url": "https://twitter.com/dril/status/955106867784626177",
+        "tweet_date": "2018-01-21 16:56:36",
+        "retweets": 3525,
+        "favorites": 16237,
+        "similarity_score": 0.28212679686546505,
+        "adjusted_score": 0.2483916034031591,
+        "card_interpretation": "You're more free than you think. The blindfold and ropes are removable. Your limitations are largely mental. Take one small step toward freedom."
+      },
+      "reversed": {
+        "tweet_id": "1208922399472668672",
+        "tweet_content": "inventing new character \"George X. Bush\" the most fucked george bush yet",
+        "tweet_url": "https://twitter.com/dril/status/1208922399472668672",
+        "tweet_date": "2019-12-23 02:28:55",
+        "retweets": 8260,
+        "favorites": 59397,
+        "similarity_score": 0.17165780875639497,
+        "adjusted_score": 0.21500808867226107,
+        "card_interpretation": "Starting to see your way out. Remove the mental blindfold. Take responsibility for your liberation. Or stubbornly refusing obvious solutions."
+      }
+    },
+    "Nine of Swords": {
+      "upright": {
+        "tweet_id": "1132911950269038592",
+        "tweet_content": "the entire time youre watching the movie 101 Dalmatians, youre just thinking, This is so many more dalmations than usual. It is just fucked",
+        "tweet_url": "https://twitter.com/dril/status/1132911950269038592",
+        "tweet_date": "2019-05-27 09:30:32",
+        "retweets": 12604,
+        "favorites": 86355,
+        "similarity_score": 0.18222440946523003,
+        "adjusted_score": 0.2594014346851067,
+        "card_interpretation": "Your thoughts are spiraling. Anxiety is lying to you. Reach out for support. The fears are real but the catastrophes are imagined. You're not alone."
+      },
+      "reversed": {
+        "tweet_id": "1176924554901389317",
+        "tweet_content": "im officially the guy who has held out the longest without being \"Ready to laugh again\" since 9/11 and what do i get in return? ASS-FUCKED..",
+        "tweet_url": "https://twitter.com/dril/status/1176924554901389317",
+        "tweet_date": "2019-09-25 20:20:54",
+        "retweets": 1026,
+        "favorites": 14909,
+        "similarity_score": 0.28639905144085165,
+        "adjusted_score": 0.24741535459202918,
+        "card_interpretation": "Finding relief from mental torture. Speaking about anxiety reduces its power. Beginning to heal. Or refusing help when you desperately need it."
+      }
+    },
+    "Ten of Swords": {
+      "upright": {
+        "tweet_id": "331216421013049344",
+        "tweet_content": "I DRIVE OFF OF A CLIFF AND SCRAMBLE TO RIP THE AXLE OFF OF MY CAR AND LIFT IT ABOVE MY HEAD AS I PLUMMET TOWARDS CERTAIN DOOM. ONE LAST REP",
+        "tweet_url": "https://twitter.com/dril/status/331216421013049344",
+        "tweet_date": "2013-05-06 03:18:43",
+        "retweets": 1945,
+        "favorites": 5012,
+        "similarity_score": 0.28795308434701883,
+        "adjusted_score": 0.2383502968593247,
+        "card_interpretation": "It's over, and that's okay. Rock bottom is solid ground to build from. What feels like the end is actually a new beginning. Release and start fresh."
+      },
+      "reversed": {
+        "tweet_id": "1070156456672944133",
+        "tweet_content": "i like to believe that getting my ass kicked 100 times a day for 50 years has granted me \"Street Smarts\"",
+        "tweet_url": "https://twitter.com/dril/status/1070156456672944133",
+        "tweet_date": "2018-12-05 04:22:36",
+        "retweets": 2548,
+        "favorites": 16576,
+        "similarity_score": 0.24740512268370107,
+        "adjusted_score": 0.21988173061725194,
+        "card_interpretation": "You're recovering from a painful ending. The worst is over. Stop clinging to what's finished. Allow the transformation to complete."
+      }
+    },
+    "Page of Swords": {
+      "upright": {
+        "tweet_id": "813966376327086080",
+        "tweet_content": "the human mind... perhaps the most powerful weapon. second only to the \"GUN\"",
+        "tweet_url": "https://twitter.com/dril/status/813966376327086080",
+        "tweet_date": "2016-12-28 05:34:41",
+        "retweets": 5305,
+        "favorites": 12909,
+        "similarity_score": 0.29123853742209826,
+        "adjusted_score": 0.25390362630945656,
+        "card_interpretation": "Stay curious and ask questions. Think for yourself. Speak up but choose your words wisely. Your mind is sharp - use it well."
+      },
+      "reversed": {
+        "tweet_id": "885908591840026625",
+        "tweet_content": "worrying a lot about our geopolitical foes recording& transcribing our military comms and its just 900 pages of \"Permission To Jack Off Sir\"",
+        "tweet_url": "https://twitter.com/dril/status/885908591840026625",
+        "tweet_date": "2017-07-14 19:07:22",
+        "retweets": 1051,
+        "favorites": 5028,
+        "similarity_score": 0.2977453670575877,
+        "adjusted_score": 0.24517602841844516,
+        "card_interpretation": "Loose lips sink ships. Think before you speak. Avoid gossip and drama. Your words have more power than you realize."
+      }
+    },
+    "Knight of Swords": {
+      "upright": {
+        "tweet_id": "1171655120125407240",
+        "tweet_content": "cowboy `s blade",
+        "tweet_url": "https://twitter.com/dril/status/1171655120125407240",
+        "tweet_date": "2019-09-11 07:22:03",
+        "retweets": 1577,
+        "favorites": 9594,
+        "similarity_score": 0.2751909858826711,
+        "adjusted_score": 0.23297901294403803,
+        "card_interpretation": "Move quickly and decisively. Your ideas have momentum. Strike while the iron is hot. Be bold but stay focused on your goal."
+      },
+      "reversed": {
+        "tweet_id": "1156698893289082880",
+        "tweet_content": "driving down the highway at 30mph laying on the horn protecting myself with a shield of Noise",
+        "tweet_url": "https://twitter.com/dril/status/1156698893289082880",
+        "tweet_date": "2019-08-01 00:51:21",
+        "retweets": 3863,
+        "favorites": 26877,
+        "similarity_score": 0.26741491132549744,
+        "adjusted_score": 0.24922672210247845,
+        "card_interpretation": "Slow down before you crash. Your intensity is becoming aggression. Think through consequences. Channel mental energy more constructively."
+      }
+    },
+    "Queen of Swords": {
+      "upright": {
+        "tweet_id": "235218148800991233",
+        "tweet_content": "strongest blade in the world, howeve,r it is so fragile as to shatter when handled by any force other than the delicate touch of a lesbian .",
+        "tweet_url": "https://twitter.com/dril/status/235218148800991233",
+        "tweet_date": "2012-08-14 05:35:51",
+        "retweets": 9733,
+        "favorites": 14310,
+        "similarity_score": 0.28756109783635847,
+        "adjusted_score": 0.25765436652903284,
+        "card_interpretation": "Speak your truth clearly and without apology. Set firm boundaries. Your clarity is a gift even when it hurts. Be fair but don't compromise yourself."
+      },
+      "reversed": {
+        "tweet_id": "1172409902507028481",
+        "tweet_content": "i love saiyng shit like \"Yow! This kittens got Claws!\" whenever a woman stabs me 38 times in the neck and chest",
+        "tweet_url": "https://twitter.com/dril/status/1172409902507028481",
+        "tweet_date": "2019-09-13 09:21:17",
+        "retweets": 8162,
+        "favorites": 56305,
+        "similarity_score": 0.2533914539497938,
+        "adjusted_score": 0.27673233762450006,
+        "card_interpretation": "Your words are cutting too deep. Bitterness is clouding judgment. Balance honesty with kindness. Soften your edges without losing your strength."
+      }
+    },
+    "King of Swords": {
+      "upright": {
+        "tweet_id": "1127068524411645953",
+        "tweet_content": "this is what an Emissary of the Kingdom of heaven my look like. Do not engage it in combatpic.twitter.com/pVAX1wTooq",
+        "tweet_url": "https://twitter.com/dril/status/1127068524411645953",
+        "tweet_date": "2019-05-11 06:30:50",
+        "retweets": 1136,
+        "favorites": 9354,
+        "similarity_score": 0.2865890825008097,
+        "adjusted_score": 0.24131558542196935,
+        "card_interpretation": "Lead with wisdom and clarity. Make decisions based on truth and ethics. Your authority comes from fair judgment. Use your mental power responsibly."
+      },
+      "reversed": {
+        "tweet_id": "627924062229123072",
+        "tweet_content": "\"don't tread of me\", the famous words of that good snake who doesn't want to get stepped on, the noble slithering bastard I relate to most",
+        "tweet_url": "https://twitter.com/dril/status/627924062229123072",
+        "tweet_date": "2015-08-02 21:28:57",
+        "retweets": 7188,
+        "favorites": 14667,
+        "similarity_score": 0.29669018190147795,
+        "adjusted_score": 0.2624454344585496,
+        "card_interpretation": "Power without heart is tyranny. Your logic is becoming cold. Include empathy in your decisions. Don't use intelligence as a weapon."
+      }
+    },
+    "Ace of Pentacles": {
+      "upright": {
+        "tweet_id": "1195746470265151488",
+        "tweet_content": "the nerve of this fucking mom and pop pizza joint hanging a framed $1 bill up. alright pal you're rich, we get it",
+        "tweet_url": "https://twitter.com/dril/status/1195746470265151488",
+        "tweet_date": "2019-11-16 17:52:29",
+        "retweets": 4585,
+        "favorites": 43176,
+        "similarity_score": 0.24247404250575186,
+        "adjusted_score": 0.24881705477502458,
+        "card_interpretation": "A golden opportunity is literally in your hands right now - whether it's a job offer, financial windfall, or chance to build something lasting. Trust that the universe is offering you real, tangible support to manifest your dreams."
+      },
+      "reversed": {
+        "tweet_id": "855858654393794561",
+        "tweet_content": "(flips wallet up in the air and tries to catch it in a cool way but spills its contents all over th e place ( $2))",
+        "tweet_url": "https://twitter.com/dril/status/855858654393794561",
+        "tweet_date": "2017-04-22 20:59:38",
+        "retweets": 2863,
+        "favorites": 8371,
+        "similarity_score": 0.2732227503858869,
+        "adjusted_score": 0.23147675935343082,
+        "card_interpretation": "You're missing the opportunity right in front of you, or you're not ready to receive what's being offered. Check whether fear, unworthiness, or poor timing is blocking your abundance."
+      }
+    },
+    "Two of Pentacles": {
+      "upright": {
+        "tweet_id": "1033250105736888322",
+        "tweet_content": "expliaining to wife what the phrase \"pussy nexus: beyond pussy\" means and why it has appeared on my credit card statement like 8 times",
+        "tweet_url": "https://twitter.com/dril/status/1033250105736888322",
+        "tweet_date": "2018-08-25 09:09:56",
+        "retweets": 3049,
+        "favorites": 21658,
+        "similarity_score": 0.27099729024506447,
+        "adjusted_score": 0.24516570635645116,
+        "card_interpretation": "You're successfully juggling work and life, money in and money out, or multiple projects at once - it's a dynamic balancing act but you've got the rhythm. Stay flexible and trust your ability to adapt to whatever comes."
+      },
+      "reversed": {
+        "tweet_id": "1106746617875423232",
+        "tweet_content": "- the Deterioration of my Balls -",
+        "tweet_url": "https://twitter.com/dril/status/1106746617875423232",
+        "tweet_date": "2019-03-16 03:38:50",
+        "retweets": 2036,
+        "favorites": 14125,
+        "similarity_score": 0.3077658789636348,
+        "adjusted_score": 0.2647683033775787,
+        "card_interpretation": "You're dropping balls left and right and something's got to give before you burn out completely. Simplify your commitments or get better systems in place to handle the complexity."
+      }
+    },
+    "Three of Pentacles": {
+      "upright": {
+        "tweet_id": "980507987256270849",
+        "tweet_content": "people are giving and receiving Respect at incredible speeds ... and it is all thanks to the humble computer chip",
+        "tweet_url": "https://twitter.com/dril/status/980507987256270849",
+        "tweet_date": "2018-04-01 20:11:35",
+        "retweets": 4327,
+        "favorites": 23403,
+        "similarity_score": 0.2606129639625774,
+        "adjusted_score": 0.24032916788629133,
+        "card_interpretation": "Your skills are being noticed and you're finding your place in a collaborative project where everyone brings their A-game. This is about quality craftsmanship and the satisfaction of building something meaningful with others."
+      },
+      "reversed": {
+        "tweet_id": "965991882072444928",
+        "tweet_content": "clowns should spend less time making balloon animals and more time making Prayer's",
+        "tweet_url": "https://twitter.com/dril/status/965991882072444928",
+        "tweet_date": "2018-02-20 17:49:46",
+        "retweets": 2569,
+        "favorites": 13202,
+        "similarity_score": 0.2419043616282742,
+        "adjusted_score": 0.2116313026099275,
+        "card_interpretation": "There's dysfunction in the team, your work isn't being appreciated, or you're not pulling your weight. The collaboration is broken or the quality of work isn't meeting the standard."
+      }
+    },
+    "Four of Pentacles": {
+      "upright": {
+        "tweet_id": "1129895759418146816",
+        "tweet_content": "betting $10 on each of the horses because all of them are my God , and every one of them has the power to physically annihilate me",
+        "tweet_url": "https://twitter.com/dril/status/1129895759418146816",
+        "tweet_date": "2019-05-19 01:45:16",
+        "retweets": 2133,
+        "favorites": 14203,
+        "similarity_score": 0.2690611878252158,
+        "adjusted_score": 0.23400548048578837,
+        "card_interpretation": "You're playing it safe with your money and resources, holding on tight to what you've got - which provides security but might also be limiting growth. There's wisdom in protection but ask if fear is making you too closed off."
+      },
+      "reversed": {
+        "tweet_id": "833084674146697217",
+        "tweet_content": "ACCOUNTANT: I Just don't know how you can justify donating $700 to \"Chips Ahoy\" ME: i hope your car flips & becomes your fucking firey grave",
+        "tweet_url": "https://twitter.com/dril/status/833084674146697217",
+        "tweet_date": "2017-02-18 23:43:58",
+        "retweets": 4334,
+        "favorites": 14247,
+        "similarity_score": 0.2776551641618996,
+        "adjusted_score": 0.24345830665531337,
+        "card_interpretation": "You're either finally loosening your death grip and learning to trust flow, or you've lost control entirely and are hemorrhaging resources. Examine whether you need more boundaries or less fear."
+      }
+    },
+    "Five of Pentacles": {
+      "upright": {
+        "tweet_id": "992109110287007744",
+        "tweet_content": "the pain of losing my life savings is softened by the big mommas house themed slot machine screaming lines from the famous movie, at me",
+        "tweet_url": "https://twitter.com/dril/status/992109110287007744",
+        "tweet_date": "2018-05-03 20:30:19",
+        "retweets": 1646,
+        "favorites": 11820,
+        "similarity_score": 0.28684300822076525,
+        "adjusted_score": 0.24493568449153272,
+        "card_interpretation": "You're going through a rough patch financially or feeling excluded and unsupported, but remember that help is often closer than you think - don't let pride keep you from asking. This hardship, though painful, is temporary and carries important lessons."
+      },
+      "reversed": {
+        "tweet_id": "785883554228101122",
+        "tweet_content": "\"Ive been studying to become a Pharmacist\" Thats good. Im living in one of those crane game enclosures now. Sometimes the claw jacks me off,",
+        "tweet_url": "https://twitter.com/dril/status/785883554228101122",
+        "tweet_date": "2016-10-11 18:43:34",
+        "retweets": 3980,
+        "favorites": 12553,
+        "similarity_score": 0.24564449108272093,
+        "adjusted_score": 0.21549831288454752,
+        "card_interpretation": "The tough times are starting to ease up and support is coming through, or you're finally ready to accept the help that's been there all along. You're moving from survival mode toward stability."
+      }
+    },
+    "Six of Pentacles": {
+      "upright": {
+        "tweet_id": "1141207076334477313",
+        "tweet_content": "the pope makes six figures easy. Fact",
+        "tweet_url": "https://twitter.com/dril/status/1141207076334477313",
+        "tweet_date": "2019-06-19 06:52:24",
+        "retweets": 2216,
+        "favorites": 22866,
+        "similarity_score": 0.2793647548438805,
+        "adjusted_score": 0.25229024236181435,
+        "card_interpretation": "You're either in a position to share your abundance generously or you're receiving help exactly when you need it - either way, resources are flowing fairly. Practice gratitude whether you're giving or receiving right now."
+      },
+      "reversed": {
+        "tweet_id": "1137086073459232768",
+        "tweet_content": "Geting that \"Impersonating an officer\" money",
+        "tweet_url": "https://twitter.com/dril/status/1137086073459232768",
+        "tweet_date": "2019-06-07 21:57:00",
+        "retweets": 1289,
+        "favorites": 11446,
+        "similarity_score": 0.29566364508083465,
+        "adjusted_score": 0.25115288058616725,
+        "card_interpretation": "Something's off in the exchange - there are strings attached, power trips happening, or the giving/receiving is out of balance. Watch for subtle manipulation disguised as generosity."
+      }
+    },
+    "Seven of Pentacles": {
+      "upright": {
+        "tweet_id": "909890193460744197",
+        "tweet_content": "the way i see it, it seems these days, it seems impossible to have a good Economy, in this economy, as i see it",
+        "tweet_url": "https://twitter.com/dril/status/909890193460744197",
+        "tweet_date": "2017-09-18 23:21:41",
+        "retweets": 4083,
+        "favorites": 14945,
+        "similarity_score": 0.2586984072599763,
+        "adjusted_score": 0.22880613381073664,
+        "card_interpretation": "You're at a crossroads, taking stock of what you've built so far and asking the hard question: is this working? Trust this pause for reflection - sometimes the most productive thing is to stop and reassess before moving forward."
+      },
+      "reversed": {
+        "tweet_id": "986436410151505922",
+        "tweet_content": "pissed off by the idea of my ass becoming grass",
+        "tweet_url": "https://twitter.com/dril/status/986436410151505922",
+        "tweet_date": "2018-04-18 04:49:01",
+        "retweets": 5971,
+        "favorites": 28389,
+        "similarity_score": 0.24291533972575197,
+        "adjusted_score": 0.233783445785998,
+        "card_interpretation": "You're either giving up right before the harvest or stubbornly watering dead plants. Be honest about whether you need more patience or whether it's time to cut your losses."
+      }
+    },
+    "Eight of Pentacles": {
+      "upright": {
+        "tweet_id": "754324549538312192",
+        "tweet_content": "ive beenn using Confidence and Self Esteem lately, to get unprecedented deals on discarded promotional displays at game stop",
+        "tweet_url": "https://twitter.com/dril/status/754324549538312192",
+        "tweet_date": "2016-07-16 16:39:21",
+        "retweets": 1124,
+        "favorites": 3569,
+        "similarity_score": 0.271434507942123,
+        "adjusted_score": 0.22253597537603034,
+        "card_interpretation": "Head down, focused on your craft, putting in the hours to truly master your skills - this is the unsexy but essential work that builds expertise. Your dedication to quality and continuous improvement is your greatest asset right now."
+      },
+      "reversed": {
+        "tweet_id": "596402111245656064",
+        "tweet_content": "i ruminate over a scrapbook full of middle finger pics to keep myself demure, respectful and humble. \"i deserve these\", i utter shitheadedly",
+        "tweet_url": "https://twitter.com/dril/status/596402111245656064",
+        "tweet_date": "2015-05-07 21:51:58",
+        "retweets": 1286,
+        "favorites": 2850,
+        "similarity_score": 0.30475663282055826,
+        "adjusted_score": 0.24855414373276558,
+        "card_interpretation": "You're cutting corners, losing focus, or getting discouraged by how much there is to learn. Recommit to the fundamentals or acknowledge that your heart's not in this particular craft."
+      }
+    },
+    "Nine of Pentacles": {
+      "upright": {
+        "tweet_id": "1087114394100617216",
+        "tweet_content": "none f you know anything about art or life. i have read the entire dictionary more than 100 times",
+        "tweet_url": "https://twitter.com/dril/status/1087114394100617216",
+        "tweet_date": "2019-01-20 23:27:23",
+        "retweets": 5748,
+        "favorites": 32483,
+        "similarity_score": 0.21178514449657135,
+        "adjusted_score": 0.21332386162171316,
+        "card_interpretation": "You've worked hard and built something beautiful for yourself - now enjoy it without guilt or apology. This is about standing in your power, savoring your independence, and appreciating the life you've created through your own efforts."
+      },
+      "reversed": {
+        "tweet_id": "545040864582856704",
+        "tweet_content": "well im sad to announce that the meme quilt project has been cancelled. someone has already jacked off on it instead of adding their patch",
+        "tweet_url": "https://twitter.com/dril/status/545040864582856704",
+        "tweet_date": "2014-12-17 03:20:43",
+        "retweets": 1409,
+        "favorites": 3191,
+        "similarity_score": 0.2709224267109283,
+        "adjusted_score": 0.22201953043814965,
+        "card_interpretation": "Your independence is threatened, or you're realizing that material success alone doesn't fill the void. Something's missing despite the outward abundance, or you're struggling to maintain your self-sufficiency."
+      }
+    },
+    "Ten of Pentacles": {
+      "upright": {
+        "tweet_id": "959843791103545345",
+        "tweet_content": "thinking going to the Kingdom of Heaven for fucking one trillion years is a fairly nice deal",
+        "tweet_url": "https://twitter.com/dril/status/959843791103545345",
+        "tweet_date": "2018-02-03 18:39:27",
+        "retweets": 1104,
+        "favorites": 8354,
+        "similarity_score": 0.25926594985965995,
+        "adjusted_score": 0.21827216628304344,
+        "card_interpretation": "This is about building something that lasts beyond your lifetime - true wealth that provides security for those you love and honors those who came before. You're thinking in terms of legacy, not just personal gain, and creating enduring structures."
+      },
+      "reversed": {
+        "tweet_id": "919502814002470912",
+        "tweet_content": "BREAKING: Millionaire rapist rehab facility lost to random gas explosion\u2014Dozens of 2nd chances tragically denied\u2014\"Mist of splinters & flesh\"",
+        "tweet_url": "https://twitter.com/dril/status/919502814002470912",
+        "tweet_date": "2017-10-15 11:58:49",
+        "retweets": 3572,
+        "favorites": 19262,
+        "similarity_score": 0.25394851186835254,
+        "adjusted_score": 0.22937615836660352,
+        "card_interpretation": "Family money drama is erupting, traditions feel suffocating, or the pursuit of legacy has become oppressive. Question whether you're honoring the past or being imprisoned by it."
+      }
+    },
+    "Page of Pentacles": {
+      "upright": {
+        "tweet_id": "1195729061672189952",
+        "tweet_content": "account Status; Verified. To the chagrin of all Shit Accounts, This is now a LOCKED PAGE . I am the rat of life. I am the bitch of forever",
+        "tweet_url": "https://twitter.com/dril/status/1195729061672189952",
+        "tweet_date": "2019-11-16 16:43:18",
+        "retweets": 1759,
+        "favorites": 14975,
+        "similarity_score": 0.2339558981903077,
+        "adjusted_score": 0.20637822104951928,
+        "card_interpretation": "A new opportunity for learning or earning is coming your way - approach it with curiosity and dedication even if you're starting from square one. This is your chance to plant seeds for future prosperity through study and practical application."
+      },
+      "reversed": {
+        "tweet_id": "1140096866169679873",
+        "tweet_content": "beanie babies are just bit coins in real life",
+        "tweet_url": "https://twitter.com/dril/status/1140096866169679873",
+        "tweet_date": "2019-06-16 05:20:49",
+        "retweets": 10533,
+        "favorites": 56613,
+        "similarity_score": 0.21341168640544803,
+        "adjusted_score": 0.2478244751361846,
+        "card_interpretation": "You're not taking the opportunity seriously, getting distracted by shiny objects, or approaching practical matters with unrealistic expectations. Ground your dreams in actual plans and follow through."
+      }
+    },
+    "Knight of Pentacles": {
+      "upright": {
+        "tweet_id": "1153809450345517061",
+        "tweet_content": "# RespectThePolice alright done. what should I respect next. bugs? urine? im taking requests",
+        "tweet_url": "https://twitter.com/dril/status/1153809450345517061",
+        "tweet_date": "2019-07-24 01:29:44",
+        "retweets": 11601,
+        "favorites": 57777,
+        "similarity_score": 0.16802473278685584,
+        "adjusted_score": 0.21407763111151004,
+        "card_interpretation": "Slow and steady wins the race - you're making reliable progress through consistent effort and responsible action. Trust the process even if results aren't flashy or immediate; your dedication will pay off."
+      },
+      "reversed": {
+        "tweet_id": "1214310535019163648",
+        "tweet_content": "Oh looks like people are \"Too busy\" to drop me a Like on some of my replies now. Guess I'll go lay in the road and get hit by CARS !!!",
+        "tweet_url": "https://twitter.com/dril/status/1214310535019163648",
+        "tweet_date": "2020-01-06 23:19:27",
+        "retweets": 2806,
+        "favorites": 20136,
+        "similarity_score": 0.2635225638986945,
+        "adjusted_score": 0.23715940251685444,
+        "card_interpretation": "You've ground to a halt, become too rigid in your approach, or you're being unreliable when others are counting on you. Either shake things up or get back to basics and follow through."
+      }
+    },
+    "Queen of Pentacles": {
+      "upright": {
+        "tweet_id": "989316859441840128",
+        "tweet_content": "it is nothing short of miraculous that all the rich people on this website are personal friends of mine, and care about me, and know my Pain",
+        "tweet_url": "https://twitter.com/dril/status/989316859441840128",
+        "tweet_date": "2018-04-26 03:34:54",
+        "retweets": 1782,
+        "favorites": 14232,
+        "similarity_score": 0.2473146548481391,
+        "adjusted_score": 0.21623854286926852,
+        "card_interpretation": "You're creating abundance and comfort not just for yourself but for everyone in your sphere - your touch makes everything more nourishing and beautiful. Trust your practical wisdom and your generous heart to provide what's needed."
+      },
+      "reversed": {
+        "tweet_id": "1032372740794155008",
+        "tweet_content": "i Fucking hate it when i come at the king and miss, especially when I best not do that",
+        "tweet_url": "https://twitter.com/dril/status/1032372740794155008",
+        "tweet_date": "2018-08-22 23:03:36",
+        "retweets": 4473,
+        "favorites": 27722,
+        "similarity_score": 0.24066779040204314,
+        "adjusted_score": 0.22949961494979917,
+        "card_interpretation": "You're either neglecting your own needs while caring for others, or using money and resources to control people. Find the balance between generous nurturing and healthy boundaries."
+      }
+    },
+    "King of Pentacles": {
+      "upright": {
+        "tweet_id": "973634207477100544",
+        "tweet_content": "Today , I am every Husband",
+        "tweet_url": "https://twitter.com/dril/status/973634207477100544",
+        "tweet_date": "2018-03-13 19:57:38",
+        "retweets": 3131,
+        "favorites": 16987,
+        "similarity_score": 0.29675298459461275,
+        "adjusted_score": 0.2605013026535879,
+        "card_interpretation": "You've got the Midas touch right now - your practical wisdom, leadership abilities, and financial savvy are all working together to build real wealth and security. Use your success to create opportunities for others while enjoying the fruits of your expertise."
+      },
+      "reversed": {
+        "tweet_id": "1148505528001159168",
+        "tweet_content": "money is such a corrupt bastards tool that all i can do about thinking about it is to simply laugh about it...",
+        "tweet_url": "https://twitter.com/dril/status/1148505528001159168",
+        "tweet_date": "2019-07-09 10:13:50",
+        "retweets": 2088,
+        "favorites": 14302,
+        "similarity_score": 0.3170757836287362,
+        "adjusted_score": 0.27247915839159337,
+        "card_interpretation": "Power and money are corrupting your values, or your empire is crumbling because you've lost touch with what matters. Examine whether you're being a benevolent leader or a greedy tyrant."
+      }
+    }
+  }
+}
