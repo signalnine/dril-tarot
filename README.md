@@ -48,18 +48,37 @@ python3 match_dril_tweets.py --regenerate-embeddings
 
 ### Generate Gallery Images
 
-```bash
-# Download RWS tarot cards and generate all images
-python3 generate_dril_tarot_images.py --download-cards
+**Step 1: Download tarot card images**
 
-# Use existing tarot card images
-python3 generate_dril_tarot_images.py --card-images-dir ./my-cards
+```bash
+# Automatically download all 78 cards from Internet Archive (recommended)
+python3 download_tarot_cards.py
+
+# Or specify custom output directory
+python3 download_tarot_cards.py --output my-cards
+```
+
+This downloads high-quality (400+ DPI) public domain Rider-Waite Smith cards from Internet Archive and converts them to JPG format. All 78 cards download in ~30-60 seconds.
+
+**Alternative**: Download manually from:
+- [Internet Archive](https://archive.org/details/rider-waite-tarot) (recommended)
+- [Itch.io CC0 deck](https://luciellaes.itch.io/rider-waite-smith-tarot-cards-cc0)
+- Save as: `the-fool.jpg`, `ace-of-wands.jpg`, etc. (lowercase, hyphens)
+
+**Step 2: Generate gallery images**
+
+```bash
+# Generate all 156 composite images
+python3 generate_dril_tarot_images.py --card-images-dir tarot-cards
 
 # Resume interrupted generation
 python3 generate_dril_tarot_images.py --skip-existing
 
 # Specify output directory
 python3 generate_dril_tarot_images.py --output my-gallery
+
+# Force regenerate tweet screenshots
+python3 generate_dril_tarot_images.py --regenerate-screenshots
 ```
 
 This generates 156 composite PNG images combining:
