@@ -38,12 +38,12 @@ except ImportError:
 
 
 # Configuration
-CARDS_FILE = 'cards.json'
-INTERPRETATIONS_FILE = 'interpretations.json'
-CARD_EMBEDDINGS_FILE = 'card_embeddings.json'
-DRIL_TWEETS_CSV = 'driltweets.csv'
-DRIL_EMBEDDINGS_FILE = 'dril_tweet_embeddings.json'
-DEFAULT_OUTPUT_FILE = 'card_dril_mapping.json'
+CARDS_FILE = 'semantic-tarot/cards.json'
+INTERPRETATIONS_FILE = 'semantic-tarot/interpretations.json'
+CARD_EMBEDDINGS_FILE = 'semantic-tarot/card_embeddings.json'
+DRIL_TWEETS_CSV = 'data/driltweets.csv'
+DRIL_EMBEDDINGS_FILE = 'data/dril_tweet_embeddings.json'
+DEFAULT_OUTPUT_FILE = 'data/card_dril_mapping.json'
 
 # Card processing order (from tarot.py)
 MAJOR_ARCANA = [
