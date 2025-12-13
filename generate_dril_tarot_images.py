@@ -201,6 +201,70 @@ def create_tweet_html(tweet_data: Dict) -> str:
     return html_content
 
 
+def screenshot_tweet(page, tweet_data: Dict) -> bytes:
+    """
+    Screenshot a tweet using Playwright page.
+
+    Args:
+        page: Playwright page object (reused for efficiency)
+        tweet_data: Tweet data dict
+
+    Returns:
+        PNG image bytes
+    """
+    # Generate HTML
+    html_content = create_tweet_html(tweet_data)
+
+    # Load HTML into page
+    page.set_content(html_content)
+
+    # Wait for content to render
+    page.wait_for_selector('.tweet-card')
+
+    # Screenshot just the tweet card element
+    tweet_element = page.query_selector('.tweet-card')
+    screenshot_bytes = tweet_element.screenshot(type='png')
+
+    return screenshot_bytes
+
+
+def generate_tweet_screenshots(mapping: Dict) -> Dict[Tuple[str, str], bytes]:
+    """
+    Generate all tweet screenshots using Playwright.
+
+    Args:
+        mapping: Card mapping data
+
+    Returns:
+        Dict mapping (card_name, position) -> screenshot PNG bytes
+    """
+    screenshots = {}
+
+    print("\nGenerating tweet screenshots...")
+
+    with sync_playwright() as p:
+        # Launch browser (headless)
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page(viewport={'width': 600, 'height': 800})
+
+        # Process each card
+        cards = get_card_processing_order(mapping)
+        for i, (card_name, position) in enumerate(cards, 1):
+            tweet_data = mapping['cards'][card_name][position]
+
+            # Screenshot
+            screenshot_bytes = screenshot_tweet(page, tweet_data)
+            screenshots[(card_name, position)] = screenshot_bytes
+
+            # Progress
+            print(f"  [{i}/{len(cards)}] {card_name} ({position})...")
+
+        browser.close()
+
+    print(f"✓ Generated {len(screenshots)} tweet screenshots")
+    return screenshots
+
+
 def test_tweet_html():
     """Test function to preview tweet HTML"""
     sample_tweet = {
@@ -260,6 +324,18 @@ def main():
         # Get processing order
         cards = get_card_processing_order(mapping)
         print(f"✓ Will generate {len(cards)} gallery images")
+
+        # Test screenshot generation
+        if True:  # Change to False to skip during development
+            screenshots = generate_tweet_screenshots(mapping)
+
+            # Save one test screenshot
+            test_key = ('The Fool', 'upright')
+            if test_key in screenshots:
+                test_path = '/tmp/test_tweet_screenshot.png'
+                with open(test_path, 'wb') as f:
+                    f.write(screenshots[test_key])
+                print(f"\n✓ Test screenshot saved to {test_path}")
 
     except FileNotFoundError as e:
         print(f"✗ Error: {e}", file=sys.stderr)
