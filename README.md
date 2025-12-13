@@ -46,15 +46,28 @@ python3 match_dril_tweets.py --min-retweets 100 --popularity-weight 0.2
 python3 match_dril_tweets.py --regenerate-embeddings
 ```
 
-### Generate Gallery Images (Coming Soon)
+### Generate Gallery Images
 
 ```bash
-# Download RWS tarot cards and generate images
+# Download RWS tarot cards and generate all images
 python3 generate_dril_tarot_images.py --download-cards
 
 # Use existing tarot card images
 python3 generate_dril_tarot_images.py --card-images-dir ./my-cards
+
+# Resume interrupted generation
+python3 generate_dril_tarot_images.py --skip-existing
+
+# Specify output directory
+python3 generate_dril_tarot_images.py --output my-gallery
 ```
+
+This generates 156 composite PNG images combining:
+- Public domain Rider-Waite Smith tarot cards (1909)
+- Classic Twitter-styled dril tweet mockups
+- Centered composition, 1200px tall, high quality
+
+Output: `gallery/the-fool-upright.png` through `gallery/king-of-pentacles-reversed.png`
 
 ## Data Files
 
@@ -69,6 +82,13 @@ python3 generate_dril_tarot_images.py --card-images-dir ./my-cards
 - **Death (reversed)**: "❒Single ❒Taken GenderDead"
 - **The Tower (reversed)**: "my greatest sin is that I've utterly betrayed my 'NO FEAR' tower decal..."
 - **The Magician (upright)**: "i got a big ass and i know how to fuck it. Mastercard"
+
+## Gallery Examples
+
+Once generated, you'll have beautiful composite images like:
+- The Fool (upright) + "inventing a new Suit of playing cards..."
+- Death (reversed) + "❒Single ❒Taken GenderDead"
+- The Tower (reversed) + "betrayed my 'NO FEAR' tower decal"
 
 ## Requirements
 
