@@ -52,6 +52,173 @@ def get_card_processing_order(mapping: Dict) -> List[Tuple[str, str]]:
     return cards_order
 
 
+def create_tweet_html(tweet_data: Dict) -> str:
+    """
+    Generate HTML for tweet mockup in classic Twitter style.
+
+    Args:
+        tweet_data: Dict with tweet_content, tweet_date, retweets, favorites
+
+    Returns:
+        HTML string
+    """
+    # Extract data
+    content = tweet_data['tweet_content']
+    date = tweet_data['tweet_date']
+    retweets = tweet_data['retweets']
+    favorites = tweet_data['favorites']
+
+    # Format date (just the date part)
+    date_display = date.split()[0] if ' ' in date else date
+
+    # Base64 encoded small dril avatar placeholder (tiny gray circle)
+    avatar_placeholder = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA2SURBVDhPY/wPBAxUAExQmgYGoxpHNY5qHNU4qpEMQFFNDMMaKQWjGkc1jmoc1TiqcVQjAwMABtQBDZdEI0gAAAAASUVORK5CYII="
+
+    html = f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * {{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }}
+
+        body {{
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }}
+
+        .tweet-card {{
+            background: white;
+            border: 1px solid #e1e8ed;
+            border-radius: 16px;
+            padding: 16px;
+            max-width: 500px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        }}
+
+        .tweet-header {{
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }}
+
+        .avatar {{
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #ccc;
+            margin-right: 12px;
+        }}
+
+        .user-info {{
+            display: flex;
+            flex-direction: column;
+        }}
+
+        .name {{
+            font-weight: bold;
+            font-size: 15px;
+            color: #14171a;
+        }}
+
+        .handle {{
+            font-size: 15px;
+            color: #657786;
+        }}
+
+        .tweet-body {{
+            font-size: 23px;
+            line-height: 1.4;
+            color: #14171a;
+            margin-bottom: 12px;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }}
+
+        .tweet-footer {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #657786;
+            font-size: 15px;
+            padding-top: 12px;
+            border-top: 1px solid #e1e8ed;
+        }}
+
+        .timestamp {{
+            color: #657786;
+        }}
+
+        .engagement {{
+            display: flex;
+            gap: 16px;
+        }}
+
+        .engagement span {{
+            color: #657786;
+        }}
+
+        .rt-icon {{
+            color: #17bf63;
+        }}
+
+        .like-icon {{
+            color: #e0245e;
+        }}
+    </style>
+</head>
+<body>
+    <div class="tweet-card">
+        <div class="tweet-header">
+            <img class="avatar" src="{avatar_placeholder}" alt="dril">
+            <div class="user-info">
+                <span class="name">dril</span>
+                <span class="handle">@dril</span>
+            </div>
+        </div>
+        <div class="tweet-body">{content}</div>
+        <div class="tweet-footer">
+            <span class="timestamp">{date_display}</span>
+            <div class="engagement">
+                <span class="rt-icon">🔁 {retweets:,}</span>
+                <span class="like-icon">❤️ {favorites:,}</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+    """
+
+    return html
+
+
+def test_tweet_html():
+    """Test function to preview tweet HTML"""
+    sample_tweet = {
+        'tweet_content': 'inventing a new Suit of playing cards: "The Horseshoes" - We got the king, queen, jack and Ace. All your favorites - The most powerful suit',
+        'tweet_date': '2018-05-03 20:06:45',
+        'retweets': 599,
+        'favorites': 5543
+    }
+
+    html = create_tweet_html(sample_tweet)
+
+    # Save to temp file for manual inspection
+    with open('/tmp/tweet_preview.html', 'w') as f:
+        f.write(html)
+
+    print("✓ Test HTML saved to /tmp/tweet_preview.html")
+    print("  Open in browser to preview tweet styling")
+
+
 def main():
     """Main execution"""
     parser = argparse.ArgumentParser(
