@@ -26,3 +26,4 @@ gallery/
 .idea/
 *.swp
 *.swo
+data/tweet_screenshots_cache.json
