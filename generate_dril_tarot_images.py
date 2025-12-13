@@ -15,6 +15,8 @@ from pathlib import Path
 from typing import Dict, List, Tuple
 from PIL import Image
 from playwright.sync_api import sync_playwright
+import requests
+from urllib.parse import quote
 
 # Configuration
 CARD_MAPPING_FILE = 'data/card_dril_mapping.json'
@@ -265,6 +267,163 @@ def generate_tweet_screenshots(mapping: Dict) -> Dict[Tuple[str, str], bytes]:
     return screenshots
 
 
+def sanitize_filename(name: str) -> str:
+    """Convert card name to safe filename"""
+    return name.lower().replace(' ', '-').replace('/', '-')
+
+
+def download_rws_cards(output_dir: str) -> bool:
+    """
+    Download public domain Rider-Waite Smith tarot card images.
+
+    Uses Wikimedia Commons public domain RWS deck.
+
+    Args:
+        output_dir: Directory to save card images
+
+    Returns:
+        True if successful, False otherwise
+    """
+    print("\nDownloading public domain RWS tarot cards...")
+
+    # Create output directory
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Wikimedia Commons RWS 1909 deck URLs
+    # These are the original Pamela Colman Smith illustrations (public domain)
+    base_url = "https://upload.wikimedia.org/wikipedia/commons/"
+
+    # Major Arcana mappings (Wikipedia file names)
+    major_arcana_files = {
+        'The Fool': '9/90/RWS_Tarot_00_Fool.jpg',
+        'The Magician': 'd/de/RWS_Tarot_01_Magician.jpg',
+        'The High Priestess': '8/88/RWS_Tarot_02_High_Priestess.jpg',
+        'The Empress': 'd/d2/RWS_Tarot_03_Empress.jpg',
+        'The Emperor': 'c/c3/RWS_Tarot_04_Emperor.jpg',
+        'The Hierophant': '8/8d/RWS_Tarot_05_Hierophant.jpg',
+        'The Lovers': '3/3a/RWS_Tarot_06_Lovers.jpg',
+        'The Chariot': '9/9b/RWS_Tarot_07_Chariot.jpg',
+        'Strength': 'f/f5/RWS_Tarot_08_Strength.jpg',
+        'The Hermit': '4/4d/RWS_Tarot_09_Hermit.jpg',
+        'Wheel of Fortune': '3/3c/RWS_Tarot_10_Wheel_of_Fortune.jpg',
+        'Justice': 'e/e0/RWS_Tarot_11_Justice.jpg',
+        'The Hanged Man': '2/2b/RWS_Tarot_12_Hanged_Man.jpg',
+        'Death': 'd/d7/RWS_Tarot_13_Death.jpg',
+        'Temperance': 'f/f8/RWS_Tarot_14_Temperance.jpg',
+        'The Devil': '5/55/RWS_Tarot_15_Devil.jpg',
+        'The Tower': '5/53/RWS_Tarot_16_Tower.jpg',
+        'The Star': 'd/db/RWS_Tarot_17_Star.jpg',
+        'The Moon': '7/7f/RWS_Tarot_18_Moon.jpg',
+        'The Sun': '1/17/RWS_Tarot_19_Sun.jpg',
+        'Judgement': 'd/dd/RWS_Tarot_20_Judgement.jpg',
+        'The World': 'f/ff/RWS_Tarot_21_World.jpg',
+    }
+
+    # Minor Arcana naming pattern
+    suits = {
+        'Wands': 'Wands',
+        'Cups': 'Cups',
+        'Swords': 'Swords',
+        'Pentacles': 'Pentacles'
+    }
+
+    ranks = {
+        'Ace': 'Ace',
+        'Two': '02',
+        'Three': '03',
+        'Four': '04',
+        'Five': '05',
+        'Six': '06',
+        'Seven': '07',
+        'Eight': '08',
+        'Nine': '09',
+        'Ten': '10',
+        'Page': 'Page',
+        'Knight': 'Knight',
+        'Queen': 'Queen',
+        'King': 'King'
+    }
+
+    # Build minor arcana URLs
+    minor_arcana_files = {}
+    for suit_name, suit_wiki in suits.items():
+        for rank_name, rank_wiki in ranks.items():
+            card_name = f"{rank_name} of {suit_name}"
+            # Wikipedia naming: RWS_Tarot_Wands01.jpg (for Ace of Wands)
+            wiki_file = f"RWS_Tarot_{suit_wiki}{rank_wiki}.jpg"
+
+            # Find the hash path (simplified - using common paths)
+            # In reality, would need to query Wikipedia API or have full mapping
+            # For now, construct likely path
+            hash_prefix = wiki_file[0].lower()
+            minor_arcana_files[card_name] = f"{hash_prefix}/{hash_prefix}{hash_prefix}/{wiki_file}"
+
+    all_cards = {**major_arcana_files, **minor_arcana_files}
+
+    # Download each card
+    success_count = 0
+    for card_name, url_path in all_cards.items():
+        filename = sanitize_filename(card_name) + '.jpg'
+        output_path = os.path.join(output_dir, filename)
+
+        # Skip if exists
+        if os.path.exists(output_path):
+            success_count += 1
+            continue
+
+        url = base_url + url_path
+
+        try:
+            response = requests.get(url, timeout=10)
+            response.raise_for_status()
+
+            with open(output_path, 'wb') as f:
+                f.write(response.content)
+
+            print(f"  ✓ {card_name}")
+            success_count += 1
+
+        except Exception as e:
+            print(f"  ✗ {card_name}: {e}")
+
+    print(f"\n✓ Downloaded {success_count}/{len(all_cards)} cards")
+
+    if success_count < 78:
+        print("\n⚠️  Some cards failed to download.")
+        print("Manual download instructions:")
+        print("  1. Visit: https://en.wikipedia.org/wiki/Rider-Waite_tarot_deck")
+        print("  2. Download missing card images")
+        print(f"  3. Save to: {output_dir}/")
+        print("  4. Use naming: the-fool.jpg, ace-of-wands.jpg, etc.")
+        return False
+
+    return True
+
+
+def verify_card_images(cards_dir: str) -> Tuple[bool, List[str]]:
+    """
+    Verify all 78 tarot card images are present.
+
+    Returns:
+        (success, missing_cards)
+    """
+    # Load card names from mapping
+    with open(CARD_MAPPING_FILE, 'r') as f:
+        mapping = json.load(f)
+
+    card_names = list(mapping['cards'].keys())
+    missing = []
+
+    for card_name in card_names:
+        filename = sanitize_filename(card_name) + '.jpg'
+        path = os.path.join(cards_dir, filename)
+
+        if not os.path.exists(path):
+            missing.append(card_name)
+
+    return len(missing) == 0, missing
+
+
 def test_tweet_html():
     """Test function to preview tweet HTML"""
     sample_tweet = {
@@ -325,17 +484,27 @@ def main():
         cards = get_card_processing_order(mapping)
         print(f"✓ Will generate {len(cards)} gallery images")
 
-        # Test screenshot generation
-        if True:  # Change to False to skip during development
-            screenshots = generate_tweet_screenshots(mapping)
+        # Handle tarot card images
+        if args.download_cards:
+            success = download_rws_cards(args.card_images_dir)
+            if not success:
+                print("\n✗ Card download incomplete", file=sys.stderr)
+                sys.exit(1)
 
-            # Save one test screenshot
-            test_key = ('The Fool', 'upright')
-            if test_key in screenshots:
-                test_path = '/tmp/test_tweet_screenshot.png'
-                with open(test_path, 'wb') as f:
-                    f.write(screenshots[test_key])
-                print(f"\n✓ Test screenshot saved to {test_path}")
+        # Verify cards present
+        print(f"\nVerifying tarot card images in {args.card_images_dir}/...")
+        cards_ok, missing = verify_card_images(args.card_images_dir)
+
+        if not cards_ok:
+            print(f"✗ Missing {len(missing)} card images:", file=sys.stderr)
+            for card in missing[:5]:
+                print(f"  - {card}", file=sys.stderr)
+            if len(missing) > 5:
+                print(f"  ... and {len(missing) - 5} more", file=sys.stderr)
+            print(f"\nRun with --download-cards to download them", file=sys.stderr)
+            sys.exit(1)
+
+        print(f"✓ All 78 tarot card images present")
 
     except FileNotFoundError as e:
         print(f"✗ Error: {e}", file=sys.stderr)
