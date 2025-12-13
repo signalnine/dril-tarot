@@ -6,6 +6,7 @@ Combines public domain Rider-Waite Smith tarot cards with styled dril tweet
 mockups to create 156 composite images for browsing.
 """
 
+import html
 import json
 import os
 import sys
@@ -74,7 +75,7 @@ def create_tweet_html(tweet_data: Dict) -> str:
     # Base64 encoded small dril avatar placeholder (tiny gray circle)
     avatar_placeholder = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA2SURBVDhPY/wPBAxUAExQmgYGoxpHNY5qHNU4qpEMQFFNDMMaKQWjGkc1jmoc1TiqcVQjAwMABtQBDZdEI0gAAAAASUVORK5CYII="
 
-    html = f"""
+    html_content = f"""
 <!DOCTYPE html>
 <html>
 <head>
@@ -184,7 +185,7 @@ def create_tweet_html(tweet_data: Dict) -> str:
                 <span class="handle">@dril</span>
             </div>
         </div>
-        <div class="tweet-body">{content}</div>
+        <div class="tweet-body">{html.escape(content)}</div>
         <div class="tweet-footer">
             <span class="timestamp">{date_display}</span>
             <div class="engagement">
@@ -197,7 +198,7 @@ def create_tweet_html(tweet_data: Dict) -> str:
 </html>
     """
 
-    return html
+    return html_content
 
 
 def test_tweet_html():
@@ -209,11 +210,11 @@ def test_tweet_html():
         'favorites': 5543
     }
 
-    html = create_tweet_html(sample_tweet)
+    html_output = create_tweet_html(sample_tweet)
 
     # Save to temp file for manual inspection
     with open('/tmp/tweet_preview.html', 'w') as f:
-        f.write(html)
+        f.write(html_output)
 
     print("✓ Test HTML saved to /tmp/tweet_preview.html")
     print("  Open in browser to preview tweet styling")
