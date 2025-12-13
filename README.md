@@ -104,10 +104,33 @@ Output: `gallery/the-fool-upright.png` through `gallery/king-of-pentacles-revers
 
 ## Gallery Examples
 
-Once generated, you'll have beautiful composite images like:
-- The Fool (upright) + "inventing a new Suit of playing cards..."
-- Death (reversed) + "❒Single ❒Taken GenderDead"
-- The Tower (reversed) + "betrayed my 'NO FEAR' tower decal"
+Here are some sample dril-tarot cards (click to enlarge):
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="gallery/samples/the-fool-upright.png" width="300"><br>
+      <b>The Fool (upright)</b><br>
+      <i>"inventing a new Suit of playing cards: 'The Horseshoes'..."</i>
+    </td>
+    <td align="center">
+      <img src="gallery/samples/death-reversed.png" width="300"><br>
+      <b>Death (reversed)</b><br>
+      <i>"❒Single ❒Taken GenderDead"</i>
+    </td>
+    <td align="center">
+      <img src="gallery/samples/the-tower-reversed.png" width="300"><br>
+      <b>The Tower (reversed)</b><br>
+      <i>"my greatest sin is that I've utterly betrayed my 'NO FEAR' tower decal..."</i>
+    </td>
+  </tr>
+</table>
+
+Each image combines:
+- Public domain Rider-Waite Smith tarot card artwork (1909)
+- Authentic dril profile picture and Twitter styling
+- Semantically matched dril tweet based on card meaning
+- High resolution (1200px tall) for quality viewing and printing
 
 ## Requirements
 
