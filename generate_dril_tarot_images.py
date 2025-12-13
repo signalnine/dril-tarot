@@ -24,6 +24,7 @@ CARD_MAPPING_FILE = 'data/card_dril_mapping.json'
 SEMANTIC_TAROT_DIR = 'semantic-tarot'
 DEFAULT_OUTPUT_DIR = 'gallery'
 DEFAULT_CARDS_DIR = 'tarot-cards'
+TWEET_SCREENSHOTS_CACHE = 'data/tweet_screenshots_cache.json'
 
 
 def load_card_mapping() -> Dict:
@@ -278,6 +279,46 @@ def generate_tweet_screenshots(mapping: Dict) -> Dict[Tuple[str, str], bytes]:
     return screenshots
 
 
+def cache_screenshots(screenshots: Dict[Tuple[str, str], bytes]):
+    """Cache tweet screenshots to disk"""
+    import base64
+
+    # Convert to serializable format
+    cache_data = {}
+    for (card_name, position), screenshot_bytes in screenshots.items():
+        key = f"{card_name}|{position}"
+        cache_data[key] = base64.b64encode(screenshot_bytes).decode('utf-8')
+
+    # Ensure data directory exists
+    os.makedirs(os.path.dirname(TWEET_SCREENSHOTS_CACHE), exist_ok=True)
+
+    with open(TWEET_SCREENSHOTS_CACHE, 'w') as f:
+        json.dump(cache_data, f)
+
+    print(f"✓ Cached {len(screenshots)} screenshots to {TWEET_SCREENSHOTS_CACHE}")
+
+
+def load_cached_screenshots() -> Dict[Tuple[str, str], bytes]:
+    """Load cached screenshots"""
+    import base64
+
+    if not os.path.exists(TWEET_SCREENSHOTS_CACHE):
+        return None
+
+    try:
+        with open(TWEET_SCREENSHOTS_CACHE, 'r') as f:
+            cache_data = json.load(f)
+
+        screenshots = {}
+        for key, b64_data in cache_data.items():
+            card_name, position = key.split('|')
+            screenshots[(card_name, position)] = base64.b64decode(b64_data)
+
+        return screenshots
+    except:
+        return None
+
+
 def sanitize_filename(name: str) -> str:
     """Convert card name to safe filename"""
     return name.lower().replace(' ', '-').replace('/', '-')
@@ -491,7 +532,8 @@ def generate_gallery_images(
     mapping: Dict,
     cards_dir: str,
     output_dir: str,
-    skip_existing: bool = False
+    skip_existing: bool = False,
+    regenerate_screenshots: bool = False
 ):
     """
     Generate all 156 gallery images.
@@ -501,6 +543,7 @@ def generate_gallery_images(
         cards_dir: Directory with tarot card images
         output_dir: Output directory for gallery
         skip_existing: Skip if output file exists
+        regenerate_screenshots: Force regenerate screenshots (ignore cache)
     """
     print("\nGenerating gallery images...")
     print("=" * 70)
@@ -508,8 +551,21 @@ def generate_gallery_images(
     # Create output directory
     os.makedirs(output_dir, exist_ok=True)
 
-    # Generate tweet screenshots
-    screenshots = generate_tweet_screenshots(mapping)
+    # Try to load cached screenshots if not regenerating
+    screenshots = None
+    if not regenerate_screenshots:
+        print("\nChecking for cached screenshots...")
+        screenshots = load_cached_screenshots()
+        if screenshots:
+            print(f"✓ Loaded {len(screenshots)} cached screenshots")
+        else:
+            print("No cache found, generating screenshots...")
+
+    # Generate tweet screenshots if not cached
+    if screenshots is None:
+        screenshots = generate_tweet_screenshots(mapping)
+        # Cache the screenshots for future runs
+        cache_screenshots(screenshots)
 
     # Process each card
     cards = get_card_processing_order(mapping)
@@ -607,6 +663,11 @@ def main():
         action='store_true',
         help='Skip generating images that already exist'
     )
+    parser.add_argument(
+        '--regenerate-screenshots',
+        action='store_true',
+        help='Force regenerate tweet screenshots (ignore cache)'
+    )
 
     args = parser.parse_args()
 
@@ -656,7 +717,8 @@ def main():
             mapping,
             args.card_images_dir,
             args.output,
-            args.skip_existing
+            args.skip_existing,
+            args.regenerate_screenshots
         )
 
         print("\n" + "=" * 70)
