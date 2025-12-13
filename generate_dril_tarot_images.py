@@ -76,8 +76,8 @@ def create_tweet_html(tweet_data: Dict) -> str:
     # Format date (just the date part)
     date_display = date.split()[0] if ' ' in date else date
 
-    # Base64 encoded small dril avatar placeholder (tiny gray circle)
-    avatar_placeholder = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA2SURBVDhPY/wPBAxUAExQmgYGoxpHNY5qHNU4qpEMQFFNDMMaKQWjGkc1jmoc1TiqcVQjAwMABtQBDZdEI0gAAAAASUVORK5CYII="
+    # Base64 encoded dril avatar (actual profile picture)
+    avatar_placeholder = "data:image/jpeg;base64,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"
 
     html_content = f"""
 <!DOCTYPE html>
@@ -183,9 +183,9 @@ def create_tweet_html(tweet_data: Dict) -> str:
 <body>
     <div class="tweet-card">
         <div class="tweet-header">
-            <img class="avatar" src="{avatar_placeholder}" alt="dril">
+            <img class="avatar" src="{avatar_placeholder}" alt="wint">
             <div class="user-info">
-                <span class="name">dril</span>
+                <span class="name">wint</span>
                 <span class="handle">@dril</span>
             </div>
         </div>
