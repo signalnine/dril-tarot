@@ -1,4 +1,4 @@
-# Dril Tarot
+# dril Tarot
 
 Semantic matching of dril tweets to tarot cards using OpenAI embeddings.
 
