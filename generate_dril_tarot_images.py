@@ -245,24 +245,34 @@ def generate_tweet_screenshots(mapping: Dict) -> Dict[Tuple[str, str], bytes]:
 
     print("\nGenerating tweet screenshots...")
 
-    with sync_playwright() as p:
-        # Launch browser (headless)
-        browser = p.chromium.launch(headless=True)
-        page = browser.new_page(viewport={'width': 600, 'height': 800})
+    try:
+        with sync_playwright() as p:
+            # Launch browser (headless)
+            browser = p.chromium.launch(headless=True)
+            page = browser.new_page(viewport={'width': 600, 'height': 800})
 
-        # Process each card
-        cards = get_card_processing_order(mapping)
-        for i, (card_name, position) in enumerate(cards, 1):
-            tweet_data = mapping['cards'][card_name][position]
+            # Process each card
+            cards = get_card_processing_order(mapping)
+            for i, (card_name, position) in enumerate(cards, 1):
+                tweet_data = mapping['cards'][card_name][position]
 
-            # Screenshot
-            screenshot_bytes = screenshot_tweet(page, tweet_data)
-            screenshots[(card_name, position)] = screenshot_bytes
+                try:
+                    # Screenshot
+                    screenshot_bytes = screenshot_tweet(page, tweet_data)
+                    screenshots[(card_name, position)] = screenshot_bytes
 
-            # Progress
-            print(f"  [{i}/{len(cards)}] {card_name} ({position})...")
+                    # Progress - show every 10 screenshots
+                    if i % 10 == 0:
+                        print(f"  Progress: {i}/{len(cards)} tweets...")
+                except Exception as e:
+                    print(f"  ✗ Failed {card_name} ({position}): {e}")
+                    # Continue with others
 
-        browser.close()
+            browser.close()
+    except Exception as e:
+        print(f"\n✗ Playwright error: {e}")
+        print("Make sure Playwright is installed: playwright install chromium")
+        raise
 
     print(f"✓ Generated {len(screenshots)} tweet screenshots")
     return screenshots
@@ -559,6 +569,19 @@ def test_tweet_html():
     print("  Open in browser to preview tweet styling")
 
 
+def check_playwright_installed():
+    """Check if Playwright browsers are installed"""
+    try:
+        from playwright.sync_api import sync_playwright
+        with sync_playwright() as p:
+            # Try to launch browser
+            browser = p.chromium.launch(headless=True)
+            browser.close()
+        return True
+    except Exception as e:
+        return False
+
+
 def main():
     """Main execution"""
     parser = argparse.ArgumentParser(
@@ -599,6 +622,12 @@ def main():
         # Get processing order
         cards = get_card_processing_order(mapping)
         print(f"✓ Will generate {len(cards)} gallery images")
+
+        # Check Playwright
+        if not check_playwright_installed():
+            print("\n✗ Playwright not installed or browsers not available")
+            print("Install with: playwright install chromium")
+            sys.exit(1)
 
         # Handle tarot card images
         if args.download_cards:
