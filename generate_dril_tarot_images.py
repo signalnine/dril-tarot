@@ -22,6 +22,36 @@ DEFAULT_OUTPUT_DIR = 'gallery'
 DEFAULT_CARDS_DIR = 'tarot-cards'
 
 
+def load_card_mapping() -> Dict:
+    """Load card-to-tweet mapping data"""
+    if not os.path.exists(CARD_MAPPING_FILE):
+        raise FileNotFoundError(
+            f"Card mapping not found: {CARD_MAPPING_FILE}\n"
+            "Run match_dril_tweets.py first to generate mappings."
+        )
+
+    with open(CARD_MAPPING_FILE, 'r') as f:
+        data = json.load(f)
+
+    return data
+
+
+def get_card_processing_order(mapping: Dict) -> List[Tuple[str, str]]:
+    """
+    Get cards in processing order: (card_name, position).
+    Returns list of tuples like [('The Fool', 'upright'), ('The Fool', 'reversed'), ...]
+    """
+    cards_order = []
+
+    # Process in order from mapping
+    for card_name in mapping['cards'].keys():
+        for position in ['upright', 'reversed']:
+            if position in mapping['cards'][card_name]:
+                cards_order.append((card_name, position))
+
+    return cards_order
+
+
 def main():
     """Main execution"""
     parser = argparse.ArgumentParser(
@@ -52,7 +82,25 @@ def main():
 
     print("Dril-Tarot Gallery Generator")
     print("=" * 70)
-    print("Not yet implemented")
+
+    try:
+        # Load mapping
+        print("\nLoading card-tweet mappings...")
+        mapping = load_card_mapping()
+        print(f"✓ Loaded {mapping['metadata']['total_matches']} card-tweet matches")
+
+        # Get processing order
+        cards = get_card_processing_order(mapping)
+        print(f"✓ Will generate {len(cards)} gallery images")
+
+    except FileNotFoundError as e:
+        print(f"✗ Error: {e}", file=sys.stderr)
+        sys.exit(1)
+    except Exception as e:
+        print(f"✗ Unexpected error: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
 
 
 if __name__ == "__main__":
