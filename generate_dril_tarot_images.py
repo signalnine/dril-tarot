@@ -529,8 +529,10 @@ def generate_gallery_images(
             position
         )
 
-        # Save
-        composite.save(output_path, 'PNG', quality=95)
+        # Save with PNG-specific compression parameters
+        # compress_level=6: default compression (0-9, higher = smaller file but slower)
+        # optimize=True: enables PNG optimization for smaller file size
+        composite.save(output_path, 'PNG', compress_level=6, optimize=True)
 
         print(f"[{i}/{len(cards)}] {card_name} ({position}) → {output_filename}")
 
