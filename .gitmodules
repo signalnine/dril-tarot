@@ -1,0 +1,3 @@
+[submodule "semantic-tarot"]
+	path = semantic-tarot
+	url = git@github.com:signalnine/semantic-tarot.git
