@@ -11,6 +11,7 @@ import json
 import os
 import sys
 import argparse
+from io import BytesIO
 from pathlib import Path
 from typing import Dict, List, Tuple
 from PIL import Image
@@ -424,6 +425,119 @@ def verify_card_images(cards_dir: str) -> Tuple[bool, List[str]]:
     return len(missing) == 0, missing
 
 
+def composite_tweet_on_card(
+    card_image_path: str,
+    tweet_screenshot_bytes: bytes,
+    card_name: str,
+    position: str
+) -> Image.Image:
+    """
+    Composite tweet screenshot onto tarot card image.
+
+    Args:
+        card_image_path: Path to tarot card JPG
+        tweet_screenshot_bytes: PNG bytes of tweet
+        card_name: Card name (for reversed handling)
+        position: 'upright' or 'reversed'
+
+    Returns:
+        Composite PIL Image
+    """
+    # Load card image
+    card = Image.open(card_image_path)
+
+    # Convert to RGB if necessary (in case of RGBA or other modes)
+    if card.mode != 'RGB':
+        card = card.convert('RGB')
+
+    # Standardize card size (maintain aspect ratio, fit to height)
+    target_height = 1200
+    aspect_ratio = card.width / card.height
+    target_width = int(target_height * aspect_ratio)
+    card = card.resize((target_width, target_height), Image.Resampling.LANCZOS)
+
+    # Rotate if reversed
+    if position == 'reversed':
+        card = card.rotate(180)
+
+    # Load tweet screenshot
+    tweet_img = Image.open(BytesIO(tweet_screenshot_bytes))
+
+    # Calculate center position
+    card_width, card_height = card.size
+    tweet_width, tweet_height = tweet_img.size
+
+    # Center horizontally and vertically
+    x = (card_width - tweet_width) // 2
+    y = (card_height - tweet_height) // 2
+
+    # Paste tweet onto card (opaque)
+    card.paste(tweet_img, (x, y))
+
+    return card
+
+
+def generate_gallery_images(
+    mapping: Dict,
+    cards_dir: str,
+    output_dir: str,
+    skip_existing: bool = False
+):
+    """
+    Generate all 156 gallery images.
+
+    Args:
+        mapping: Card mapping data
+        cards_dir: Directory with tarot card images
+        output_dir: Output directory for gallery
+        skip_existing: Skip if output file exists
+    """
+    print("\nGenerating gallery images...")
+    print("=" * 70)
+
+    # Create output directory
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Generate tweet screenshots
+    screenshots = generate_tweet_screenshots(mapping)
+
+    # Process each card
+    cards = get_card_processing_order(mapping)
+
+    for i, (card_name, position) in enumerate(cards, 1):
+        # Output filename
+        output_filename = sanitize_filename(card_name) + f'-{position}.png'
+        output_path = os.path.join(output_dir, output_filename)
+
+        # Skip if exists
+        if skip_existing and os.path.exists(output_path):
+            print(f"[{i}/{len(cards)}] {card_name} ({position}) - skipped (exists)")
+            continue
+
+        # Get card image path
+        card_image_filename = sanitize_filename(card_name) + '.jpg'
+        card_image_path = os.path.join(cards_dir, card_image_filename)
+
+        # Get tweet screenshot
+        screenshot_bytes = screenshots[(card_name, position)]
+
+        # Composite
+        composite = composite_tweet_on_card(
+            card_image_path,
+            screenshot_bytes,
+            card_name,
+            position
+        )
+
+        # Save
+        composite.save(output_path, 'PNG', quality=95)
+
+        print(f"[{i}/{len(cards)}] {card_name} ({position}) → {output_filename}")
+
+    print("\n" + "=" * 70)
+    print(f"✓ Generated {len(cards)} gallery images in {output_dir}/")
+
+
 def test_tweet_html():
     """Test function to preview tweet HTML"""
     sample_tweet = {
@@ -505,6 +619,19 @@ def main():
             sys.exit(1)
 
         print(f"✓ All 78 tarot card images present")
+
+        # Generate gallery
+        generate_gallery_images(
+            mapping,
+            args.card_images_dir,
+            args.output,
+            args.skip_existing
+        )
+
+        print("\n" + "=" * 70)
+        print("Gallery generation complete!")
+        print(f"Images saved to: {args.output}/")
+        print("=" * 70)
 
     except FileNotFoundError as e:
         print(f"✗ Error: {e}", file=sys.stderr)
