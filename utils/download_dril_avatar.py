@@ -39,7 +39,7 @@ def image_to_base64(image_path: str) -> str:
     return f"data:image/jpeg;base64,{b64}"
 
 
-def main():
+def main() -> None:
     print("Dril Avatar Base64 Converter")
     print("=" * 70)
     print()

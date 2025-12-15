@@ -111,10 +111,19 @@ CARD_URLS = {
 
 def sanitize_filename(name: str) -> str:
     """Convert card name to safe filename."""
-    return name.lower().replace(' ', '-').replace('/', '-')
+    # Remove null bytes
+    name = name.replace('\0', '')
+    # Replace dangerous characters
+    sanitized = name.lower().replace(' ', '-').replace('/', '-')
+    # Remove leading/trailing dots and path separators
+    sanitized = sanitized.strip('.-_')
+    # Prevent directory traversal
+    sanitized = sanitized.replace('..', '')
+    # Limit length
+    return sanitized[:255]
 
 
-def download_cards(output_dir='tarot-cards'):
+def download_cards(output_dir: str = 'tarot-cards') -> bool:
     """Download all 78 tarot cards from Internet Archive."""
 
     # Create output directory
@@ -162,7 +171,12 @@ def download_cards(output_dir='tarot-cards'):
                 background = Image.new('RGB', img.size, (255, 255, 255))
                 if img.mode == 'P':
                     img = img.convert('RGBA')
-                background.paste(img, mask=img.split()[-1] if img.mode in ('RGBA', 'LA') else None)
+                # Get alpha channel
+                if img.mode in ('RGBA', 'LA'):
+                    alpha = img.split()[-1]
+                    background.paste(img, mask=alpha)
+                else:
+                    background.paste(img)
                 img = background
             elif img.mode != 'RGB':
                 img = img.convert('RGB')

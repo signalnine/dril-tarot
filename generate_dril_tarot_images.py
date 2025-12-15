@@ -11,9 +11,10 @@ import json
 import os
 import sys
 import argparse
+import tempfile
 from io import BytesIO
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Optional
 from PIL import Image
 from playwright.sync_api import sync_playwright
 import requests
@@ -25,6 +26,8 @@ SEMANTIC_TAROT_DIR = 'semantic-tarot'
 DEFAULT_OUTPUT_DIR = 'gallery'
 DEFAULT_CARDS_DIR = 'tarot-cards'
 TWEET_SCREENSHOTS_CACHE = 'data/tweet_screenshots_cache.json'
+VIEWPORT_WIDTH = 600
+VIEWPORT_HEIGHT = 800
 
 
 def load_card_mapping() -> Dict:
@@ -35,7 +38,7 @@ def load_card_mapping() -> Dict:
             "Run match_dril_tweets.py first to generate mappings."
         )
 
-    with open(CARD_MAPPING_FILE, 'r') as f:
+    with open(CARD_MAPPING_FILE, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
     return data
@@ -250,36 +253,38 @@ def generate_tweet_screenshots(mapping: Dict) -> Dict[Tuple[str, str], bytes]:
         with sync_playwright() as p:
             # Launch browser (headless)
             browser = p.chromium.launch(headless=True)
-            page = browser.new_page(viewport={'width': 600, 'height': 800})
+            try:
+                page = browser.new_page(viewport={'width': VIEWPORT_WIDTH, 'height': VIEWPORT_HEIGHT})
 
-            # Process each card
-            cards = get_card_processing_order(mapping)
-            for i, (card_name, position) in enumerate(cards, 1):
-                tweet_data = mapping['cards'][card_name][position]
+                # Process each card
+                cards = get_card_processing_order(mapping)
+                for i, (card_name, position) in enumerate(cards, 1):
+                    tweet_data = mapping['cards'][card_name][position]
 
-                try:
-                    # Screenshot
-                    screenshot_bytes = screenshot_tweet(page, tweet_data)
-                    screenshots[(card_name, position)] = screenshot_bytes
+                    try:
+                        # Screenshot
+                        screenshot_bytes = screenshot_tweet(page, tweet_data)
+                        screenshots[(card_name, position)] = screenshot_bytes
 
-                    # Progress - show every 10 screenshots
-                    if i % 10 == 0:
-                        print(f"  Progress: {i}/{len(cards)} tweets...")
-                except Exception as e:
-                    print(f"  ✗ Failed {card_name} ({position}): {e}")
-                    # Continue with others
+                        # Progress - show every 10 screenshots
+                        if i % 10 == 0:
+                            print(f"  Progress: {i}/{len(cards)} tweets...")
+                    except Exception as e:
+                        print(f"  ✗ Failed {card_name} ({position}): {e}", file=sys.stderr)
+                        # Continue with others
 
-            browser.close()
+            finally:
+                browser.close()
     except Exception as e:
-        print(f"\n✗ Playwright error: {e}")
-        print("Make sure Playwright is installed: playwright install chromium")
+        print(f"\n✗ Playwright error: {e}", file=sys.stderr)
+        print("Make sure Playwright is installed: playwright install chromium", file=sys.stderr)
         raise
 
     print(f"✓ Generated {len(screenshots)} tweet screenshots")
     return screenshots
 
 
-def cache_screenshots(screenshots: Dict[Tuple[str, str], bytes]):
+def cache_screenshots(screenshots: Dict[Tuple[str, str], bytes]) -> None:
     """Cache tweet screenshots to disk"""
     import base64
 
@@ -292,13 +297,13 @@ def cache_screenshots(screenshots: Dict[Tuple[str, str], bytes]):
     # Ensure data directory exists
     os.makedirs(os.path.dirname(TWEET_SCREENSHOTS_CACHE), exist_ok=True)
 
-    with open(TWEET_SCREENSHOTS_CACHE, 'w') as f:
+    with open(TWEET_SCREENSHOTS_CACHE, 'w', encoding='utf-8') as f:
         json.dump(cache_data, f)
 
     print(f"✓ Cached {len(screenshots)} screenshots to {TWEET_SCREENSHOTS_CACHE}")
 
 
-def load_cached_screenshots() -> Dict[Tuple[str, str], bytes]:
+def load_cached_screenshots() -> Optional[Dict[Tuple[str, str], bytes]]:
     """Load cached screenshots"""
     import base64
 
@@ -306,22 +311,36 @@ def load_cached_screenshots() -> Dict[Tuple[str, str], bytes]:
         return None
 
     try:
-        with open(TWEET_SCREENSHOTS_CACHE, 'r') as f:
+        with open(TWEET_SCREENSHOTS_CACHE, 'r', encoding='utf-8') as f:
             cache_data = json.load(f)
 
         screenshots = {}
         for key, b64_data in cache_data.items():
-            card_name, position = key.split('|')
+            parts = key.split('|', 1)  # Split on first occurrence only
+            if len(parts) != 2:
+                print(f"Warning: Invalid cache key format: {key}", file=sys.stderr)
+                continue
+            card_name, position = parts
             screenshots[(card_name, position)] = base64.b64decode(b64_data)
 
         return screenshots
-    except:
+    except (json.JSONDecodeError, ValueError, KeyError) as e:
+        print(f"Warning: Failed to load screenshot cache: {e}", file=sys.stderr)
         return None
 
 
 def sanitize_filename(name: str) -> str:
     """Convert card name to safe filename"""
-    return name.lower().replace(' ', '-').replace('/', '-')
+    # Remove null bytes
+    name = name.replace('\0', '')
+    # Replace dangerous characters
+    sanitized = name.lower().replace(' ', '-').replace('/', '-')
+    # Remove leading/trailing dots and path separators
+    sanitized = sanitized.strip('.-_')
+    # Prevent directory traversal
+    sanitized = sanitized.replace('..', '')
+    # Limit length
+    return sanitized[:255]
 
 
 def download_rws_cards(output_dir: str) -> bool:
@@ -379,7 +398,7 @@ def download_rws_cards(output_dir: str) -> bool:
     os.makedirs(output_dir, exist_ok=True)
 
     # Check if user wants to continue
-    response = input("Have you downloaded the cards? (yes/no): ").strip().lower()
+    response = input("Have you downloaded the cards? (yes/no): ").strip().lower()[:10]
 
     if response in ['yes', 'y']:
         # Verify cards are present
@@ -412,7 +431,7 @@ def verify_card_images(cards_dir: str) -> Tuple[bool, List[str]]:
         (success, missing_cards)
     """
     # Load card names from mapping
-    with open(CARD_MAPPING_FILE, 'r') as f:
+    with open(CARD_MAPPING_FILE, 'r', encoding='utf-8') as f:
         mapping = json.load(f)
 
     card_names = list(mapping['cards'].keys())
@@ -448,6 +467,12 @@ def composite_tweet_on_card(
     """
     # Load card image
     card = Image.open(card_image_path)
+
+    # Validate dimensions
+    if card.width == 0 or card.height == 0:
+        raise ValueError(f"Invalid card image dimensions: {card.size}")
+    if card.width > 10000 or card.height > 10000:
+        raise ValueError(f"Card image too large: {card.size}")
 
     # Convert to RGB if necessary (in case of RGBA or other modes)
     if card.mode != 'RGB':
@@ -558,7 +583,7 @@ def generate_gallery_images(
     print(f"✓ Generated {len(cards)} gallery images in {output_dir}/")
 
 
-def test_tweet_html():
+def test_tweet_html() -> None:
     """Test function to preview tweet HTML"""
     sample_tweet = {
         'tweet_content': 'inventing a new Suit of playing cards: "The Horseshoes" - We got the king, queen, jack and Ace. All your favorites - The most powerful suit',
@@ -570,14 +595,15 @@ def test_tweet_html():
     html_output = create_tweet_html(sample_tweet)
 
     # Save to temp file for manual inspection
-    with open('/tmp/tweet_preview.html', 'w') as f:
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.html', delete=False, encoding='utf-8') as f:
         f.write(html_output)
+        temp_path = f.name
 
-    print("✓ Test HTML saved to /tmp/tweet_preview.html")
+    print(f"✓ Test HTML saved to {temp_path}")
     print("  Open in browser to preview tweet styling")
 
 
-def check_playwright_installed():
+def check_playwright_installed() -> bool:
     """Check if Playwright browsers are installed"""
     try:
         from playwright.sync_api import sync_playwright
@@ -590,7 +616,7 @@ def check_playwright_installed():
         return False
 
 
-def main():
+def main() -> None:
     """Main execution"""
     parser = argparse.ArgumentParser(
         description='Generate dril-tarot gallery images'

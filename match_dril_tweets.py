@@ -92,14 +92,20 @@ def load_api_key() -> str:
 
 def load_cards() -> List[Dict]:
     """Load card data"""
-    with open(CARDS_FILE, 'r') as f:
-        return json.load(f)
+    try:
+        with open(CARDS_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except json.JSONDecodeError as e:
+        raise ValueError(f"Invalid JSON in {CARDS_FILE}: {e}")
 
 
 def load_interpretations() -> Dict:
     """Load interpretation data"""
-    with open(INTERPRETATIONS_FILE, 'r') as f:
-        return json.load(f)
+    try:
+        with open(INTERPRETATIONS_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except json.JSONDecodeError as e:
+        raise ValueError(f"Invalid JSON in {INTERPRETATIONS_FILE}: {e}")
 
 
 def load_card_embeddings() -> List[Dict]:
@@ -110,8 +116,11 @@ def load_card_embeddings() -> List[Dict]:
             "Please run generate_embeddings.py first to create embeddings."
         )
 
-    with open(CARD_EMBEDDINGS_FILE, 'r') as f:
-        return json.load(f)
+    try:
+        with open(CARD_EMBEDDINGS_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except json.JSONDecodeError as e:
+        raise ValueError(f"Invalid JSON in {CARD_EMBEDDINGS_FILE}: {e}")
 
 
 def load_dril_tweets() -> List[Dict]:
@@ -128,23 +137,36 @@ def load_dril_tweets() -> List[Dict]:
 
         for row in reader:
             try:
+                # Parse retweets and favorites with error handling
+                try:
+                    retweets = int(row['retweets']) if row['retweets'] else 0
+                except ValueError:
+                    print(f"Warning: Invalid retweets value for tweet {row.get('id')}: {row.get('retweets')}", file=sys.stderr)
+                    retweets = 0
+
+                try:
+                    favorites = int(row['favorites']) if row['favorites'] else 0
+                except ValueError:
+                    print(f"Warning: Invalid favorites value for tweet {row.get('id')}: {row.get('favorites')}", file=sys.stderr)
+                    favorites = 0
+
                 tweet = {
                     'id': row['id'],
                     'content': row['content'],
                     'date': row['date'],
                     'url': row['link'],
-                    'retweets': int(row['retweets']) if row['retweets'] else 0,
-                    'favorites': int(row['favorites']) if row['favorites'] else 0,
+                    'retweets': retweets,
+                    'favorites': favorites,
                 }
                 tweets.append(tweet)
-            except (ValueError, KeyError) as e:
-                print(f"Warning: Skipping malformed tweet row: {e}", file=sys.stderr)
+            except KeyError as e:
+                print(f"Warning: Skipping tweet row missing field: {e}", file=sys.stderr)
                 continue
 
     return tweets
 
 
-def generate_tweet_embeddings(client: OpenAI, tweets: List[Dict]) -> Dict:
+def generate_tweet_embeddings(client: OpenAI, tweets: List[Dict]) -> Dict[str, List[float]]:
     """
     Generate embeddings for all dril tweets.
 
@@ -160,6 +182,7 @@ def generate_tweet_embeddings(client: OpenAI, tweets: List[Dict]) -> Dict:
 
     embeddings = {}
     batch_size = 100
+    failed_batches = []
 
     for i in range(0, len(tweets), batch_size):
         batch = tweets[i:i + batch_size]
@@ -184,13 +207,21 @@ def generate_tweet_embeddings(client: OpenAI, tweets: List[Dict]) -> Dict:
 
         except Exception as e:
             print(f"  ✗ Error generating embeddings for batch: {e}", file=sys.stderr)
+            failed_batches.append((i+1, batch_end, str(e)))
             # Continue with remaining batches
+
+    if failed_batches:
+        print(f"\n⚠ Warning: {len(failed_batches)} batch(es) failed:", file=sys.stderr)
+        for start, end, error in failed_batches[:5]:
+            print(f"  - Tweets {start}-{end}: {error}", file=sys.stderr)
+        if len(failed_batches) > 5:
+            print(f"  ... and {len(failed_batches) - 5} more", file=sys.stderr)
 
     print(f"✓ Generated {len(embeddings)} tweet embeddings")
     return embeddings
 
 
-def save_tweet_embeddings(embeddings: Dict, tweets: List[Dict], output_file: str):
+def save_tweet_embeddings(embeddings: Dict[str, List[float]], tweets: List[Dict], output_file: str) -> None:
     """Save tweet embeddings to cache file"""
     data = {
         'model': 'text-embedding-3-small',
@@ -200,18 +231,18 @@ def save_tweet_embeddings(embeddings: Dict, tweets: List[Dict], output_file: str
         'embeddings': embeddings
     }
 
-    with open(output_file, 'w') as f:
+    with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2)
 
     print(f"✓ Saved embeddings to {output_file}")
 
 
-def load_tweet_embeddings() -> Dict:
+def load_tweet_embeddings() -> Optional[Dict[str, List[float]]]:
     """Load tweet embeddings from cache file"""
     if not os.path.exists(DRIL_EMBEDDINGS_FILE):
         return None
 
-    with open(DRIL_EMBEDDINGS_FILE, 'r') as f:
+    with open(DRIL_EMBEDDINGS_FILE, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
     return data['embeddings']
@@ -371,23 +402,24 @@ def match_tweets_to_cards(
     # Get card processing order
     card_order = get_card_processing_order(cards)
 
+    # Build embedding index for O(1) lookup instead of O(n) search
+    embedding_index = {}
+    for emb_data in card_embeddings:
+        key = (emb_data['card_name'], emb_data['position'],
+               emb_data.get('interpretation_system', 'combined'))
+        embedding_index[key] = emb_data['embedding']
+
     # Process each card
     for card_name in card_order:
         matches[card_name] = {}
 
         # Process upright, then reversed
         for position in ['upright', 'reversed']:
-            # Find card embedding for this system and position
-            card_embedding = None
-            for emb_data in card_embeddings:
-                if (emb_data['card_name'] == card_name and
-                    emb_data['position'] == position and
-                    emb_data.get('interpretation_system', 'combined') == system):
-                    card_embedding = emb_data['embedding']
-                    break
+            # Find card embedding for this system and position using index
+            card_embedding = embedding_index.get((card_name, position, system))
 
             if card_embedding is None:
-                print(f"✗ No embedding found for {card_name} ({position}, {system})")
+                print(f"✗ No embedding found for {card_name} ({position}, {system})", file=sys.stderr)
                 continue
 
             # Find best matching tweet
@@ -454,7 +486,7 @@ def match_tweets_to_cards(
     return matches
 
 
-def save_results(matches: Dict, output_file: str, system: str, min_retweets: int, popularity_weight: float):
+def save_results(matches: Dict, output_file: str, system: str, min_retweets: int, popularity_weight: float) -> None:
     """Save matching results to JSON file"""
     # Count matches
     total_matches = sum(len(positions) for positions in matches.values())
@@ -471,14 +503,14 @@ def save_results(matches: Dict, output_file: str, system: str, min_retweets: int
         'cards': matches
     }
 
-    with open(output_file, 'w') as f:
+    with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2)
 
     print(f"\n✓ Matched {total_matches} cards to unique tweets")
     print(f"✓ Saved to {output_file}")
 
 
-def main():
+def main() -> None:
     """Main execution"""
     parser = argparse.ArgumentParser(
         description='Match dril tweets to tarot cards using semantic similarity',
