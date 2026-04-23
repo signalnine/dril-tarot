@@ -1,23 +1,36 @@
-# CONTRACT: Missing-screenshot resilience in gallery generation
+# CONTRACT: Preserve tweet-card rounded corners in gallery composite
 
-Tracks bd issue `dril-tarot-qnk`.
+Tracks bd issue `dril-tarot-892`.
 
 ## Problem
 
-`generate_tweet_screenshots()` catches per-card exceptions and prints a warning, but leaves the `(card_name, position)` key absent from the returned dict. Its consumer `generate_gallery_images()` then does `screenshots[(card_name, position)]` without a guard, so one failed screenshot raises `KeyError` and aborts the whole gallery run. Same hazard applies to a partially-populated cached screenshots file loaded by `load_cached_screenshots()`.
+`composite_tweet_on_card()` calls `card.paste(tweet_img, (x, y))` with an RGBA
+tweet screenshot and an RGB card. Without a mask, PIL copies the source RGB
+values and drops the alpha channel, so transparent pixels around the tweet
+card's `border-radius` corners (alpha=0) get pasted as solid RGB. The result
+is a visible rectangular patch painted over the tarot card exactly where the
+rounded corners should let the card show through.
 
 ## Behaviors required
 
-- [x] When a `(card_name, position)` has no entry in the `screenshots` dict, `generate_gallery_images()` logs a warning to stderr identifying the card and position, and skips that gallery image.
-- [x] After skipping a missing screenshot, `generate_gallery_images()` continues processing the remaining cards.
-- [x] When all screenshots are present, behavior is unchanged: all images are generated.
+- [x] When the tweet screenshot has transparent pixels (RGBA), those pixels
+      must not overwrite the tarot card beneath; the card's colors must remain
+      visible in those positions.
+- [x] When the tweet screenshot has opaque pixels, they continue to replace
+      the card beneath unchanged (the tweet body still appears over the card).
+- [x] Non-RGBA tweet screenshots (e.g. RGB PNG without alpha) continue to
+      composite correctly without regression.
 
 ## Verification
 
-- [x] New test `tests/test_missing_screenshot.py` invokes `generate_gallery_images` with a screenshots dict that intentionally omits one key, and asserts:
-  - no exception is raised,
-  - the remaining card still reaches the save path,
-  - a warning mentioning the missing card+position is printed to stderr.
-- [x] Test fails on current `main` (confirmed: `KeyError: ('The Fool', 'upright')`).
+- [x] New test `tests/test_transparent_composite.py` builds an RGBA tweet image
+      with a distinct colored border-radius corner region (alpha=0), composites
+      it onto a uniformly colored RGB card via `composite_tweet_on_card`, and
+      asserts:
+      - a pixel inside a transparent corner retains the card's color,
+      - a pixel inside the opaque tweet body matches the tweet body color,
+      - no exception is raised.
+- [x] Test fails on current `main` (transparent corner pixel equals the tweet
+      RGB value rather than the card color).
 - [x] Test passes after fix.
-- [x] Existing scripts still import cleanly (`python3 -c "import generate_dril_tarot_images"`).
+- [x] Pre-existing `tests/test_missing_screenshot.py` still passes.

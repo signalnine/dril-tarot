@@ -499,8 +499,14 @@ def composite_tweet_on_card(
     x = (card_width - tweet_width) // 2
     y = (card_height - tweet_height) // 2
 
-    # Paste tweet onto card (opaque)
-    card.paste(tweet_img, (x, y))
+    # Paste tweet onto card. If the tweet PNG has an alpha channel (it
+    # usually does: the CSS border-radius creates transparent corners), use
+    # it as the paste mask so those corners let the tarot card show through
+    # rather than being painted as opaque RGB.
+    if tweet_img.mode in ('RGBA', 'LA'):
+        card.paste(tweet_img, (x, y), tweet_img)
+    else:
+        card.paste(tweet_img, (x, y))
 
     return card
 
