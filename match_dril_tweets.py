@@ -27,7 +27,7 @@ import csv
 import argparse
 import numpy as np
 from typing import List, Dict, Tuple, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 from openai import OpenAI
 
 try:
@@ -226,7 +226,7 @@ def save_tweet_embeddings(embeddings: Dict[str, List[float]], tweets: List[Dict]
     data = {
         'model': 'text-embedding-3-small',
         'dimension': 1536,
-        'generated_at': datetime.utcnow().isoformat() + 'Z',
+        'generated_at': datetime.now(timezone.utc).isoformat(timespec='microseconds').replace('+00:00', 'Z'),
         'total_tweets': len(embeddings),
         'embeddings': embeddings
     }
@@ -493,7 +493,7 @@ def save_results(matches: Dict, output_file: str, system: str, min_retweets: int
 
     output = {
         'metadata': {
-            'generated_at': datetime.utcnow().isoformat() + 'Z',
+            'generated_at': datetime.now(timezone.utc).isoformat(timespec='microseconds').replace('+00:00', 'Z'),
             'interpretation_system': system,
             'min_retweets': min_retweets,
             'popularity_weight': popularity_weight,
