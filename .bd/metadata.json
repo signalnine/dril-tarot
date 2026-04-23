@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "dril_tarot",
+  "project_id": "cad4d18e-0e90-4ff6-909c-3d371de54528"
+}

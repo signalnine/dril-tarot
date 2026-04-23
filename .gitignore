@@ -27,3 +27,5 @@ gallery/
 *.swp
 *.swo
 data/tweet_screenshots_cache.json
+.dolt/
+*.db
