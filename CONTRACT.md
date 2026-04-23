@@ -1,36 +1,39 @@
-# CONTRACT: Preserve tweet-card rounded corners in gallery composite
+# CONTRACT: Flatten palette-mode PNG transparency onto white in avatar encoder
 
-Tracks bd issue `dril-tarot-892`.
+Tracks bd issue `dril-tarot-7hr`.
 
 ## Problem
 
-`composite_tweet_on_card()` calls `card.paste(tweet_img, (x, y))` with an RGBA
-tweet screenshot and an RGB card. Without a mask, PIL copies the source RGB
-values and drops the alpha channel, so transparent pixels around the tweet
-card's `border-radius` corners (alpha=0) get pasted as solid RGB. The result
-is a visible rectangular patch painted over the tarot card exactly where the
-rounded corners should let the card show through.
+`utils/download_dril_avatar.py::image_to_base64` resizes the source image,
+then flattens `RGBA`/`LA` inputs onto a white background before JPEG encoding.
+Every other mode falls through to a bare `Image.convert('RGB')`. Palette-mode
+(`P`) PNGs whose transparency is declared via the `transparency` info key
+carry no alpha channel, so a direct RGB conversion paints transparent pixels
+with whatever palette color sits at the transparent index. The resulting
+avatar has stray color smears where the source intended transparency.
+
+The sibling downloader `download_tarot_cards.py` already handles this case
+correctly by routing `P` through `RGBA` first -- the two files diverged.
 
 ## Behaviors required
 
-- [x] When the tweet screenshot has transparent pixels (RGBA), those pixels
-      must not overwrite the tarot card beneath; the card's colors must remain
-      visible in those positions.
-- [x] When the tweet screenshot has opaque pixels, they continue to replace
-      the card beneath unchanged (the tweet body still appears over the card).
-- [x] Non-RGBA tweet screenshots (e.g. RGB PNG without alpha) continue to
-      composite correctly without regression.
+- [x] Palette-mode PNG with a declared transparent index is flattened onto
+      the white background, matching the RGBA/LA behavior.
+- [x] Opaque palette pixels still render as their palette RGB after encoding.
+- [x] Pre-existing RGBA and LA handling continues to work without regression.
+- [x] Plain RGB inputs are unaffected.
 
 ## Verification
 
-- [x] New test `tests/test_transparent_composite.py` builds an RGBA tweet image
-      with a distinct colored border-radius corner region (alpha=0), composites
-      it onto a uniformly colored RGB card via `composite_tweet_on_card`, and
-      asserts:
-      - a pixel inside a transparent corner retains the card's color,
-      - a pixel inside the opaque tweet body matches the tweet body color,
-      - no exception is raised.
-- [x] Test fails on current `main` (transparent corner pixel equals the tweet
-      RGB value rather than the card color).
-- [x] Test passes after fix.
-- [x] Pre-existing `tests/test_missing_screenshot.py` still passes.
+- [x] `tests/test_avatar_base64.py::test_p_mode_transparent_region_becomes_white`
+      builds a 48x48 P-mode PNG whose left half uses a transparent palette
+      index and asserts the center of that half encodes to near-white after
+      a round-trip through `image_to_base64`.
+- [x] `test_p_mode_opaque_region_is_preserved` asserts the opaque right half
+      still renders as the palette red.
+- [x] `test_rgba_transparent_region_still_flattens_onto_white` locks in the
+      pre-existing RGBA code path.
+- [x] Failing-test run on unfixed code showed `(0, 255, 1)` at the transparent
+      sample point (palette green bleed-through); fixed run returns near-white.
+- [x] Pre-existing `tests/test_missing_screenshot.py` and
+      `tests/test_transparent_composite.py` still pass.

@@ -19,8 +19,14 @@ def image_to_base64(image_path: str) -> str:
     img = Image.open(image_path)
     img = img.resize((48, 48), Image.Resampling.LANCZOS)
 
-    # Convert to RGB if necessary
-    if img.mode in ('RGBA', 'LA'):
+    # Flatten any transparency onto a white background before writing JPEG.
+    # Palette ('P') PNGs carry transparency via the info['transparency'] key
+    # rather than a dedicated alpha channel; converting straight to RGB
+    # would paint the transparent index with its palette color instead of
+    # letting the background show through, so route P through RGBA first.
+    if img.mode in ('RGBA', 'LA', 'P'):
+        if img.mode == 'P':
+            img = img.convert('RGBA')
         background = Image.new('RGB', img.size, (255, 255, 255))
         background.paste(img, mask=img.split()[-1])
         img = background
