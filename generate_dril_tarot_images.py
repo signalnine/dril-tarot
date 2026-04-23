@@ -557,12 +557,21 @@ def generate_gallery_images(
             print(f"[{i}/{len(cards)}] {card_name} ({position}) - skipped (exists)")
             continue
 
+        # Get tweet screenshot; may be absent if an earlier screenshot step
+        # failed (generate_tweet_screenshots logs and continues) or if the
+        # cache file is incomplete. Skip rather than aborting the whole run.
+        screenshot_bytes = screenshots.get((card_name, position))
+        if screenshot_bytes is None:
+            print(
+                f"[{i}/{len(cards)}] {card_name} ({position}) - skipped "
+                f"(no screenshot available)",
+                file=sys.stderr,
+            )
+            continue
+
         # Get card image path
         card_image_filename = sanitize_filename(card_name) + '.jpg'
         card_image_path = os.path.join(cards_dir, card_image_filename)
-
-        # Get tweet screenshot
-        screenshot_bytes = screenshots[(card_name, position)]
 
         # Composite
         composite = composite_tweet_on_card(
