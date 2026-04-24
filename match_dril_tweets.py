@@ -592,13 +592,19 @@ Examples:
         print(f"✓ Loaded {len(tweets)} dril tweets")
 
         # Load or generate tweet embeddings
-        if args.regenerate_embeddings or not os.path.exists(DRIL_EMBEDDINGS_FILE):
-            tweet_embeddings = generate_tweet_embeddings(client, tweets)
-            save_tweet_embeddings(tweet_embeddings, tweets, DRIL_EMBEDDINGS_FILE)
-        else:
+        tweet_embeddings = None
+        if not args.regenerate_embeddings and os.path.exists(DRIL_EMBEDDINGS_FILE):
             print("\nLoading cached tweet embeddings...")
             tweet_embeddings = load_tweet_embeddings()
-            print(f"✓ Loaded {len(tweet_embeddings)} cached embeddings")
+            if tweet_embeddings is not None:
+                print(f"✓ Loaded {len(tweet_embeddings)} cached embeddings")
+
+        # Regenerate when the user asked, when no cache exists, or when
+        # the cache failed to load (load_tweet_embeddings returns None
+        # on corruption and already warns to stderr).
+        if tweet_embeddings is None:
+            tweet_embeddings = generate_tweet_embeddings(client, tweets)
+            save_tweet_embeddings(tweet_embeddings, tweets, DRIL_EMBEDDINGS_FILE)
 
         # Match tweets to cards
         matches = match_tweets_to_cards(

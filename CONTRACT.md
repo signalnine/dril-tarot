@@ -1,43 +1,49 @@
-# CONTRACT: Harden load_tweet_embeddings against corrupt cache
+# CONTRACT: main() must regenerate embeddings when cache load returns None
 
-Tracks bd issue `dril-tarot-6a4`.
+Tracks bd issue `dril-tarot-dnj`.
 
 ## Problem
 
-`match_dril_tweets.py::load_tweet_embeddings` assumes the cache file is
-always well-formed. If `data/dril_tweet_embeddings.json` is truncated,
-invalid JSON, or missing the top-level `embeddings` key, the helper raises
-`json.JSONDecodeError`, `KeyError`, or `OSError`; none are caught, so the
-entire script aborts with a traceback from `main`'s generic handler. The
-cache is ~370MB, and corruption is plausible (killed write, disk full,
-partial download). The sibling helper `load_cached_screenshots` in
-`generate_dril_tarot_images.py` already handles this case by warning and
-returning `None`, which lets the caller fall back to regeneration.
-`load_tweet_embeddings` must behave the same way.
+The earlier fix (commit 270ef6f) made `load_tweet_embeddings()` return
+`None` on a missing or corrupt cache, with the intent that the caller
+would fall through to regeneration. But the caller in `main()` does not
+handle `None`:
+
+```python
+else:
+    print("\nLoading cached tweet embeddings...")
+    tweet_embeddings = load_tweet_embeddings()
+    print(f"✓ Loaded {len(tweet_embeddings)} cached embeddings")
+```
+
+When the cache is corrupt, `load_tweet_embeddings()` returns `None`
+(with a stderr warning), then `len(None)` raises `TypeError` and the
+script aborts. Same outcome as before the fix, just one frame deeper.
+The "degrades to regenerate from scratch" promise in the helper's
+docstring is not actually delivered end-to-end.
 
 ## Behaviors required
 
-- [x] Non-existent cache file: `load_tweet_embeddings()` returns `None`
-      (pre-existing behavior, must not regress).
-- [x] Cache file containing invalid JSON: returns `None` and writes a
-      warning to stderr mentioning the failure.
-- [x] Cache file containing valid JSON but no `embeddings` key: returns
-      `None` and writes a warning to stderr.
-- [x] Cache file containing a valid payload: returns the `embeddings`
-      dict (pre-existing behavior, must not regress).
+- [x] When `load_tweet_embeddings()` returns `None` in `main()` (cache
+      file present but corrupt), `main()` must regenerate embeddings via
+      `generate_tweet_embeddings()` and persist them via
+      `save_tweet_embeddings()`, just like the `--regenerate-embeddings`
+      / missing-file branch.
+- [x] When the cache loads successfully, behavior is unchanged: log the
+      count of loaded embeddings and proceed.
 - [x] Pre-existing tests in `tests/` continue to pass.
 
 ## Verification
 
-- [x] `tests/test_corrupted_embeddings_cache.py::test_invalid_json_returns_none_with_warning`
-      writes garbage bytes to the cache path, patches
-      `DRIL_EMBEDDINGS_FILE`, and asserts `None` + stderr warning.
-- [x] `test_missing_embeddings_key_returns_none_with_warning` writes a
-      valid JSON object with no `embeddings` key and asserts the same.
-- [x] `test_valid_cache_roundtrips` writes a valid payload and asserts
-      the returned dict equals the embeddings dict (no regression).
-- [x] `test_missing_cache_returns_none` (no file at path) returns `None`
-      silently (no stderr noise).
-- [x] All four new tests fail on unfixed code for the corrupt-cache
-      paths and pass after the fix.
-- [x] Full `pytest tests/` reports 12/12 passing (8 existing + 4 new).
+- [x] New test `tests/test_main_corrupt_cache_regenerates.py` patches
+      `DRIL_EMBEDDINGS_FILE` to a corrupt file, stubs the OpenAI client
+      and `generate_tweet_embeddings` / `save_tweet_embeddings`, runs
+      `main()`, and asserts:
+      - `main()` returns normally (no `TypeError`, no `SystemExit` from
+        the catch-all).
+      - `generate_tweet_embeddings` was called.
+      - `save_tweet_embeddings` was called.
+- [x] Test fails on unfixed code with a `TypeError: object of type
+      'NoneType' has no len()`.
+- [x] Test passes after the fix.
+- [x] `pytest tests/` reports all tests passing (13/13: 12 existing + 1 new).
