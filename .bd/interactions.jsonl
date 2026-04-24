@@ -23,3 +23,8 @@
 {"id":"int-cb2c651e","kind":"field_change","created_at":"2026-04-23T19:00:36.47691384Z","actor":"Gabe Ortiz","issue_id":"dril-tarot-dyd.3","extra":{"field":"status","new_value":"in_progress","old_value":"open"}}
 {"id":"int-8e5d329a","kind":"field_change","created_at":"2026-04-23T19:00:54.381299919Z","actor":"Gabe Ortiz","issue_id":"dril-tarot-dyd.3","extra":{"field":"status","new_value":"closed","old_value":"in_progress"}}
 {"id":"int-b42f2ecf","kind":"field_change","created_at":"2026-04-23T19:00:54.795370675Z","actor":"Gabe Ortiz","issue_id":"dril-tarot-dyd","extra":{"field":"status","new_value":"closed","old_value":"open"}}
+{"id":"int-b4b0d48d","kind":"field_change","created_at":"2026-04-24T14:35:59.143791612Z","actor":"Gabe Ortiz","issue_id":"dril-tarot-6a4.1","extra":{"field":"status","new_value":"in_progress","old_value":"open"}}
+{"id":"int-74587459","kind":"field_change","created_at":"2026-04-24T14:36:27.480756608Z","actor":"Gabe Ortiz","issue_id":"dril-tarot-6a4.1","extra":{"field":"status","new_value":"closed","old_value":"in_progress"}}
+{"id":"int-fc6a7a9d","kind":"field_change","created_at":"2026-04-24T14:36:27.907450443Z","actor":"Gabe Ortiz","issue_id":"dril-tarot-6a4.2","extra":{"field":"status","new_value":"in_progress","old_value":"open"}}
+{"id":"int-57bbd850","kind":"field_change","created_at":"2026-04-24T14:36:49.087564032Z","actor":"Gabe Ortiz","issue_id":"dril-tarot-6a4.2","extra":{"field":"status","new_value":"closed","old_value":"in_progress"}}
+{"id":"int-c5afc983","kind":"field_change","created_at":"2026-04-24T14:36:49.527252079Z","actor":"Gabe Ortiz","issue_id":"dril-tarot-6a4.3","extra":{"field":"status","new_value":"in_progress","old_value":"open"}}

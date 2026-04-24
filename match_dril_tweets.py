@@ -238,14 +238,27 @@ def save_tweet_embeddings(embeddings: Dict[str, List[float]], tweets: List[Dict]
 
 
 def load_tweet_embeddings() -> Optional[Dict[str, List[float]]]:
-    """Load tweet embeddings from cache file"""
+    """Load tweet embeddings from cache file.
+
+    Returns None on both "no cache file" and "cache is corrupt" so the
+    caller can fall through to regenerating from OpenAI rather than
+    aborting the whole run on a bad ~370MB file. Corruption warns to
+    stderr; absence is silent (cache priming on first run is expected).
+    """
     if not os.path.exists(DRIL_EMBEDDINGS_FILE):
         return None
 
-    with open(DRIL_EMBEDDINGS_FILE, 'r', encoding='utf-8') as f:
-        data = json.load(f)
-
-    return data['embeddings']
+    try:
+        with open(DRIL_EMBEDDINGS_FILE, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return data['embeddings']
+    except (json.JSONDecodeError, OSError, KeyError, TypeError) as e:
+        print(
+            f"Warning: Failed to load tweet embeddings cache "
+            f"({DRIL_EMBEDDINGS_FILE}): {e}. Will regenerate.",
+            file=sys.stderr,
+        )
+        return None
 
 
 def cosine_similarity(vec1: List[float], vec2: List[float]) -> float:
