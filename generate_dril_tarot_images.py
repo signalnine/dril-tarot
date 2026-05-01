@@ -345,82 +345,22 @@ def sanitize_filename(name: str) -> str:
 
 def download_rws_cards(output_dir: str) -> bool:
     """
-    Download public domain Rider-Waite Smith tarot card images.
+    Download public domain Rider-Waite Smith tarot card images from
+    Internet Archive.
 
-    Provides clear instructions for manual download from reliable sources.
-    Automatic download is challenging due to anti-hotlinking protections.
+    Delegates to download_tarot_cards.download_cards, which fetches the 1909
+    Pamela Colman Smith illustrations directly. The earlier implementation
+    only printed manual-download instructions and blocked on input(), which
+    contradicted the --download-cards flag's name.
 
     Args:
         output_dir: Directory to save card images
 
     Returns:
-        True if successful, False otherwise
+        True if all 78 cards were downloaded (or already cached), else False.
     """
-    print("\n" + "=" * 70)
-    print("TAROT CARD DOWNLOAD INSTRUCTIONS")
-    print("=" * 70)
-    print()
-    print("Due to anti-hotlinking protections, automatic download is not reliable.")
-    print("Please download the public domain Rider-Waite Smith cards manually.")
-    print()
-    print("RECOMMENDED SOURCE:")
-    print("  Internet Archive (high quality, 400+ DPI)")
-    print("  https://archive.org/details/rider-waite-tarot")
-    print()
-    print("ALTERNATIVE SOURCES:")
-    print("  1. Itch.io (CC0, cleaned scans)")
-    print("     https://luciellaes.itch.io/rider-waite-smith-tarot-cards-cc0")
-    print()
-    print("  2. Sacred Texts")
-    print("     https://sacred-texts.com/tarot/pkt/index.htm")
-    print()
-    print("  3. Wikimedia Commons (individual files)")
-    print("     https://commons.wikimedia.org/wiki/Category:Rider-Waite_tarot_deck")
-    print()
-    print(f"SAVE LOCATION: {output_dir}/")
-    print()
-    print("FILE NAMING CONVENTION:")
-    print("  - the-fool.jpg")
-    print("  - the-magician.jpg")
-    print("  - ace-of-wands.jpg")
-    print("  - two-of-cups.jpg")
-    print("  - king-of-pentacles.jpg")
-    print("  etc. (lowercase, hyphens, no position suffix)")
-    print()
-    print("You need all 78 cards:")
-    print("  - 22 Major Arcana (The Fool through The World)")
-    print("  - 56 Minor Arcana (Ace-King in Wands, Cups, Swords, Pentacles)")
-    print()
-    print("=" * 70)
-    print()
-
-    # Create output directory
-    os.makedirs(output_dir, exist_ok=True)
-
-    # Check if user wants to continue
-    response = input("Have you downloaded the cards? (yes/no): ").strip().lower()[:10]
-
-    if response in ['yes', 'y']:
-        # Verify cards are present
-        print("\nVerifying downloaded cards...")
-        cards_ok, missing = verify_card_images(output_dir)
-
-        if cards_ok:
-            print("✓ All 78 cards found!")
-            return True
-        else:
-            print(f"\n✗ Still missing {len(missing)} cards:")
-            for card in missing[:10]:
-                filename = sanitize_filename(card) + '.jpg'
-                print(f"  - {card} → {filename}")
-            if len(missing) > 10:
-                print(f"  ... and {len(missing) - 10} more")
-            print()
-            print("Please download the missing cards and run again.")
-            return False
-    else:
-        print("\nPlease download the cards first, then run this script again.")
-        return False
+    import download_tarot_cards
+    return download_tarot_cards.download_cards(output_dir=output_dir)
 
 
 def verify_card_images(cards_dir: str) -> Tuple[bool, List[str]]:
@@ -579,18 +519,28 @@ def generate_gallery_images(
         card_image_filename = sanitize_filename(card_name) + '.jpg'
         card_image_path = os.path.join(cards_dir, card_image_filename)
 
-        # Composite
-        composite = composite_tweet_on_card(
-            card_image_path,
-            screenshot_bytes,
-            card_name,
-            position
-        )
+        # Composite + save. Per-card failures (corrupt card image, unexpected
+        # PIL mode, transient disk error) must not abort the whole run -- the
+        # cached-screenshots phase has already succeeded by this point and
+        # the user has invested setup time. Mirror generate_tweet_screenshots'
+        # log-and-continue pattern.
+        try:
+            composite = composite_tweet_on_card(
+                card_image_path,
+                screenshot_bytes,
+                card_name,
+                position
+            )
 
-        # Save with PNG-specific compression parameters
-        # compress_level=6: default compression (0-9, higher = smaller file but slower)
-        # optimize=True: enables PNG optimization for smaller file size
-        composite.save(output_path, 'PNG', compress_level=6, optimize=True)
+            # compress_level=6: default compression (0-9, higher = smaller file but slower)
+            # optimize=True: enables PNG optimization for smaller file size
+            composite.save(output_path, 'PNG', compress_level=6, optimize=True)
+        except Exception as e:
+            print(
+                f"[{i}/{len(cards)}] {card_name} ({position}) - failed: {e}",
+                file=sys.stderr,
+            )
+            continue
 
         print(f"[{i}/{len(cards)}] {card_name} ({position}) → {output_filename}")
 

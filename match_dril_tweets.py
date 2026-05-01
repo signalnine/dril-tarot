@@ -222,12 +222,19 @@ def generate_tweet_embeddings(client: OpenAI, tweets: List[Dict]) -> Dict[str, L
 
 
 def save_tweet_embeddings(embeddings: Dict[str, List[float]], tweets: List[Dict], output_file: str) -> None:
-    """Save tweet embeddings to cache file"""
+    """Save tweet embeddings to cache file.
+
+    total_tweets reflects the INPUT tweet count; embedded_count reflects how
+    many actually got embeddings. They differ when some batches in
+    generate_tweet_embeddings fail and are logged-and-skipped -- without a
+    distinct input count, partial failures are invisible after the fact.
+    """
     data = {
         'model': 'text-embedding-3-small',
         'dimension': 1536,
         'generated_at': datetime.now(timezone.utc).isoformat(timespec='microseconds').replace('+00:00', 'Z'),
-        'total_tweets': len(embeddings),
+        'total_tweets': len(tweets),
+        'embedded_count': len(embeddings),
         'embeddings': embeddings
     }
 
