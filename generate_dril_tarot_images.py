@@ -20,6 +20,11 @@ from playwright.sync_api import sync_playwright
 import requests
 from urllib.parse import quote
 
+# sanitize_filename has a single canonical definition in download_tarot_cards
+# so a fix or extension (length caps, non-ASCII handling, etc.) cannot drift
+# between the writer (downloader) and the reader (gallery + verifier).
+from download_tarot_cards import sanitize_filename
+
 # Configuration
 CARD_MAPPING_FILE = 'data/card_dril_mapping.json'
 SEMANTIC_TAROT_DIR = 'semantic-tarot'
@@ -235,19 +240,36 @@ def screenshot_tweet(page, tweet_data: Dict) -> bytes:
     return screenshot_bytes
 
 
-def generate_tweet_screenshots(mapping: Dict) -> Dict[Tuple[str, str], bytes]:
+def generate_tweet_screenshots(
+    mapping: Dict,
+    only_for: Optional[List[Tuple[str, str]]] = None,
+) -> Dict[Tuple[str, str], bytes]:
     """
-    Generate all tweet screenshots using Playwright.
+    Generate tweet screenshots using Playwright.
 
     Args:
         mapping: Card mapping data
+        only_for: Optional list of (card_name, position) pairs to render.
+            When provided, only those entries are produced; the rest of
+            the mapping is left alone. Used by callers that already have
+            a (partially) fresh cache and only need the stale entries
+            regenerated, rather than reflowing all 156 cards.
 
     Returns:
         Dict mapping (card_name, position) -> screenshot PNG bytes
     """
     screenshots = {}
 
-    print("\nGenerating tweet screenshots...")
+    if only_for is None:
+        targets = get_card_processing_order(mapping)
+    else:
+        targets = list(only_for)
+
+    if not targets:
+        print(f"\n✓ No tweet screenshots to generate (cache is fully fresh)")
+        return screenshots
+
+    print(f"\nGenerating tweet screenshots ({len(targets)} entries)...")
 
     try:
         with sync_playwright() as p:
@@ -256,9 +278,7 @@ def generate_tweet_screenshots(mapping: Dict) -> Dict[Tuple[str, str], bytes]:
             try:
                 page = browser.new_page(viewport={'width': VIEWPORT_WIDTH, 'height': VIEWPORT_HEIGHT})
 
-                # Process each card
-                cards = get_card_processing_order(mapping)
-                for i, (card_name, position) in enumerate(cards, 1):
+                for i, (card_name, position) in enumerate(targets, 1):
                     tweet_data = mapping['cards'][card_name][position]
 
                     try:
@@ -268,7 +288,7 @@ def generate_tweet_screenshots(mapping: Dict) -> Dict[Tuple[str, str], bytes]:
 
                         # Progress - show every 10 screenshots
                         if i % 10 == 0:
-                            print(f"  Progress: {i}/{len(cards)} tweets...")
+                            print(f"  Progress: {i}/{len(targets)} tweets...")
                     except Exception as e:
                         print(f"  ✗ Failed {card_name} ({position}): {e}", file=sys.stderr)
                         # Continue with others
@@ -284,27 +304,63 @@ def generate_tweet_screenshots(mapping: Dict) -> Dict[Tuple[str, str], bytes]:
     return screenshots
 
 
-def cache_screenshots(screenshots: Dict[Tuple[str, str], bytes]) -> None:
-    """Cache tweet screenshots to disk"""
+def _mapping_tweet_id(mapping: Dict, card_name: str, position: str) -> Optional[str]:
+    """Pull the tweet_id for a (card, position) out of a mapping dict."""
+    try:
+        return mapping['cards'][card_name][position].get('tweet_id')
+    except (KeyError, AttributeError, TypeError):
+        return None
+
+
+def cache_screenshots(
+    screenshots: Dict[Tuple[str, str], bytes],
+    mapping: Optional[Dict] = None,
+) -> None:
+    """Cache tweet screenshots to disk, tagged by tweet_id.
+
+    Each entry stores the tweet_id from the current mapping alongside the
+    PNG bytes. On reload, any entry whose stored tweet_id no longer matches
+    the active mapping is treated as stale -- so changing --system,
+    --min-retweets, or hand-editing card_dril_mapping.json invalidates only
+    the affected screenshots instead of silently serving the previous run's
+    images for the new card-tweet assignments.
+    """
     import base64
 
-    # Convert to serializable format
     cache_data = {}
     for (card_name, position), screenshot_bytes in screenshots.items():
         key = f"{card_name}|{position}"
-        cache_data[key] = base64.b64encode(screenshot_bytes).decode('utf-8')
+        tweet_id = _mapping_tweet_id(mapping, card_name, position) if mapping else None
+        cache_data[key] = {
+            'tweet_id': tweet_id,
+            'data': base64.b64encode(screenshot_bytes).decode('utf-8'),
+        }
 
-    # Ensure data directory exists
     os.makedirs(os.path.dirname(TWEET_SCREENSHOTS_CACHE), exist_ok=True)
 
-    with open(TWEET_SCREENSHOTS_CACHE, 'w', encoding='utf-8') as f:
+    # Atomic write: don't truncate a previous valid cache if json.dump fails
+    # halfway through.
+    tmp = TWEET_SCREENSHOTS_CACHE + '.tmp'
+    with open(tmp, 'w', encoding='utf-8') as f:
         json.dump(cache_data, f)
+    os.replace(tmp, TWEET_SCREENSHOTS_CACHE)
 
     print(f"✓ Cached {len(screenshots)} screenshots to {TWEET_SCREENSHOTS_CACHE}")
 
 
-def load_cached_screenshots() -> Optional[Dict[Tuple[str, str], bytes]]:
-    """Load cached screenshots"""
+def load_cached_screenshots(
+    mapping: Optional[Dict] = None,
+) -> Optional[Dict[Tuple[str, str], bytes]]:
+    """Load cached screenshots, filtering stale entries against `mapping`.
+
+    Cache schema is `{ "<card>|<position>": {"tweet_id": str, "data": b64} }`.
+    Older caches that store `{ "<card>|<position>": "<b64>" }` directly
+    have no tweet_id sidecar -- they cannot be validated, so they are
+    treated as fully stale and an empty dict is returned (callers will
+    regenerate). When `mapping` is None, freshness cannot be checked and
+    only the entries that have a stored tweet_id are returned (still as
+    bytes).
+    """
     import base64
 
     if not os.path.exists(TWEET_SCREENSHOTS_CACHE):
@@ -313,34 +369,60 @@ def load_cached_screenshots() -> Optional[Dict[Tuple[str, str], bytes]]:
     try:
         with open(TWEET_SCREENSHOTS_CACHE, 'r', encoding='utf-8') as f:
             cache_data = json.load(f)
-
-        screenshots = {}
-        for key, b64_data in cache_data.items():
-            parts = key.split('|', 1)  # Split on first occurrence only
-            if len(parts) != 2:
-                print(f"Warning: Invalid cache key format: {key}", file=sys.stderr)
-                continue
-            card_name, position = parts
-            screenshots[(card_name, position)] = base64.b64decode(b64_data)
-
-        return screenshots
-    except (json.JSONDecodeError, ValueError, KeyError) as e:
+    except (json.JSONDecodeError, ValueError) as e:
         print(f"Warning: Failed to load screenshot cache: {e}", file=sys.stderr)
         return None
 
+    screenshots: Dict[Tuple[str, str], bytes] = {}
+    stale_count = 0
+    legacy_count = 0
+    for key, entry in cache_data.items():
+        parts = key.split('|', 1)
+        if len(parts) != 2:
+            print(f"Warning: Invalid cache key format: {key}", file=sys.stderr)
+            continue
+        card_name, position = parts
 
-def sanitize_filename(name: str) -> str:
-    """Convert card name to safe filename"""
-    # Remove null bytes
-    name = name.replace('\0', '')
-    # Replace dangerous characters
-    sanitized = name.lower().replace(' ', '-').replace('/', '-')
-    # Remove leading/trailing dots and path separators
-    sanitized = sanitized.strip('.-_')
-    # Prevent directory traversal
-    sanitized = sanitized.replace('..', '')
-    # Limit length
-    return sanitized[:255]
+        # Legacy format: bare base64 string with no tweet_id metadata. We
+        # can't tell whether this was rendered for the current mapping or
+        # an older one, so refuse to serve it.
+        if not isinstance(entry, dict):
+            legacy_count += 1
+            continue
+
+        stored_tweet_id = entry.get('tweet_id')
+        b64_data = entry.get('data')
+        if b64_data is None:
+            continue
+
+        if mapping is not None:
+            current_tweet_id = _mapping_tweet_id(mapping, card_name, position)
+            # Drop the entry when we have a current assignment to compare
+            # against and it doesn't match what was originally rendered.
+            if current_tweet_id is not None and stored_tweet_id != current_tweet_id:
+                stale_count += 1
+                continue
+
+        try:
+            screenshots[(card_name, position)] = base64.b64decode(b64_data)
+        except (ValueError, TypeError) as e:
+            print(f"Warning: Bad b64 for {key}: {e}", file=sys.stderr)
+            continue
+
+    if legacy_count:
+        print(
+            f"Warning: discarded {legacy_count} legacy screenshot cache "
+            f"entries (no tweet_id sidecar -- will regenerate)",
+            file=sys.stderr,
+        )
+    if stale_count:
+        print(
+            f"Note: {stale_count} cached screenshot(s) stale due to "
+            f"mapping change -- will regenerate just those",
+            file=sys.stderr,
+        )
+
+    return screenshots
 
 
 def download_rws_cards(output_dir: str) -> bool:
@@ -474,21 +556,34 @@ def generate_gallery_images(
     # Create output directory
     os.makedirs(output_dir, exist_ok=True)
 
-    # Try to load cached screenshots if not regenerating
-    screenshots = None
+    # Try to load cached screenshots if not regenerating. Pass the active
+    # mapping so any cached entry whose tweet_id no longer matches the
+    # current assignment is dropped before we use it (dril-tarot-41z).
+    screenshots: Optional[Dict[Tuple[str, str], bytes]] = None
     if not regenerate_screenshots:
         print("\nChecking for cached screenshots...")
-        screenshots = load_cached_screenshots()
+        screenshots = load_cached_screenshots(mapping)
         if screenshots:
             print(f"✓ Loaded {len(screenshots)} cached screenshots")
         else:
-            print("No cache found, generating screenshots...")
+            print("No fresh cache entries, generating screenshots...")
 
-    # Generate tweet screenshots if not cached
     if screenshots is None:
-        screenshots = generate_tweet_screenshots(mapping)
-        # Cache the screenshots for future runs
-        cache_screenshots(screenshots)
+        screenshots = {}
+
+    # Compute which (card, position) pairs the current mapping needs but the
+    # cache cannot satisfy. Regenerate ONLY those, then merge with the cache
+    # so a single mapping change doesn't reflow all 156 screenshots.
+    needed_pairs = get_card_processing_order(mapping)
+    missing_pairs = [pair for pair in needed_pairs if pair not in screenshots]
+
+    if missing_pairs:
+        new_screenshots = generate_tweet_screenshots(mapping, only_for=missing_pairs)
+        screenshots.update(new_screenshots)
+        # Persist the merged cache (cached + freshly regenerated). cache_screenshots
+        # is given the mapping so each entry is tagged with its tweet_id for the
+        # next run's freshness check.
+        cache_screenshots(screenshots, mapping)
 
     # Process each card
     cards = get_card_processing_order(mapping)

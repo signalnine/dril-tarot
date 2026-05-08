@@ -109,6 +109,32 @@ CARD_URLS = {
 }
 
 
+def is_valid_cached_jpeg(path: str) -> bool:
+    """Check that a cached card JPG is a complete, decodable image.
+
+    A previous run killed mid-Image.save() leaves a 0-byte or truncated
+    file behind. PIL's lazy loading lets Image.open() succeed on those,
+    so we round-trip through Image.verify() which forces a decode pass.
+    """
+    try:
+        if os.path.getsize(path) == 0:
+            return False
+    except OSError:
+        return False
+    try:
+        from PIL import Image
+        # verify() catches malformed headers but does NOT detect truncation
+        # because PIL is lazy. After verify() the file handle is consumed,
+        # so reopen and load() to force a full decode of the pixel data.
+        with Image.open(path) as img:
+            img.verify()
+        with Image.open(path) as img:
+            img.load()
+        return True
+    except Exception:
+        return False
+
+
 def sanitize_filename(name: str) -> str:
     """Convert card name to safe filename."""
     # Remove null bytes
@@ -147,11 +173,21 @@ def download_cards(output_dir: str = 'tarot-cards') -> bool:
         output_filename = sanitize_filename(card_name) + '.jpg'
         output_path = os.path.join(output_dir, output_filename)
 
-        # Skip if already exists
+        # Skip if a valid cached JPG already exists. Validate before
+        # short-circuiting so a 0-byte or truncated file from a killed
+        # earlier run doesn't masquerade as a successful cache hit.
         if os.path.exists(output_path):
-            print(f"  ✓ {card_name:30} (cached)")
-            success_count += 1
-            continue
+            if is_valid_cached_jpeg(output_path):
+                print(f"  ✓ {card_name:30} (cached)")
+                success_count += 1
+                continue
+            print(f"  ! {card_name:30} (corrupt cache, redownloading)")
+            try:
+                os.remove(output_path)
+            except OSError as e:
+                print(f"  ✗ {card_name:30} (could not remove corrupt file: {e})")
+                failed.append((card_name, archive_filename, f"corrupt cache: {e}"))
+                continue
 
         # Download URL
         url = BASE_URL + archive_filename

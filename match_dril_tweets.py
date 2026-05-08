@@ -228,29 +228,79 @@ def save_tweet_embeddings(embeddings: Dict[str, List[float]], tweets: List[Dict]
     many actually got embeddings. They differ when some batches in
     generate_tweet_embeddings fail and are logged-and-skipped -- without a
     distinct input count, partial failures are invisible after the fact.
+
+    Two extra protections against partial-failure-poisoning the cache:
+      1. Merge against any existing on-disk cache so a retry that suffers
+         a fresh transient failure never leaves the cache strictly worse
+         than it found it.
+      2. Write atomically via tempfile + os.replace so a crash mid-write
+         cannot truncate the previous valid cache.
     """
+    # Merge with existing cache: keep all prior embeddings, then layer the
+    # newly-fetched ones on top. The new dict wins on key collisions, which
+    # matches the user's intent when they pass --regenerate-embeddings.
+    merged: Dict[str, List[float]] = {}
+    if os.path.exists(output_file):
+        try:
+            with open(output_file, 'r', encoding='utf-8') as f:
+                existing = json.load(f)
+            existing_emb = existing.get('embeddings')
+            if isinstance(existing_emb, dict):
+                merged.update(existing_emb)
+        except (json.JSONDecodeError, OSError) as e:
+            print(
+                f"Warning: existing cache at {output_file} unreadable "
+                f"({e}); proceeding with fresh save",
+                file=sys.stderr,
+            )
+    merged.update(embeddings)
+
+    is_partial = len(merged) < len(tweets)
     data = {
         'model': 'text-embedding-3-small',
         'dimension': 1536,
         'generated_at': datetime.now(timezone.utc).isoformat(timespec='microseconds').replace('+00:00', 'Z'),
         'total_tweets': len(tweets),
-        'embedded_count': len(embeddings),
-        'embeddings': embeddings
+        'embedded_count': len(merged),
+        'partial': is_partial,
+        'embeddings': merged,
     }
 
-    with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=2)
+    tmp_file = output_file + '.tmp'
+    try:
+        with open(tmp_file, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=2)
+    except Exception:
+        # Clean up tempfile on failure so it doesn't accumulate.
+        try:
+            os.remove(tmp_file)
+        except OSError:
+            pass
+        raise
+    os.replace(tmp_file, output_file)
 
-    print(f"✓ Saved embeddings to {output_file}")
+    if is_partial:
+        missing = len(tweets) - len(merged)
+        print(
+            f"⚠ Saved PARTIAL embeddings cache to {output_file} "
+            f"({len(merged)}/{len(tweets)}, {missing} missing)",
+            file=sys.stderr,
+        )
+    else:
+        print(f"✓ Saved embeddings to {output_file}")
 
 
-def load_tweet_embeddings() -> Optional[Dict[str, List[float]]]:
-    """Load tweet embeddings from cache file.
+def load_tweet_embeddings_with_meta() -> Optional[Dict]:
+    """Load tweet embeddings from cache file, returning embeddings + metadata.
 
     Returns None on both "no cache file" and "cache is corrupt" so the
     caller can fall through to regenerating from OpenAI rather than
     aborting the whole run on a bad ~370MB file. Corruption warns to
     stderr; absence is silent (cache priming on first run is expected).
+
+    The 'partial' flag is taken from the saved file. Older caches that
+    predate the field have it inferred from embedded_count vs total_tweets
+    so existing files are still classified correctly after upgrade.
     """
     if not os.path.exists(DRIL_EMBEDDINGS_FILE):
         return None
@@ -258,7 +308,7 @@ def load_tweet_embeddings() -> Optional[Dict[str, List[float]]]:
     try:
         with open(DRIL_EMBEDDINGS_FILE, 'r', encoding='utf-8') as f:
             data = json.load(f)
-        return data['embeddings']
+        embeddings = data['embeddings']
     except (json.JSONDecodeError, OSError, KeyError, TypeError) as e:
         print(
             f"Warning: Failed to load tweet embeddings cache "
@@ -266,6 +316,28 @@ def load_tweet_embeddings() -> Optional[Dict[str, List[float]]]:
             file=sys.stderr,
         )
         return None
+
+    total_tweets = data.get('total_tweets', len(embeddings))
+    embedded_count = data.get('embedded_count', len(embeddings))
+    if 'partial' in data:
+        partial = bool(data['partial'])
+    else:
+        partial = embedded_count < total_tweets
+    return {
+        'embeddings': embeddings,
+        'partial': partial,
+        'total_tweets': total_tweets,
+        'embedded_count': embedded_count,
+    }
+
+
+def load_tweet_embeddings() -> Optional[Dict[str, List[float]]]:
+    """Backward-compatible wrapper: returns just the embeddings dict.
+
+    See load_tweet_embeddings_with_meta for the partial flag and counts.
+    """
+    meta = load_tweet_embeddings_with_meta()
+    return None if meta is None else meta['embeddings']
 
 
 def cosine_similarity(vec1: List[float], vec2: List[float]) -> float:
@@ -429,6 +501,35 @@ def match_tweets_to_cards(
                emb_data.get('interpretation_system', 'combined'))
         embedding_index[key] = emb_data['embedding']
 
+    # Build the eligible-tweet matrix once. Filter to tweets that actually
+    # have an embedding so the row index matches the candidate list. The
+    # original implementation re-wrapped each tweet vector as np.array on
+    # every of the ~1.4M iterations; here we stack once and row-normalize
+    # so each card scoring pass is a single (D,) @ (M,D)^T = (M,) matmul.
+    candidate_tweets = [t for t in eligible_tweets if t['id'] in tweet_embeddings]
+    if candidate_tweets:
+        tweet_matrix = np.asarray(
+            [tweet_embeddings[t['id']] for t in candidate_tweets],
+            dtype=np.float64,
+        )
+        tweet_norms = np.linalg.norm(tweet_matrix, axis=1)
+        # Avoid division-by-zero: zero-norm rows score 0 (matches the
+        # cosine_similarity guard) and stay 0 after normalization.
+        safe_tweet_norms = np.where(tweet_norms == 0, 1.0, tweet_norms)
+        tweet_matrix_normed = tweet_matrix / safe_tweet_norms[:, None]
+        tweet_matrix_normed[tweet_norms == 0] = 0.0
+        popularity_array = np.array(
+            [popularity_scores.get(t['id'], 0.0) for t in candidate_tweets],
+            dtype=np.float64,
+        )
+    else:
+        tweet_matrix_normed = np.empty((0, 0), dtype=np.float64)
+        popularity_array = np.empty((0,), dtype=np.float64)
+
+    candidate_ids = [t['id'] for t in candidate_tweets]
+    id_to_index = {tid: i for i, tid in enumerate(candidate_ids)}
+    available_mask = np.ones(len(candidate_tweets), dtype=bool)
+
     # Process each card
     for card_name in card_order:
         matches[card_name] = {}
@@ -442,39 +543,35 @@ def match_tweets_to_cards(
                 print(f"✗ No embedding found for {card_name} ({position}, {system})", file=sys.stderr)
                 continue
 
-            # Find best matching tweet
-            best_tweet = None
-            best_score = -1.0
-            best_similarity = 0.0
-
-            for tweet in eligible_tweets:
-                # Skip if already used
-                if tweet['id'] in used_tweet_ids:
-                    continue
-
-                # Skip if no embedding
-                if tweet['id'] not in tweet_embeddings:
-                    continue
-
-                # Calculate similarity
-                tweet_emb = tweet_embeddings[tweet['id']]
-                similarity = cosine_similarity(card_embedding, tweet_emb)
-
-                # Apply popularity weighting
-                popularity = popularity_scores.get(tweet['id'], 0.0)
-                adjusted_score = similarity * (1 - popularity_weight) + popularity * popularity_weight
-
-                if adjusted_score > best_score:
-                    best_score = adjusted_score
-                    best_similarity = similarity
-                    best_tweet = tweet
-
-            if best_tweet is None:
+            if not candidate_tweets or not available_mask.any():
                 print(f"✗ No available tweet for {card_name} ({position})")
                 continue
 
+            card_vec = np.asarray(card_embedding, dtype=np.float64)
+            card_norm = np.linalg.norm(card_vec)
+            if card_norm == 0:
+                similarities = np.zeros(len(candidate_tweets), dtype=np.float64)
+            else:
+                similarities = tweet_matrix_normed @ (card_vec / card_norm)
+            adjusted = (
+                similarities * (1.0 - popularity_weight)
+                + popularity_array * popularity_weight
+            )
+            # Mask out used tweets so they cannot win the argmax. -inf is
+            # safe because adjusted is bounded by max(|sim|, |pop|) <= ~1.
+            masked = np.where(available_mask, adjusted, -np.inf)
+            best_idx = int(np.argmax(masked))
+            if not np.isfinite(masked[best_idx]):
+                print(f"✗ No available tweet for {card_name} ({position})")
+                continue
+
+            best_tweet = candidate_tweets[best_idx]
+            best_similarity = float(similarities[best_idx])
+            best_score = float(adjusted[best_idx])
+
             # Mark as used
             used_tweet_ids.add(best_tweet['id'])
+            available_mask[best_idx] = False
 
             # Get interpretation text
             interp_text = get_card_interpretation_text(
@@ -598,13 +695,21 @@ Examples:
         print(f"✓ Loaded {len(cards)} cards")
         print(f"✓ Loaded {len(tweets)} dril tweets")
 
-        # Load or generate tweet embeddings
+        # Load or generate tweet embeddings.
         tweet_embeddings = None
         if not args.regenerate_embeddings and os.path.exists(DRIL_EMBEDDINGS_FILE):
             print("\nLoading cached tweet embeddings...")
-            tweet_embeddings = load_tweet_embeddings()
-            if tweet_embeddings is not None:
+            cached = load_tweet_embeddings_with_meta()
+            if cached is not None:
+                tweet_embeddings = cached['embeddings']
                 print(f"✓ Loaded {len(tweet_embeddings)} cached embeddings")
+                if cached['partial']:
+                    print(
+                        f"⚠ Cache is marked PARTIAL "
+                        f"({cached['embedded_count']}/{cached['total_tweets']} embedded). "
+                        f"A previous run failed mid-batch.",
+                        file=sys.stderr,
+                    )
 
         # Regenerate when the user asked, when no cache exists, or when
         # the cache failed to load (load_tweet_embeddings returns None
@@ -612,6 +717,20 @@ Examples:
         if tweet_embeddings is None:
             tweet_embeddings = generate_tweet_embeddings(client, tweets)
             save_tweet_embeddings(tweet_embeddings, tweets, DRIL_EMBEDDINGS_FILE)
+        else:
+            # Auto-retry only the tweets missing from the cache. This handles
+            # both legacy partial caches and the case where new tweets were
+            # added to the CSV since the cache was last built.
+            missing = [t for t in tweets if t['id'] not in tweet_embeddings]
+            if missing:
+                print(
+                    f"\n{len(missing)} tweet(s) missing from cache; "
+                    f"fetching embeddings for them now...",
+                    file=sys.stderr,
+                )
+                new_embeddings = generate_tweet_embeddings(client, missing)
+                tweet_embeddings = {**tweet_embeddings, **new_embeddings}
+                save_tweet_embeddings(new_embeddings, tweets, DRIL_EMBEDDINGS_FILE)
 
         # Match tweets to cards
         matches = match_tweets_to_cards(
