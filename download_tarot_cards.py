@@ -217,8 +217,19 @@ def download_cards(output_dir: str = 'tarot-cards') -> bool:
             elif img.mode != 'RGB':
                 img = img.convert('RGB')
 
-            # Save as JPG
-            img.save(output_path, 'JPEG', quality=95)
+            # Save as JPG atomically: write to a tempfile in the same dir
+            # then os.replace, so a kill mid-write leaves either the previous
+            # valid file or the new fully-written one, never a truncated JPG.
+            tmp_path = output_path + '.tmp'
+            try:
+                img.save(tmp_path, 'JPEG', quality=95)
+                os.replace(tmp_path, output_path)
+            except Exception:
+                try:
+                    os.remove(tmp_path)
+                except OSError:
+                    pass
+                raise
 
             print(f"  ✓ {card_name:30} → {output_filename}")
             success_count += 1

@@ -620,8 +620,17 @@ def save_results(matches: Dict, output_file: str, system: str, min_retweets: int
         'cards': matches
     }
 
-    with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump(output, f, indent=2)
+    tmp_file = output_file + '.tmp'
+    try:
+        with open(tmp_file, 'w', encoding='utf-8') as f:
+            json.dump(output, f, indent=2)
+    except Exception:
+        try:
+            os.remove(tmp_file)
+        except OSError:
+            pass
+        raise
+    os.replace(tmp_file, output_file)
 
     print(f"\n✓ Matched {total_matches} cards to unique tweets")
     print(f"✓ Saved to {output_file}")

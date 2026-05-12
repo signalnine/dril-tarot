@@ -23,7 +23,7 @@ from urllib.parse import quote
 # sanitize_filename has a single canonical definition in download_tarot_cards
 # so a fix or extension (length caps, non-ASCII handling, etc.) cannot drift
 # between the writer (downloader) and the reader (gallery + verifier).
-from download_tarot_cards import sanitize_filename
+from download_tarot_cards import is_valid_cached_jpeg, sanitize_filename
 
 # Configuration
 CARD_MAPPING_FILE = 'data/card_dril_mapping.json'
@@ -230,14 +230,24 @@ def screenshot_tweet(page, tweet_data: Dict) -> bytes:
     # Load HTML into page
     page.set_content(html_content)
 
-    # Wait for content to render
-    page.wait_for_selector('.tweet-card')
+    # Wait for content to render. wait_for_selector returns the ElementHandle
+    # for the matched selector, so use it directly rather than a second
+    # query_selector call: that pattern is racy (the element can disappear
+    # between the wait and the query) and silently degrades to a confusing
+    # AttributeError on the .screenshot call. Fall back to query_selector for
+    # the rare case where wait_for_selector returns None, raising a clear
+    # RuntimeError so generate_tweet_screenshots' per-card except logs an
+    # actionable message rather than 'NoneType has no attribute screenshot'.
+    tweet_element = page.wait_for_selector('.tweet-card')
+    if tweet_element is None:
+        tweet_element = page.query_selector('.tweet-card')
+    if tweet_element is None:
+        raise RuntimeError(
+            "screenshot_tweet: '.tweet-card' element not found after "
+            "wait_for_selector returned; page failed to render the tweet card"
+        )
 
-    # Screenshot just the tweet card element
-    tweet_element = page.query_selector('.tweet-card')
-    screenshot_bytes = tweet_element.screenshot(type='png')
-
-    return screenshot_bytes
+    return tweet_element.screenshot(type='png')
 
 
 def generate_tweet_screenshots(
@@ -463,7 +473,7 @@ def verify_card_images(cards_dir: str) -> Tuple[bool, List[str]]:
         filename = sanitize_filename(card_name) + '.jpg'
         path = os.path.join(cards_dir, filename)
 
-        if not os.path.exists(path):
+        if not is_valid_cached_jpeg(path):
             missing.append(card_name)
 
     return len(missing) == 0, missing
