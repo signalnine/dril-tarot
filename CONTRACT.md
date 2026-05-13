@@ -1,49 +1,42 @@
-# CONTRACT: main() must regenerate embeddings when cache load returns None
+# CONTRACT: direct tests for composite_tweet_on_card guard rails
 
-Tracks bd issue `dril-tarot-dnj`.
+Tracks bd issue `dril-tarot-yk5`.
 
 ## Problem
 
-The earlier fix (commit 270ef6f) made `load_tweet_embeddings()` return
-`None` on a missing or corrupt cache, with the intent that the caller
-would fall through to regeneration. But the caller in `main()` does not
-handle `None`:
+`composite_tweet_on_card` (generate_dril_tarot_images.py:482) has explicit
+guard rails and a reversed-rotation branch that are only exercised
+indirectly via `test_gallery_composite_resilience` and
+`test_transparent_composite`. The guard branches themselves have no
+direct coverage:
 
-```python
-else:
-    print("\nLoading cached tweet embeddings...")
-    tweet_embeddings = load_tweet_embeddings()
-    print(f"✓ Loaded {len(tweet_embeddings)} cached embeddings")
-```
-
-When the cache is corrupt, `load_tweet_embeddings()` returns `None`
-(with a stderr warning), then `len(None)` raises `TypeError` and the
-script aborts. Same outcome as before the fix, just one frame deeper.
-The "degrades to regenerate from scratch" promise in the helper's
-docstring is not actually delivered end-to-end.
+- `card.width == 0 or card.height == 0` -> `ValueError('Invalid card image dimensions')`
+- `card.width > 10000 or card.height > 10000` -> `ValueError('Card image too large')`
+- `position == 'reversed'` -> output is rotated 180 degrees
 
 ## Behaviors required
 
-- [x] When `load_tweet_embeddings()` returns `None` in `main()` (cache
-      file present but corrupt), `main()` must regenerate embeddings via
-      `generate_tweet_embeddings()` and persist them via
-      `save_tweet_embeddings()`, just like the `--regenerate-embeddings`
-      / missing-file branch.
-- [x] When the cache loads successfully, behavior is unchanged: log the
-      count of loaded embeddings and proceed.
+- [x] A zero-pixel card image makes `composite_tweet_on_card` raise
+      `ValueError` with a message that mentions "Invalid card image
+      dimensions".
+- [x] An oversize card image (width or height > 10000) makes
+      `composite_tweet_on_card` raise `ValueError` with a message that
+      mentions "Card image too large".
+- [x] When `position='reversed'`, the rendered card is rotated 180
+      degrees relative to the same render with `position='upright'`.
+      Verified by placing a known marker (a colored stripe across the
+      top of the card) and asserting it appears at the bottom of the
+      reversed output.
 - [x] Pre-existing tests in `tests/` continue to pass.
 
 ## Verification
 
-- [x] New test `tests/test_main_corrupt_cache_regenerates.py` patches
-      `DRIL_EMBEDDINGS_FILE` to a corrupt file, stubs the OpenAI client
-      and `generate_tweet_embeddings` / `save_tweet_embeddings`, runs
-      `main()`, and asserts:
-      - `main()` returns normally (no `TypeError`, no `SystemExit` from
-        the catch-all).
-      - `generate_tweet_embeddings` was called.
-      - `save_tweet_embeddings` was called.
-- [x] Test fails on unfixed code with a `TypeError: object of type
-      'NoneType' has no len()`.
-- [x] Test passes after the fix.
-- [x] `pytest tests/` reports all tests passing (13/13: 12 existing + 1 new).
+- [x] New test file `tests/test_composite_guards.py` exists with one
+      pytest per behavior above.
+- [x] Uses the same `sys.path.insert` import pattern as the rest of
+      `tests/`.
+- [x] `python3 -m pytest tests/` reports all tests passing
+      (51 total: 48 existing + 3 new).
+- [x] Mutation-tested: each test fails when its corresponding guard or
+      the `rotate(180)` call is removed, confirming the tests actually
+      exercise those branches rather than passing incidentally.
